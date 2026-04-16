@@ -1,8 +1,11 @@
 import fs from "fs";
 import path from "path";
 
+export type ArticleType = "occult_comment" | "occult_news";
+
 export type Article = {
   id: string;
+  type: ArticleType;
   title: string;
   source: string;
   sourceUrl: string;

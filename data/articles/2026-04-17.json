@@ -3,6 +3,7 @@
   "articles": [
     {
       "id": "2026-04-17-001",
+      "type": "occult_comment",
       "title": "パンスターズ彗星、17万年ぶりに地球接近──4月17日前後に観測チャンス",
       "source": "Yahoo!ニュース",
       "sourceUrl": "https://news.yahoo.co.jp/articles/1df040099b85727622146e2545679019e963216b",
@@ -13,6 +14,7 @@
     },
     {
       "id": "2026-04-17-002",
+      "type": "occult_comment",
       "title": "2025年の孤独死、22,222人──前年比366人増で過去最多",
       "source": "時事通信",
       "sourceUrl": "https://www.jiji.com/jc/article?k=2026041700001",
@@ -23,6 +25,7 @@
     },
     {
       "id": "2026-04-17-003",
+      "type": "occult_comment",
       "title": "Microsoft、4月のWindows Update実施──悪用が確認された脆弱性も修正",
       "source": "窓の杜",
       "sourceUrl": "https://forest.watch.impress.co.jp/docs/news/2101692.html",
@@ -33,6 +36,7 @@
     },
     {
       "id": "2026-04-17-004",
+      "type": "occult_comment",
       "title": "宮城県沖で震度3の地震──深さ約60km、M4.2",
       "source": "Yahoo!天気・災害",
       "sourceUrl": "https://typhoon.yahoo.co.jp/weather/jp/earthquake/20260412220052.html",
@@ -43,12 +47,35 @@
     },
     {
       "id": "2026-04-17-005",
+      "type": "occult_comment",
       "title": "埼玉・八潮の県道陥没、1年3か月ぶりに一部通行再開",
       "source": "時事通信",
       "sourceUrl": "https://www.jiji.com/jc/article?k=2026041700002",
       "category": "society",
       "occultComment": "地面が突然崩落する──これは世界中で増えている現象だ。2023年から2025年にかけて、中国・トルコ・ブラジル・日本で大規模陥没が急増した。地質学者は老朽化や地下水の変動を原因に挙げるが、ある研究者はこう指摘する。「地球の内部で何かが動いている」。地殻の内側、マントルの対流パターンが変化しつつあるという仮説がある。1年3か月も復旧にかかったということは、単なる道路の問題ではなく、地下構造そのものが不安定だということだ。足元の大地を、私たちは本当に信用していいのだろうか。",
       "commentStyle": "conspiracy",
+      "createdAt": "2026-04-17T09:00:00+09:00"
+    },
+    {
+      "id": "2026-04-17-006",
+      "type": "occult_news",
+      "title": "米国防総省、新たなUAP（未確認空中現象）映像3本を機密解除",
+      "source": "TOCANA",
+      "sourceUrl": "https://tocana.jp/",
+      "category": "ufo",
+      "occultComment": "ペンタゴンが2025年後半に撮影されたとする3本のUAP映像を公開した。いずれも赤外線カメラで捉えたもので、従来の航空機では説明できない機動を見せている。特に注目は3本目の映像で、物体が海面から急上昇し、一瞬で視界から消失する。AARO（全領域異常解決局）は「調査継続中」としているが、元国防情報局のルイス・エリゾンド氏は「これは氷山の一角」とコメントしている。",
+      "commentStyle": "ufo",
+      "createdAt": "2026-04-17T09:00:00+09:00"
+    },
+    {
+      "id": "2026-04-17-007",
+      "type": "occult_news",
+      "title": "スコットランド・ネス湖で過去最大規模のソナー調査開始──新型水中ドローン投入",
+      "source": "ATLAS",
+      "sourceUrl": "https://mnsatlas.com/",
+      "category": "uma",
+      "occultComment": "ネス湖で2024年に続く大規模ソナー調査が4月15日から開始された。今回は深度300mまで対応する新型水中ドローン4機を投入し、湖底の3Dマッピングも同時に行う。昨年の調査では「説明困難な大型反応」が複数検出されており、今回はその正体の特定が目的。調査チームのリーダーは「何かがいることはほぼ確実。問題は何なのかだ」と述べている。調査は5月末まで続く予定。",
+      "commentStyle": "uma",
       "createdAt": "2026-04-17T09:00:00+09:00"
     }
   ]

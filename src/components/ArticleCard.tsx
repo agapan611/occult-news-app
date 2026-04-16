@@ -1,17 +1,7 @@
 "use client";
 
 import { useState } from "react";
-
-type Article = {
-  id: string;
-  title: string;
-  source: string;
-  sourceUrl: string;
-  category: string;
-  occultComment: string;
-  commentStyle: string;
-  createdAt: string;
-};
+import type { Article } from "@/lib/articles";
 
 const categoryLabels: Record<string, string> = {
   science: "科学",
@@ -22,6 +12,13 @@ const categoryLabels: Record<string, string> = {
   world: "国際",
   sports: "スポーツ",
   entertainment: "芸能",
+  ufo: "UFO",
+  uma: "UMA",
+  ghost: "心霊",
+  urban_legend: "都市伝説",
+  paranormal: "超常現象",
+  mystery: "ミステリー",
+  cryptid: "未確認生物",
 };
 
 const styleLabels: Record<string, string> = {
@@ -35,6 +32,7 @@ const styleLabels: Record<string, string> = {
 
 export default function ArticleCard({ article }: { article: Article }) {
   const [expanded, setExpanded] = useState(false);
+  const isOccultNews = article.type === "occult_news";
 
   const preview = article.occultComment.slice(0, 80) + "...";
 
@@ -43,32 +41,53 @@ export default function ArticleCard({ article }: { article: Article }) {
       className="border-b border-card-border px-4 py-5 active:bg-white/[0.02] transition-colors"
       onClick={() => setExpanded(!expanded)}
     >
-      {/* カテゴリ＋考察スタイル */}
+      {/* カテゴリ＋タイプ */}
       <div className="mb-2 flex items-center gap-2 text-xs">
-        <span className="rounded bg-accent/20 px-1.5 py-0.5 text-accent">
+        <span
+          className={`rounded px-1.5 py-0.5 ${
+            isOccultNews
+              ? "bg-cyan/20 text-cyan"
+              : "bg-accent/20 text-accent"
+          }`}
+        >
           {categoryLabels[article.category] ?? article.category}
         </span>
-        <span className="text-cyan">
-          {styleLabels[article.commentStyle] ?? article.commentStyle}
-        </span>
+        {!isOccultNews && (
+          <span className="text-cyan">
+            {styleLabels[article.commentStyle] ?? article.commentStyle}
+          </span>
+        )}
+        {isOccultNews && (
+          <span className="text-accent/60">オカルトNEWS</span>
+        )}
       </div>
 
       {/* ニュース見出し */}
       <h2 className="text-[15px] font-bold leading-snug mb-1">
         {article.title}
       </h2>
-      <p className="text-xs text-muted mb-3">
-        {article.source}
-      </p>
+      <p className="text-xs text-muted mb-3">{article.source}</p>
 
-      {/* オカルトコメント */}
-      <div className="rounded-lg bg-card border border-card-border p-3">
-        <p className="text-xs text-accent/80 font-bold mb-1">AI考察</p>
+      {/* コメント/概要 */}
+      <div
+        className={`rounded-lg border p-3 ${
+          isOccultNews
+            ? "bg-cyan/[0.03] border-cyan/10"
+            : "bg-card border-card-border"
+        }`}
+      >
+        <p className={`text-xs font-bold mb-1 ${isOccultNews ? "text-cyan/80" : "text-accent/80"}`}>
+          {isOccultNews ? "概要" : "AI考察"}
+        </p>
         <p className="text-sm leading-relaxed text-foreground/90">
           {expanded ? article.occultComment : preview}
         </p>
         <button
-          className="mt-2 text-xs text-accent hover:text-accent-dim transition-colors"
+          className={`mt-2 text-xs transition-colors ${
+            isOccultNews
+              ? "text-cyan hover:text-cyan/70"
+              : "text-accent hover:text-accent-dim"
+          }`}
           onClick={(e) => {
             e.stopPropagation();
             setExpanded(!expanded);
