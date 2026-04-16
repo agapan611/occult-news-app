@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from "next/link";
 
 export default function Header() {
   return (
@@ -26,7 +27,12 @@ export default function Header() {
             <span className="text-muted ml-1 text-sm font-normal">WIRE</span>
           </h1>
         </div>
-        <span className="text-[10px] text-muted">シュナ & ライカ</span>
+        <Link
+          href="/about"
+          className="text-[10px] text-muted hover:text-accent transition-colors"
+        >
+          シュナ &amp; ライカ &rsaquo;
+        </Link>
       </div>
     </header>
   );
