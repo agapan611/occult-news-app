@@ -10,6 +10,7 @@ export type Article = {
   source: string;
   sourceUrl: string;
   category: string;
+  summary: string;
   occultComment: string;
   commentStyle: string;
   createdAt: string;

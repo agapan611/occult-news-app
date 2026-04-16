@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import Image from "next/image";
 import type { Article } from "@/lib/articles";
 
 const categoryLabels: Record<string, string> = {
@@ -34,7 +35,7 @@ export default function ArticleCard({ article }: { article: Article }) {
   const [expanded, setExpanded] = useState(false);
   const isOccultNews = article.type === "occult_news";
 
-  const preview = article.occultComment.slice(0, 80) + "...";
+  const commentPreview = article.occultComment.slice(0, 60) + "...";
 
   return (
     <article
@@ -66,9 +67,14 @@ export default function ArticleCard({ article }: { article: Article }) {
       <h2 className="text-[15px] font-bold leading-snug mb-1">
         {article.title}
       </h2>
-      <p className="text-xs text-muted mb-3">{article.source}</p>
+      <p className="text-xs text-muted mb-2">{article.source}</p>
 
-      {/* コメント/概要 */}
+      {/* 記事概要 */}
+      <p className="text-sm leading-relaxed text-foreground/70 mb-3">
+        {article.summary}
+      </p>
+
+      {/* シュナのコメント（吹き出し風） */}
       <div
         className={`rounded-lg border p-3 ${
           isOccultNews
@@ -76,25 +82,36 @@ export default function ArticleCard({ article }: { article: Article }) {
             : "bg-card border-card-border"
         }`}
       >
-        <p className={`text-xs font-bold mb-1 ${isOccultNews ? "text-cyan/80" : "text-accent/80"}`}>
-          {isOccultNews ? "概要" : "AI考察"}
-        </p>
-        <p className="text-sm leading-relaxed text-foreground/90">
-          {expanded ? article.occultComment : preview}
-        </p>
-        <button
-          className={`mt-2 text-xs transition-colors ${
-            isOccultNews
-              ? "text-cyan hover:text-cyan/70"
-              : "text-accent hover:text-accent-dim"
-          }`}
-          onClick={(e) => {
-            e.stopPropagation();
-            setExpanded(!expanded);
-          }}
-        >
-          {expanded ? "閉じる" : "続きを読む"}
-        </button>
+        <div className="flex items-start gap-2.5">
+          <Image
+            src="/shuna.png"
+            alt="シュナ"
+            width={28}
+            height={28}
+            className="rounded-full border border-accent/30 shrink-0 mt-0.5"
+          />
+          <div className="min-w-0 flex-1">
+            <p className={`text-[10px] font-bold mb-1 ${isOccultNews ? "text-cyan/80" : "text-accent/80"}`}>
+              シュナの{isOccultNews ? "ひとこと" : "考察"}
+            </p>
+            <p className="text-sm leading-relaxed text-foreground/90">
+              {expanded ? article.occultComment : commentPreview}
+            </p>
+            <button
+              className={`mt-2 text-xs transition-colors ${
+                isOccultNews
+                  ? "text-cyan hover:text-cyan/70"
+                  : "text-accent hover:text-accent-dim"
+              }`}
+              onClick={(e) => {
+                e.stopPropagation();
+                setExpanded(!expanded);
+              }}
+            >
+              {expanded ? "閉じる" : "続きを読む"}
+            </button>
+          </div>
+        </div>
       </div>
 
       {/* 元記事リンク */}
