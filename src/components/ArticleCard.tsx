@@ -2,38 +2,29 @@
 
 import { useState } from "react";
 import Image from "next/image";
-import type { Article } from "@/lib/articles";
+import type { Article, Commenter } from "@/lib/articles";
 
 const categoryLabels: Record<string, string> = {
-  science: "科学",
-  society: "社会",
-  politics: "政治",
-  economy: "経済",
-  tech: "テクノロジー",
-  world: "国際",
-  sports: "スポーツ",
-  entertainment: "芸能",
-  ufo: "UFO",
-  uma: "UMA",
-  ghost: "心霊",
-  urban_legend: "都市伝説",
-  paranormal: "超常現象",
-  mystery: "ミステリー",
-  cryptid: "未確認生物",
+  science: "科学", society: "社会", politics: "政治", economy: "経済",
+  tech: "テクノロジー", world: "国際", sports: "スポーツ", entertainment: "芸能",
+  ufo: "UFO", uma: "UMA", ghost: "心霊", urban_legend: "都市伝説",
+  paranormal: "超常現象", mystery: "ミステリー", cryptid: "未確認生物",
 };
 
 const styleLabels: Record<string, string> = {
-  numerology: "数秘術",
-  ancient_civilization: "古代文明",
-  conspiracy: "陰謀論",
-  prophecy: "予言",
-  synchronicity: "シンクロニシティ",
-  occult_history: "オカルト史",
+  numerology: "数秘術", ancient_civilization: "古代文明", conspiracy: "陰謀論",
+  prophecy: "予言", synchronicity: "シンクロニシティ", occult_history: "オカルト史",
+};
+
+const commenterInfo: Record<Commenter, { name: string; icon: string }> = {
+  shuna: { name: "シュナ", icon: "/shuna.png" },
+  raika: { name: "ライカ", icon: "/raika.png" },
 };
 
 export default function ArticleCard({ article }: { article: Article }) {
   const [expanded, setExpanded] = useState(false);
   const isOccultNews = article.type === "occult_news";
+  const commenter = commenterInfo[article.commentBy] ?? commenterInfo.shuna;
 
   const commentPreview = article.occultComment.slice(0, 60) + "...";
 
@@ -46,9 +37,7 @@ export default function ArticleCard({ article }: { article: Article }) {
       <div className="mb-2 flex items-center gap-2 text-xs">
         <span
           className={`rounded px-1.5 py-0.5 ${
-            isOccultNews
-              ? "bg-cyan/20 text-cyan"
-              : "bg-accent/20 text-accent"
+            isOccultNews ? "bg-cyan/20 text-cyan" : "bg-accent/20 text-accent"
           }`}
         >
           {categoryLabels[article.category] ?? article.category}
@@ -74,34 +63,30 @@ export default function ArticleCard({ article }: { article: Article }) {
         {article.summary}
       </p>
 
-      {/* シュナのコメント（吹き出し風） */}
+      {/* コメント（吹き出し風） */}
       <div
         className={`rounded-lg border p-3 ${
-          isOccultNews
-            ? "bg-cyan/[0.03] border-cyan/10"
-            : "bg-card border-card-border"
+          isOccultNews ? "bg-cyan/[0.03] border-cyan/10" : "bg-card border-card-border"
         }`}
       >
         <div className="flex items-start gap-2.5">
           <Image
-            src="/shuna.png"
-            alt="シュナ"
+            src={commenter.icon}
+            alt={commenter.name}
             width={28}
             height={28}
             className="rounded-full border border-accent/30 shrink-0 mt-0.5"
           />
           <div className="min-w-0 flex-1">
             <p className={`text-[10px] font-bold mb-1 ${isOccultNews ? "text-cyan/80" : "text-accent/80"}`}>
-              シュナの{isOccultNews ? "ひとこと" : "考察"}
+              {commenter.name}の{isOccultNews ? "ひとこと" : "考察"}
             </p>
             <p className="text-sm leading-relaxed text-foreground/90">
               {expanded ? article.occultComment : commentPreview}
             </p>
             <button
               className={`mt-2 text-xs transition-colors ${
-                isOccultNews
-                  ? "text-cyan hover:text-cyan/70"
-                  : "text-accent hover:text-accent-dim"
+                isOccultNews ? "text-cyan hover:text-cyan/70" : "text-accent hover:text-accent-dim"
               }`}
               onClick={(e) => {
                 e.stopPropagation();

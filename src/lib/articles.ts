@@ -3,6 +3,8 @@ import path from "path";
 
 export type ArticleType = "occult_comment" | "occult_news";
 
+export type Commenter = "shuna" | "raika";
+
 export type Article = {
   id: string;
   type: ArticleType;
@@ -13,6 +15,7 @@ export type Article = {
   summary: string;
   occultComment: string;
   commentStyle: string;
+  commentBy: Commenter;
   createdAt: string;
 };
 
