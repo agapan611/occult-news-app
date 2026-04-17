@@ -1,26 +1,37 @@
 {
-  "description": "長編記事の重複チェック用インデックス。新記事生成時にこのリストを参照し、同じテーマ・タイトルを避けること。",
+  "description": "長編記事（GRIMOIRE）の重複チェック用インデックス。/グリモワール投稿 スキルが参照する。",
   "rules": [
-    "過去記事と同じ主題・切り口を避ける",
-    "他サイト・書籍の文章を直接引用しない（出典を明記した短い引用は可）",
+    "過去記事と同じ主題・同じ切り口を避ける（themeとkeywordsで判定）",
+    "直近7日で同じカテゴリが連続しないよう分散する",
+    "author（shuna/raika/both）の投稿ペースを均等に（shuna:raika=1:1、bothは月1〜2回）",
+    "他サイト・書籍の文章を直接引用しない（出典明記した短い引用のみ可）",
     "既存の創作物（映画・小説）の筋書きを丸写ししない",
-    "事実と創作の境界を明示する",
-    "人物・団体への名誉毀損になる断定を避ける"
+    "人物・団体への名誉毀損になる断定を避ける",
+    "事実と創作の境界を明示する"
   ],
+  "category_rotation_hint": {
+    "shuna_preferred": ["numerology", "ancient_civilization", "mysticism", "ghost_stories", "prophecy"],
+    "raika_preferred": ["ufo", "conspiracy", "uma", "mystery", "science_occult"],
+    "both_preferred": ["urban_legend", "horror"]
+  },
   "published": [
     {
       "id": "2026-04-17-shuna-seven-wonders-numerology",
+      "date": "2026-04-17",
       "author": "shuna",
+      "category": "numerology",
       "title": "なぜ「七不思議」は7つなのか──数字7が人類を縛る理由",
       "theme": "数字7の偏在と数秘術",
-      "keywords": ["7", "数秘術", "虹", "七不思議", "北斗七星"]
+      "keywords": ["7", "数秘術", "虹", "七不思議", "北斗七星", "ニュートン", "短期記憶", "隠れた8つ目"]
     },
     {
       "id": "2026-04-16-raika-dyatlov-pass",
+      "date": "2026-04-16",
       "author": "raika",
+      "category": "mystery",
       "title": "ディアトロフ峠事件──9人の登山家を殺したのは「誰」だったのか",
-      "theme": "未解決事件の考察",
-      "keywords": ["ディアトロフ峠", "ソ連", "雪山", "軍事実験", "インフラサウンド"]
+      "theme": "未解決事件の多角的考察",
+      "keywords": ["ディアトロフ峠", "ソ連", "1959年", "ウラル山脈", "雪崩説", "軍事実験", "インフラサウンド", "マンシ族"]
     }
   ]
 }
