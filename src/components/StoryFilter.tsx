@@ -20,7 +20,18 @@ export default function StoryFilter({ stories }: { stories: Story[] }) {
 
   return (
     <>
-      <div className="sticky top-14 z-50 border-b border-card-border bg-background/90 backdrop-blur-md">
+      {/* タイトルヒーロー */}
+      <div className="border-b border-card-border bg-gradient-to-b from-accent/5 to-transparent px-4 py-8 text-center">
+        <p className="text-[10px] tracking-[0.4em] text-accent mb-1">OCCULT WIRE</p>
+        <h1 className="text-3xl font-bold tracking-[0.3em] mb-2">GRIMOIRE</h1>
+        <div className="mx-auto h-px w-12 bg-gradient-to-r from-transparent via-accent/60 to-transparent mb-3" />
+        <p className="text-xs text-foreground/70 leading-relaxed">
+          シュナとライカが綴る、オカルト・都市伝説の書庫。
+        </p>
+      </div>
+
+      {/* フィルタタブ */}
+      <div className="sticky top-[6.25rem] z-40 border-b border-card-border bg-background/90 backdrop-blur-md">
         <div className="mx-auto flex max-w-lg">
           {filters.map((f) => (
             <button
@@ -37,12 +48,6 @@ export default function StoryFilter({ stories }: { stories: Story[] }) {
       </div>
 
       <main className="mx-auto w-full max-w-lg flex-1">
-        <div className="px-4 py-4 border-b border-card-border">
-          <p className="text-xs text-muted">
-            シュナとライカがお届けする、オカルト・都市伝説の読み物。
-          </p>
-        </div>
-
         {filtered.length === 0 ? (
           <div className="py-20 text-center text-sm text-muted">該当する記事がありません</div>
         ) : (

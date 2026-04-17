@@ -39,8 +39,8 @@ export default function ArticleFeed({ days }: { days: DailyArticles[] }) {
         ) : (
           filtered.map((day) => (
             <section key={day.date}>
-              <div className="sticky top-[6.5rem] z-40 border-b border-card-border bg-background/90 backdrop-blur-sm px-4 py-2">
-                <time className="text-xs font-bold text-accent">
+              <div className="border-b border-card-border bg-card/30 px-4 py-2">
+                <time className="text-xs font-bold text-accent tracking-wider">
                   {formatDate(day.date)}
                 </time>
               </div>

@@ -35,9 +35,9 @@ export async function generateMetadata({
 }) {
   const { slug } = await params;
   const info = authorInfo[slug as StoryAuthor];
-  if (!info) return { title: "記事一覧 | OCCULT WIRE" };
+  if (!info) return { title: "GRIMOIRE | OCCULT WIRE" };
   return {
-    title: `${info.name}の読み物 | OCCULT WIRE`,
+    title: `${info.name}のGRIMOIRE | OCCULT WIRE`,
     description: info.description,
   };
 }
@@ -59,12 +59,12 @@ export default async function AuthorPage({
       <header className="sticky top-0 z-50 border-b border-card-border bg-background/80 backdrop-blur-md">
         <div className="mx-auto flex h-14 max-w-lg items-center px-4">
           <Link
-            href="/stories"
+            href="/grimoire"
             className="text-xs text-accent hover:text-accent-dim transition-colors"
           >
-            &larr; 読み物一覧
+            &larr; GRIMOIRE
           </Link>
-          <h1 className="flex-1 text-center text-sm font-bold">{info.name}の読み物</h1>
+          <h1 className="flex-1 text-center text-sm font-bold tracking-wider">{info.name}の書</h1>
           <div className="w-20" />
         </div>
       </header>

@@ -18,7 +18,7 @@ export default function TabBar({
   onChange: (tab: ArticleType | "all") => void;
 }) {
   return (
-    <div className="sticky top-14 z-50 border-b border-card-border bg-background/90 backdrop-blur-md">
+    <div className="sticky top-[6.25rem] z-40 border-b border-card-border bg-background/90 backdrop-blur-md">
       <div className="mx-auto flex max-w-lg">
         {tabs.map((tab) => (
           <button

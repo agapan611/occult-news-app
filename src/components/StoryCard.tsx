@@ -27,7 +27,7 @@ export default function StoryCard({ story }: { story: Story }) {
   const author = authorInfo[story.author];
   return (
     <Link
-      href={`/stories/${story.id}`}
+      href={`/grimoire/${story.id}`}
       className="block border-b border-card-border px-4 py-5 active:bg-white/[0.02] transition-colors"
     >
       {/* カテゴリ + 読了時間 */}
