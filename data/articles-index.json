@@ -6,7 +6,8 @@
     "直近7日で keyAngles のキーワードが3回以上被らないように分散する",
     "1日あたりのシュナ:ライカの割合を 2:3 〜 3:2 に保つ",
     "見出しは事実ベースで書く（キャラ口調の見出しは使わない）",
-    "コメントは150〜250字。短すぎず長すぎず"
+    "コメントは150〜250字。短すぎず長すぎず",
+    "sourceUrl は必ず個別記事ページであること（トップページ・カテゴリページは禁止）"
   ],
   "recent": [
     {
@@ -20,7 +21,7 @@
       "sourceUrl": "https://news.yahoo.co.jp/articles/1df040099b85727622146e2545679019e963216b"
     },
     {
-      "id": "2026-04-17-003",
+      "id": "2026-04-17-002",
       "date": "2026-04-17",
       "title": "Microsoft、4月のWindows Update実施──悪用が確認された脆弱性も修正",
       "commentBy": "shuna",
@@ -30,7 +31,7 @@
       "sourceUrl": "https://forest.watch.impress.co.jp/docs/news/2101692.html"
     },
     {
-      "id": "2026-04-17-004",
+      "id": "2026-04-17-003",
       "date": "2026-04-17",
       "title": "宮城県沖で震度3の地震──深さ約60km、M4.2",
       "commentBy": "raika",
@@ -38,86 +39,6 @@
       "category": "society",
       "keyAngles": ["日付数字合計", "奇数素数列", "地震周期", "次は11"],
       "sourceUrl": "https://typhoon.yahoo.co.jp/weather/jp/earthquake/20260412220052.html"
-    },
-    {
-      "id": "2026-04-17-005",
-      "date": "2026-04-17",
-      "title": "埼玉・八潮の県道陥没、1年3か月ぶりに一部通行再開",
-      "commentBy": "shuna",
-      "commentStyle": "conspiracy",
-      "category": "society",
-      "keyAngles": ["世界の陥没急増", "地球内部", "マントル対流", "地下構造不安"],
-      "sourceUrl": "https://www.jiji.com/jc/article?k=2026041700002"
-    },
-    {
-      "id": "2026-04-17-006",
-      "date": "2026-04-17",
-      "title": "米国防総省、新たなUAP（未確認空中現象）映像3本を機密解除",
-      "commentBy": "raika",
-      "commentStyle": "ufo",
-      "category": "ufo",
-      "keyAngles": ["UAP公開映像", "海面から急上昇", "エリゾンド", "AARO", "氷山の一角"],
-      "sourceUrl": "https://tocana.jp/"
-    },
-    {
-      "id": "2026-04-17-007",
-      "date": "2026-04-17",
-      "title": "スコットランド・ネス湖で過去最大規模のソナー調査開始──新型水中ドローン投入",
-      "commentBy": "shuna",
-      "commentStyle": "uma",
-      "category": "uma",
-      "keyAngles": ["ネッシー", "水中ドローン", "ソナー反応", "湖底3D"],
-      "sourceUrl": "https://mnsatlas.com/"
-    },
-    {
-      "id": "2026-04-16-001",
-      "date": "2026-04-16",
-      "title": "AI規制法案、G7で共同声明へ──日本は「自主規制」路線を堅持",
-      "commentBy": "raika",
-      "commentStyle": "prophecy",
-      "category": "politics",
-      "keyAngles": ["知性規制の歴史", "印刷機", "暗号技術", "自主規制=意思認定"],
-      "sourceUrl": "https://www.nikkei.com/"
-    },
-    {
-      "id": "2026-04-16-002",
-      "date": "2026-04-16",
-      "title": "東京都心で4月としては記録的大雨──1時間に50mm超",
-      "commentBy": "shuna",
-      "commentStyle": "occult_history",
-      "category": "society",
-      "keyAngles": ["季節外れの雨", "日本書紀", "大化の改新", "時代の変わり目"],
-      "sourceUrl": "https://www3.nhk.or.jp/news/"
-    },
-    {
-      "id": "2026-04-16-003",
-      "date": "2026-04-16",
-      "title": "新種の深海魚、駿河湾で発見──体長2m超の巨大個体",
-      "commentBy": "raika",
-      "commentStyle": "synchronicity",
-      "category": "science",
-      "keyAngles": ["深海魚浮上", "海底変動", "駿河トラフ", "南海トラフ"],
-      "sourceUrl": "https://www.asahi.com/"
-    },
-    {
-      "id": "2026-04-16-004",
-      "date": "2026-04-16",
-      "title": "チリ・アタカマ砂漠で正体不明の金属球が大量出現──地元住民パニック",
-      "commentBy": "shuna",
-      "commentStyle": "paranormal",
-      "category": "paranormal",
-      "keyAngles": ["金属球200個", "完全な真球", "アタカマ砂漠", "NASA火星実験場"],
-      "sourceUrl": "https://tocana.jp/"
-    },
-    {
-      "id": "2026-04-16-005",
-      "date": "2026-04-16",
-      "title": "京都の廃寺で江戸時代の「呪術書」発見──解読で新たな陰陽道の体系が判明",
-      "commentBy": "raika",
-      "commentStyle": "mystery",
-      "category": "mystery",
-      "keyAngles": ["陰陽道手稿", "星辰配置結界術", "江戸中期", "正確な星図"],
-      "sourceUrl": "https://www.kyoto-np.co.jp/"
     }
   ]
 }
