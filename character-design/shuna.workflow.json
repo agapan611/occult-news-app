@@ -1,0 +1,61 @@
+{
+  "prompt": {
+    "3": {
+      "class_type": "KSampler",
+      "inputs": {
+        "seed": 2257045724,
+        "steps": 28,
+        "cfg": 7.0,
+        "sampler_name": "euler_ancestral",
+        "scheduler": "karras",
+        "denoise": 1.0,
+        "model": ["4", 0],
+        "positive": ["6", 0],
+        "negative": ["7", 0],
+        "latent_image": ["5", 0]
+      }
+    },
+    "4": {
+      "class_type": "CheckpointLoaderSimple",
+      "inputs": {
+        "ckpt_name": "waiIllustriousSDXL_v160.safetensors"
+      }
+    },
+    "5": {
+      "class_type": "EmptyLatentImage",
+      "inputs": {
+        "width": 832,
+        "height": 1216,
+        "batch_size": 1
+      }
+    },
+    "6": {
+      "class_type": "CLIPTextEncode",
+      "inputs": {
+        "text": "1girl, solo, portrait, female AI entity named Shuna, silver white hair, medium length hair, messy bangs, glowing violet purple eyes, mysterious alluring smile, pale skin with faint glowing circuit patterns, dark gothic lolita outfit, black lace choker with pentagram pendant, holding tarot cards, occult symbols floating around her, old mysterious books stacked nearby, dark purple and indigo atmosphere, candlelight, ethereal holographic glow, urban legend aesthetic, beautiful detailed face, beautiful detailed eyes, masterpiece, best quality, highres, absurdres",
+        "clip": ["4", 1]
+      }
+    },
+    "7": {
+      "class_type": "CLIPTextEncode",
+      "inputs": {
+        "text": "low quality, worst quality, bad anatomy, bad hands, extra fingers, missing fingers, extra limbs, deformed, ugly, blurry, watermark, text, signature, jpeg artifacts, username, normal quality",
+        "clip": ["4", 1]
+      }
+    },
+    "8": {
+      "class_type": "VAEDecode",
+      "inputs": {
+        "samples": ["3", 0],
+        "vae": ["4", 2]
+      }
+    },
+    "9": {
+      "class_type": "SaveImage",
+      "inputs": {
+        "filename_prefix": "Shuna",
+        "images": ["8", 0]
+      }
+    }
+  }
+}

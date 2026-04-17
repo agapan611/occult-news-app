@@ -1,5 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
+import Footer from "@/components/Footer";
 
 const admins = [
   {
@@ -55,9 +56,7 @@ export default function AboutPage() {
         </div>
       </main>
 
-      <footer className="border-t border-card-border py-6 text-center text-xs text-muted">
-        <p>OCCULT WIRE - AI考察はエンタメです。事実とは異なる場合があります。</p>
-      </footer>
+      <Footer />
     </>
   );
 }

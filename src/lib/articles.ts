@@ -16,6 +16,7 @@ export type Article = {
   occultComment: string;
   commentStyle: string;
   commentBy: Commenter;
+  leadline?: string; // 見出し上のキャラ一言（サブタイトル方式）
   createdAt: string;
 };
 
