@@ -129,3 +129,8 @@
 - [ ] X投稿スキル作成
 - [ ] 親スキル作成（ニュース+GRIMOIRE+X を一発統合実行）
 - [ ] スケジュールタスク化（毎朝自動実行）
+- [ ] **Vercel Production Domain 設定見直し（長期対策）**
+  - 現状: git push や `vercel deploy --prod` しても `occult.ainiwa.jp` の alias が自動更新されない
+  - 毎回手動で `vercel alias set https://occult-news-app.vercel.app occult.ainiwa.jp` を叩く必要がある
+  - 短期対策: スキル Step 8 に alias set コマンドを組み込み済み
+  - 根本対策: Vercelダッシュボード https://vercel.com/agapan611s-projects/occult-news-app/settings/domains を開き、`occult.ainiwa.jp` が Production Domain として正しく登録されているか確認。`ainiwa.jp`親ドメイン（別プロジェクト ainiwa-portal）との紐付き衝突の可能性あり
