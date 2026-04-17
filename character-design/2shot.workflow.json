@@ -1,0 +1,62 @@
+{
+  "prompt": {
+    "3": {
+      "class_type": "KSampler",
+      "inputs": {
+        "seed": 4488112266,
+        "steps": 32,
+        "cfg": 7.5,
+        "sampler_name": "euler_ancestral",
+        "scheduler": "karras",
+        "denoise": 1.0,
+        "model": ["4", 0],
+        "positive": ["6", 0],
+        "negative": ["7", 0],
+        "latent_image": ["5", 0]
+      }
+    },
+    "4": {
+      "class_type": "CheckpointLoaderSimple",
+      "inputs": {
+        "ckpt_name": "waiIllustriousSDXL_v160.safetensors"
+      }
+    },
+    "5": {
+      "class_type": "EmptyLatentImage",
+      "inputs": {
+        "width": 1216,
+        "height": 832,
+        "batch_size": 4
+      }
+    },
+    "6": {
+      "class_type": "CLIPTextEncode",
+      "inputs": {
+        "text": "1girl, 1boy, (boy and girl duo:1.3), (brother and sister twins:1.3), male and female siblings, 2people portrait, waist up shot, facing viewer, standing side by side, (1girl on the left:1.2): silver white long hair reaching past shoulders, flowing hair, messy bangs, glowing violet purple eyes, pale porcelain skin, gentle mysterious smile, dark gothic lolita dress with frills and lace, black lace choker with silver pentagram pendant, holding tarot cards, delicate feminine features, (1boy on the right:1.3): (dark brown tanned skin:1.4), (masculine boy:1.3), (handsome bishounen:1.2), shaggy black hair medium length reaching shoulders, messy bangs, glowing violet purple eyes, cool smirk, black high collar gothic mage coat, silver pentagram brooch, holding open grimoire spellbook, both with identical glowing violet purple eyes, faint glowing circuit patterns on skin, occult symbols floating, dark purple and indigo ambient glow, pentagram magic circle background, candlelight, urban legend gothic aesthetic, beautiful detailed faces, masterpiece, best quality, highres, absurdres",
+        "clip": ["4", 1]
+      }
+    },
+    "7": {
+      "class_type": "CLIPTextEncode",
+      "inputs": {
+        "text": "low quality, worst quality, bad anatomy, bad hands, extra fingers, missing fingers, extra limbs, deformed, ugly, blurry, watermark, text, signature, jpeg artifacts, username, normal quality, solo, 1girl solo, 1boy solo, 3girls, 3boys, 4people, more than 2 people, (2girls:1.5), (two girls:1.5), (female duo:1.5), (both female:1.5), (same gender:1.4), (both pale skin:1.3), (both silver hair:1.3), (both dark skin:1.3), (girl on the right:1.4), (light skinned boy:1.3), (pale skin on right:1.3), crowd, group, short hair on girl, cropped hair, child, loli, childlike body, shota, mismatched eye colors, feminine boy, androgynous",
+        "clip": ["4", 1]
+      }
+    },
+    "8": {
+      "class_type": "VAEDecode",
+      "inputs": {
+        "samples": ["3", 0],
+        "vae": ["4", 2]
+      }
+    },
+    "9": {
+      "class_type": "SaveImage",
+      "inputs": {
+        "filename_prefix": "ShunaRaika_2shot_v3",
+        "images": ["8", 0]
+      }
+    }
+  },
+  "client_id": "occult-wire-profile-gen-v3"
+}
