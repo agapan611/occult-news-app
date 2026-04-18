@@ -127,7 +127,6 @@
 - [x] 運営者情報のメアド非公開化 → 問い合わせ用に `shunaraika@gmail.com` を設定
 
 ### 残タスク（2026-04-19 以降）
-- [ ] 画像生成スキルの作成（ComfyUI起動〜生成〜保存を自動化）
 - [ ] スケジュールタスク化（毎朝自動実行）
 - [ ] **Vercel Production Domain 設定見直し（長期対策）**
   - 現状: git push や `vercel deploy --prod` しても `occult.ainiwa.jp` の alias が自動更新されない
