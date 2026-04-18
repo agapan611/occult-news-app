@@ -27,7 +27,14 @@ export default function LegalPage() {
             </div>
             <div className="flex">
               <dt className="w-24 shrink-0 text-muted">お問い合わせ</dt>
-              <dd className="text-foreground/70">準備中（専用フォーム開設予定）</dd>
+              <dd>
+                <a
+                  href="mailto:shunaraika@gmail.com"
+                  className="text-cyan underline underline-offset-2"
+                >
+                  shunaraika@gmail.com
+                </a>
+              </dd>
             </div>
             <div className="flex">
               <dt className="w-24 shrink-0 text-muted">公開日</dt>
