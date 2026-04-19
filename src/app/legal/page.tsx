@@ -1,3 +1,4 @@
+import Link from "next/link";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 
@@ -27,10 +28,16 @@ export default function LegalPage() {
             </div>
             <div className="flex">
               <dt className="w-24 shrink-0 text-muted">お問い合わせ</dt>
-              <dd>
+              <dd className="flex flex-col gap-0.5">
+                <Link
+                  href="/contact"
+                  className="text-cyan underline underline-offset-2"
+                >
+                  お問い合わせフォーム
+                </Link>
                 <a
                   href="mailto:shunaraika@gmail.com"
-                  className="text-cyan underline underline-offset-2"
+                  className="break-all text-cyan underline underline-offset-2"
                 >
                   shunaraika@gmail.com
                 </a>

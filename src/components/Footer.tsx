@@ -3,7 +3,10 @@ import Link from "next/link";
 export default function Footer() {
   return (
     <footer className="border-t border-card-border py-6 text-center text-xs text-muted">
-      <nav className="mb-3 flex justify-center gap-4">
+      <nav className="mb-3 flex flex-wrap justify-center gap-x-4 gap-y-2">
+        <Link href="/contact" className="hover:text-accent transition-colors">
+          お問い合わせ
+        </Link>
         <Link href="/legal" className="hover:text-accent transition-colors">
           運営・プライバシー
         </Link>

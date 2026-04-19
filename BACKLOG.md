@@ -11,50 +11,6 @@
 
 ---
 
-## 優先度: 最優先（今週〜今月上旬）
-
-### 1. Search Console 登録・インデックス状況確認
-- `site:occult.ainiwa.jp` で検索結果がほぼ出ない疑惑（評価②指摘）
-- Google Search Console に `occult.ainiwa.jp` を追加
-- sitemap 送信、カバレッジ確認
-- 未インデックスなら URL 検査ツールから手動インデックス申請
-- Bing Webmaster Tools も合わせて登録
-
-### 2. robots.txt / sitemap.xml 設置確認
-- Next.js 16 標準の `app/robots.ts` / `app/sitemap.ts` での自動生成を確認
-- **AIクローラーの許可方針を決定**して robots.txt に明記：
-  - `GPTBot`（ChatGPT）
-  - `ClaudeBot` / `Claude-Web`（Anthropic）
-  - `PerplexityBot`
-  - `Google-Extended`（Gemini学習用）
-- 流入狙いなら原則 Allow 推奨（ただし免責との整合は要検討、下記 #3 参照）
-
-### 3. llms.txt 設置
-- ルート直下 `/llms.txt` を配置
-- サイト概要・キャラ設定・「AI考察はエンタメ」の明示
-- 主要URL（/grimoire, /about, /legal）への案内
-- 英語サマリーも併記（英語圏AIからの参照精度向上）
-- **留意**: 免責「事実と異なる場合あり」を明記している以上、LLMが引用から除外する可能性がある（評価②指摘）。AI露出 vs 免責誠実性のトレードオフを理解した上で書く
-
-### 4. お問い合わせフォーム開設
-- 現状 `/legal` で「準備中」→ DMCA・権利侵害申立ての受け皿がない
-- Google フォームで即席開設 → `/legal` から導線
-- 受信先: `shunaraika@gmail.com`（運用中メアド）
-- AdSense 審査・特商法対応の前提としても必須
-
-### 5. 各ページの `<title>` / `meta description` / `og:image` 固有性確認
-- トップ／GRIMOIRE一覧／個別記事／about／legal の各ページで固有メタが設定されているか監査
-- 使い回しがあれば修正
-- `generateMetadata` の活用状況を再点検
-
-### 6. 免責文の追記
-- 現行の「エンタメ目的」「事実と異なる場合あり」に加えて以下を追加：
-  - 「**投資判断の根拠にしないでください**」（金融商品取引法の風説の流布リスク対策）
-  - 「**防災・避難判断の根拠にしないでください**」（災害対策基本法のデマ等リスク対策）
-  - 「**特定個人・団体への中傷を意図するものではありません**」（名誉毀損リスク対策）
-
----
-
 ## 優先度: 高（今月中に着手）
 
 ### 7. 構造化データ（JSON-LD）実装
@@ -259,6 +215,16 @@
   - 原因は「親ドメイン衝突」ではなく、単にプロジェクトの Production Domain として未登録だったため
 - [x] 4月19日 daily X投稿（シュナ数秘術5、Playwright MCP経由）
 - [x] 災害・死亡ニュースのガイドライン自主設定（CHARACTERS.md・両スキルに反映）
+
+### 2026-04-19 SEO/LLMO/法務対応（BACKLOG 最優先消化）
+- [x] **#1 Search Console 登録・サイトマップ送信**（HTMLタグ方式で所有権確認→sitemap送信完了）
+- [x] **#2 robots.ts / sitemap.ts 設置**（Next.js 16 標準の MetadataRoute で自動生成）
+  - AIクローラー許可リスト27種（Googlebot/GPTBot/ClaudeBot/PerplexityBot/Google-Extended 等）
+  - 攻撃的ボット拒否リスト14種（Bytespider/SemrushBot/AhrefsBot/DotBot 等）
+- [x] **#3 llms.txt 設置**（英語サマリー、キャラ設定、AI考察はエンタメ明記）
+- [x] **#4 お問い合わせフォーム開設**（Googleフォーム経由 + `/contact` ページ新設 + Footer導線）
+- [x] **#5 各ページ メタ監査**（layout.tsx 共通OGP/Twitter/Verification、about/legal/contact 個別メタ設定）
+- [x] **#6 免責文の追記**（投資判断・防災避難判断・中傷意図なしの3項目を `/legal` に追加）
 
 ### 残タスク（2026-04-20 以降）
 - [ ] スケジュールタスク化（毎朝自動実行）— 自動化は後回し（X API有料化で代替案要検討）
