@@ -126,10 +126,17 @@
 - [x] `/x投稿` スキル作成 + 初投稿テスト成功
 - [x] 運営者情報のメアド非公開化 → 問い合わせ用に `shunaraika@gmail.com` を設定
 
-### 残タスク（2026-04-19 以降）
-- [ ] スケジュールタスク化（毎朝自動実行）
-- [ ] **Vercel Production Domain 設定見直し（長期対策）**
-  - 現状: git push や `vercel deploy --prod` しても `occult.ainiwa.jp` の alias が自動更新されない
-  - 毎回手動で `vercel alias set https://occult-news-app.vercel.app occult.ainiwa.jp` を叩く必要がある
-  - 短期対策: スキル Step 8 に alias set コマンドを組み込み済み
-  - 根本対策: Vercelダッシュボード設定で `occult.ainiwa.jp` が Production Domain として正しく登録されているか確認。`ainiwa.jp`親ドメイン（別プロジェクト ainiwa-portal）との紐付き衝突の可能性あり
+### 2026-04-19 追加対応
+- [x] **Vercel Production Domain 設定見直し**（alias 自動更新問題を根本解決）
+  - `vercel domains add occult.ainiwa.jp` で Production Domain として正式登録
+  - 空コミット push で自動 alias 張り替えを実テスト → OK
+  - `/occult-news投稿` と `/グリモワール投稿` スキルから手動 `vercel alias set` 記述を削除
+  - 原因は「親ドメイン衝突」ではなく、単にプロジェクトの Production Domain として未登録だったため
+- [x] 4月19日 daily X投稿（シュナ数秘術5、Playwright MCP経由）
+
+### 残タスク（2026-04-20 以降）
+- [ ] スケジュールタスク化（毎朝自動実行）— 自動化は後回し（X API有料化で A'案も要検討）
+- [ ] ainiwa-portal 側の Production Domain 確認（手動 alias set の記憶なし＝既に登録済みの可能性。次回 portal 更新時に挙動確認）
+- [ ] 内部リンク設計の強化（GRIMOIRE⇔ニュースの関連記事）
+- [ ] カテゴリページ `/category/[slug]`
+- [ ] AdSense審査対応準備（GRIMOIRE 20記事貯まるまで据え置き）
