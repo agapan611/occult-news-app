@@ -59,13 +59,11 @@ export async function generateMetadata({
       modifiedTime: publishedIso,
       authors: [authorName],
       tags: story.tags,
-      images: ["/shuna-raika.png"],
     },
     twitter: {
       card: "summary_large_image",
       title: `${story.title} | OCCULT WIRE`,
       description: story.summary,
-      images: ["/shuna-raika.png"],
     },
   };
 }
