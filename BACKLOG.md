@@ -49,10 +49,6 @@
 - → **コンセプトの核に関わるのでユーザー判断必要**。AdSense通すかどうかと連動
 - 一次取材・一次資料入り記事も数本仕込むと E-E-A-T 的に強い
 
-### 20. タグアーカイブページ
-- `/tag/数秘術`、`/tag/UFO` 等
-- 評価①指摘: SEO・UX 両面で効く
-
 ### 21. 攻撃的ボット防御の強化（Vercel Firewall / Cloudflare）
 - `robots.txt` はお行儀のよいクローラーにしか効かない
   - → 無視して帯域を食い潰す悪質スクレイパーへの対策が必要
@@ -208,6 +204,16 @@
   - 最新30件、`revalidate: 3600` + `stale-while-revalidate: 86400`
   - layout.tsx の `alternates.types["application/rss+xml"]` で発見可能化
   - Footer に RSS リンク導線追加
+
+### 2026-04-20 タグアーカイブ追加
+- [x] **#20 タグアーカイブページ `/grimoire/tag/[slug]` 新設**
+  - `src/lib/stories.ts` に `getAllTags()`（件数付き、降順）と `getStoriesByTag()` を追加
+  - `generateStaticParams` で全21タグSSG
+  - `BreadcrumbList` + `CollectionPage` JSON-LD を挿入
+  - タグ別記事一覧 + 上位20タグへの導線（件数表示付き）
+  - GRIMOIRE 個別ページのタグ chip を Link 化
+  - 日本語タグは `encodeURIComponent` で URL-safe 化、受け取り側で `decodeURIComponent`
+  - sitemap.xml に全タグページ自動追加（priority 0.6）
 
 ### 2026-04-19 回遊性・視認性対応（BACKLOG 中優先消化）
 - [x] **#13 内部リンク設計の強化**
