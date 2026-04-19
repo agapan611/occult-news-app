@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { useState } from "react";
 import type { Story, StoryAuthor } from "@/lib/stories";
 import StoryCard from "./StoryCard";
@@ -28,6 +29,13 @@ export default function StoryFilter({ stories }: { stories: Story[] }) {
         <p className="text-xs text-foreground/70 leading-relaxed">
           シュナとライカが綴る、オカルト・都市伝説の書庫。
         </p>
+        <Link
+          href="/grimoire/random"
+          prefetch={false}
+          className="mt-4 inline-block rounded-full border border-accent/40 bg-accent/10 px-4 py-1.5 text-[11px] text-accent tracking-wider hover:bg-accent/20 hover:border-accent/60 transition-colors"
+        >
+          ランダムに1冊 &rarr;
+        </Link>
       </div>
 
       {/* フィルタタブ */}
