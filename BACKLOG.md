@@ -22,15 +22,6 @@
 
 ## 優先度: 中
 
-### 13. 内部リンク設計の強化
-- GRIMOIRE → ニュース、ニュース → GRIMOIRE の関連リンク
-- 記事末尾の「関連記事」ブロック
-- カテゴリ別回遊導線
-
-### 14. カテゴリページ `/category/[slug]`
-- ロングテールSEO + 回遊性
-- 既存タブフィルタだけでなく URL を切る
-
 ### 15. AdSense審査対応（GRIMOIRE 20記事蓄積後）
 - **NEWS欄の陰謀論/数秘術カテゴリは審査リスク高**
 - 選択肢:
@@ -57,10 +48,6 @@
 - 数字遊びの数秘術を一歩引く
 - → **コンセプトの核に関わるのでユーザー判断必要**。AdSense通すかどうかと連動
 - 一次取材・一次資料入り記事も数本仕込むと E-E-A-T 的に強い
-
-### 19. キャラ別アクセントカラー
-- シュナ=ピンク/マゼンタ系、ライカ=青/シアン系
-- 視認性UP、著者を追う読者体験の向上
 
 ### 20. タグアーカイブページ
 - `/tag/数秘術`、`/tag/UFO` 等
@@ -221,6 +208,23 @@
   - 最新30件、`revalidate: 3600` + `stale-while-revalidate: 86400`
   - layout.tsx の `alternates.types["application/rss+xml"]` で発見可能化
   - Footer に RSS リンク導線追加
+
+### 2026-04-19 回遊性・視認性対応（BACKLOG 中優先消化）
+- [x] **#13 内部リンク設計の強化**
+  - GRIMOIRE 個別ページ末尾に同カテゴリ関連記事ブロック（4件まで）を追加
+  - カテゴリバッジをリンク化（個別ページ → `/grimoire/category/[slug]`）
+  - `getRelatedStories()` 関数を `src/lib/stories.ts` に追加
+- [x] **#14 カテゴリページ `/grimoire/category/[slug]` 新設**
+  - `generateStaticParams` で全カテゴリSSG
+  - `BreadcrumbList` + `CollectionPage` JSON-LD 挿入
+  - カテゴリ説明文 + 記事一覧 + 他カテゴリ導線
+  - `src/lib/categories.ts` に `grimoireCategoryLabels` / `grimoireCategoryDescriptions` を集約（StoryCard/個別ページ/カテゴリページで共有）
+  - sitemap.xml にカテゴリページ自動追加（priority 0.7）
+- [x] **#19 キャラ別アクセントカラー（カードUI反映）**
+  - StoryCard / ArticleCard の左端に著者別の極細アクセントストライプを追加
+  - シュナ=`bg-accent`（紫）、ライカ=`bg-cyan`、both=グラデーション
+  - 一覧スキャン時に執筆者を直感的に識別できる視覚的手がかり
+  - LatestGrimoire（横スクロール bordered card）は既に著者アイコン+名前が表示されているため見送り
 
 ### 残タスク（2026-04-20 以降）
 - [ ] スケジュールタスク化（毎朝自動実行）— 自動化は後回し（X API有料化で代替案要検討）
