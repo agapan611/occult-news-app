@@ -6,17 +6,18 @@ export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 
 async function loadJpFont(): Promise<ArrayBuffer> {
+  // IE 互換 UA だと Google Fonts は TTF フォーマットを返す（satori は TTF/OTF しか扱えない）
   const css = await fetch(
     "https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@700&display=swap",
     {
       headers: {
         "User-Agent":
-          "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36",
+          "Mozilla/5.0 (compatible; MSIE 9.0; Windows NT 6.1; Trident/5.0)",
       },
     },
   ).then((r) => r.text());
 
-  const urlMatch = css.match(/src:\s*url\(([^)]+\.(?:ttf|otf))\)/);
+  const urlMatch = css.match(/url\(([^)]+\.(?:ttf|otf))\)/);
   if (!urlMatch) throw new Error("Japanese font URL not found in Google Fonts CSS");
   return fetch(urlMatch[1]).then((r) => r.arrayBuffer());
 }
