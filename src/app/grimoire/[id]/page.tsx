@@ -185,12 +185,13 @@ export default async function StoryPage({
         {/* タグ */}
         <div className="mt-8 flex flex-wrap gap-2">
           {story.tags.map((tag) => (
-            <span
+            <Link
               key={tag}
-              className="rounded-full border border-card-border px-2 py-0.5 text-[10px] text-muted"
+              href={`/grimoire/tag/${encodeURIComponent(tag)}`}
+              className="rounded-full border border-card-border px-2 py-0.5 text-[10px] text-muted hover:border-accent hover:text-accent transition-colors"
             >
               #{tag}
-            </span>
+            </Link>
           ))}
         </div>
 

@@ -69,3 +69,21 @@ export function getRelatedStories(story: Story, limit = 4): Story[] {
     .filter((s) => s.id !== story.id && s.category === story.category)
     .slice(0, limit);
 }
+
+/** 全タグ一覧（件数の多い順） */
+export function getAllTags(): { tag: string; count: number }[] {
+  const counts = new Map<string, number>();
+  for (const s of getAllStories()) {
+    for (const t of s.tags) {
+      counts.set(t, (counts.get(t) ?? 0) + 1);
+    }
+  }
+  return Array.from(counts.entries())
+    .map(([tag, count]) => ({ tag, count }))
+    .sort((a, b) => b.count - a.count || a.tag.localeCompare(b.tag, "ja"));
+}
+
+/** タグ別の記事（新しい順） */
+export function getStoriesByTag(tag: string): Story[] {
+  return getAllStories().filter((s) => s.tags.includes(tag));
+}
