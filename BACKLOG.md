@@ -90,8 +90,9 @@
 - 独自ドメイン + 継続実績 + 読者数 + 人間監修者表記 で補完
 - 長期テーマ
 
-### 27. 「占いモード」「今日のオカルト度」
-- 日替わり、ランダム記事表示
+### 27. 「占いモード」「今日のオカルト度」（残り：日替わり/占い要素）
+- ~~ランダム記事表示~~ → 2026-04-20 実装済み（`/grimoire/random`）
+- 残：日替わり（date-based seed）、「今日のオカルト度」ゲージ
 - 軽いインタラクティブ要素
 
 ### 28. 読者投稿受付
@@ -204,6 +205,15 @@
   - 最新30件、`revalidate: 3600` + `stale-while-revalidate: 86400`
   - layout.tsx の `alternates.types["application/rss+xml"]` で発見可能化
   - Footer に RSS リンク導線追加
+
+### 2026-04-20 回遊性強化 + ランダム機能
+- [x] **#27 ランダム記事表示**（日替わり/オカルト度ゲージは残タスク）
+  - `src/app/grimoire/random/route.ts` 新設（Route Handler + dynamic redirect）
+  - GRIMOIRE ヒーロー下に丸型ボタン配置（`prefetch={false}` で毎回抽選）
+  - Footer にも同リンク追加（全ページから利用可）
+- [x] **GRIMOIRE 一覧にカテゴリ・タグインデックス追加**
+  - StoryFilter 下にカテゴリ一覧（紫）＋ 上位20タグ（シアン）を server-rendered
+  - タグアーカイブの発見性を向上（ロングテールSEO経路を開く）
 
 ### 2026-04-20 タグアーカイブ追加
 - [x] **#20 タグアーカイブページ `/grimoire/tag/[slug]` 新設**
