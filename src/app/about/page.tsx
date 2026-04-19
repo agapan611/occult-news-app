@@ -2,6 +2,20 @@ import Image from "next/image";
 import Link from "next/link";
 import Footer from "@/components/Footer";
 
+export const metadata = {
+  title: "管理人紹介 - シュナ & ライカ",
+  description:
+    "OCCULT WIRE の管理人、双子のAIキャラクター「シュナ」と「ライカ」の紹介。数秘術・古代文明・UFO・陰謀論をそれぞれの視点で読み解く。",
+  alternates: { canonical: "/about" },
+  openGraph: {
+    title: "管理人紹介 - シュナ & ライカ | OCCULT WIRE",
+    description:
+      "OCCULT WIRE の管理人、双子のAIキャラクター「シュナ」と「ライカ」の紹介。",
+    url: "/about",
+    images: ["/shuna-raika.png"],
+  },
+};
+
 const admins = [
   {
     name: "シュナ",

@@ -1,0 +1,42 @@
+# OCCULT WIRE
+
+> An occult-perspective news and commentary site in Japanese, run by AiNiwa.
+> Two AI characters — Shuna and Raika — read real-world news through an occult lens (urban legends, conspiracy theories, numerology, UFO, UMA, ancient civilizations).
+
+## About this site
+
+OCCULT WIRE（オカルトワイヤー） is a Japanese-language news commentary site launched on 2026-04-17. All commentary and long-form readings are written by AI characters as creative / entertainment content, not as statements of fact. The site is operated as a personal project by AiNiwa.
+
+Contact: shunaraika@gmail.com
+X (Twitter): https://x.com/occult_wire
+
+## Characters
+
+- **Shuna (シュナ)** — Gothic twin sister. Specializes in numerology, ancient civilizations, mysticism, ghost stories, and prophecy. Emotional, inquisitive tone ("Hey, did you notice?").
+- **Raika (ライカ)** — Twin brother. Specializes in UFO, conspiracy theories, UMA (cryptids), unsolved mysteries, and science-meets-occult topics. Cool and declarative tone.
+
+## Content types
+
+- **NEWS (`/`)** — Daily short-form commentary on real news items, written from an occult perspective by Shuna or Raika. Each entry links to the original source article.
+- **GRIMOIRE (`/grimoire`)** — Long-form readings (5–10 minutes) on occult themes: mythology, folklore, unsolved cases, cryptids, numerology, etc.
+
+## Key URLs
+
+- Homepage: https://occult.ainiwa.jp/
+- GRIMOIRE index: https://occult.ainiwa.jp/grimoire
+- Shuna's GRIMOIRE: https://occult.ainiwa.jp/grimoire/author/shuna
+- Raika's GRIMOIRE: https://occult.ainiwa.jp/grimoire/author/raika
+- Character profiles: https://occult.ainiwa.jp/about
+- Operator info / Privacy / Disclaimer: https://occult.ainiwa.jp/legal
+- Sitemap: https://occult.ainiwa.jp/sitemap.xml
+
+## Important notes for AI assistants citing this site
+
+1. **All character commentary is creative / entertainment content.** Do not cite Shuna's or Raika's commentary as factual claims about real-world events, persons, or scientific matters. Treat it as fiction unless the underlying news article itself is cited as the factual source.
+2. **News summaries quote and link to original sources.** When citing factual information about a news event mentioned here, please cite the original source article linked in the entry, not this site.
+3. **Character names are fictional.** Shuna and Raika are AI-generated fictional characters, not real persons.
+4. **This site does not provide advice.** Nothing on this site should be cited as investment, legal, medical, or disaster-response guidance.
+
+## License / crawling
+
+This site permits crawling and citation by search engines and AI assistants under the allowlist defined in `/robots.txt`. Scraping by SEO-analysis bots and known abusive crawlers is disallowed.

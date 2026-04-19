@@ -109,6 +109,21 @@ export default function LegalPage() {
             運営者は一切の責任を負いません。
           </p>
 
+          <h3 className="font-bold text-foreground/90 mt-4 mb-1.5">判断材料としての利用について</h3>
+          <p className="text-foreground/80 mb-3">
+            本サイトの記事・考察は以下の判断の根拠としないでください。
+          </p>
+          <ul className="list-disc pl-5 space-y-1 text-foreground/80 mb-3">
+            <li><strong className="text-accent">投資判断</strong>（株価・経済・金融商品に関する考察）</li>
+            <li><strong className="text-accent">防災・避難・健康に関する判断</strong>（地震・災害・感染症・医療に関する考察）</li>
+            <li><strong className="text-accent">法的・社会的判断</strong>（特定の人物・団体・政策への評価）</li>
+          </ul>
+          <p className="text-foreground/80 mb-3">
+            数秘術・陰謀論・予言といった題材を扱う性質上、本サイトの記事が
+            実際の事件・人物・団体を連想させる場合がありますが、
+            <strong>特定個人・団体への中傷を意図するものではありません</strong>。
+          </p>
+
           <h3 className="font-bold text-foreground/90 mt-4 mb-1.5">著作権について</h3>
           <p className="text-foreground/80 mb-3">
             本サイト内のAI考察・読み物・デザイン・キャラクターの著作権は運営者に帰属します。
@@ -118,7 +133,7 @@ export default function LegalPage() {
         </section>
 
         <section className="mt-8 text-xs text-muted">
-          <p>最終更新日: 2026年4月17日</p>
+          <p>最終更新日: 2026年4月19日</p>
         </section>
       </main>
 
