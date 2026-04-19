@@ -13,14 +13,6 @@
 
 ## 優先度: 高（今月中に着手）
 
-### 7. 構造化データ（JSON-LD）実装
-- NEWS: `NewsArticle` Schema
-- GRIMOIRE: `Article` Schema
-- キャラ: `Person`（`fictionalCharacter` 扱い要検討）
-- 共通: `BreadcrumbList`, `WebSite + SearchAction`, `Organization`
-- Googleリッチリザルト・Discover掲載の足がかり
-- AI引用精度も向上
-
 ### 8. NEWS引用の主従関係ルール化（スキル改修）
 - 現状 NEWS の一部は「引用概要 ≧ AI考察」で著作権法32条の引用要件グレー
 - `/occult-news投稿` スキルに以下を組込：
@@ -38,16 +30,6 @@
 - 狙いクエリ例: 「ディアトロフ峠事件 真相」「数秘術 7 意味」「アトランティス 正体」
 - 週2本ペースで積み上げ → 半年〜1年で化ける可能性
 - 20本蓄積で AdSense 審査対応 #15 の前提が整う
-
-### 11. OGP画像の動的生成
-- `@vercel/og` で記事タイトル＋キャラアイコン入りのOGP
-- SNS拡散時のCTR向上
-- Next.js 16 App Router の `opengraph-image.tsx` 規約を使う
-
-### 12. RSS / ATOM フィード
-- オカルトジャンルは熱心な購読者が多い（評価①指摘）
-- `/feed.xml` もしくは `/rss.xml`
-- NEWS用・GRIMOIRE用の分離も検討
 
 ---
 
@@ -225,6 +207,24 @@
 - [x] **#4 お問い合わせフォーム開設**（Googleフォーム経由 + `/contact` ページ新設 + Footer導線）
 - [x] **#5 各ページ メタ監査**（layout.tsx 共通OGP/Twitter/Verification、about/legal/contact 個別メタ設定）
 - [x] **#6 免責文の追記**（投資判断・防災避難判断・中傷意図なしの3項目を `/legal` に追加）
+
+### 2026-04-19 SEO/LLMO 構造化対応（BACKLOG 高優先消化）
+- [x] **#7 構造化データ（JSON-LD）実装**
+  - 共通 `JsonLd` コンポーネント新設（XSS対策付き）
+  - layout.tsx に `WebSite` + `Organization` 挿入
+  - GRIMOIRE個別ページに `Article` + `BreadcrumbList` + `Person(author)` 挿入
+  - GRIMOIRE一覧ページに `BreadcrumbList` 挿入
+  - generateMetadata を拡張（canonical、openGraph type=article、twitter、authors、keywords、publishedTime/modifiedTime）
+- [x] **#11 OGP画像の動的生成**
+  - `src/app/grimoire/[id]/opengraph-image.tsx` 新設（`next/og` の `ImageResponse`）
+  - `public/fonts/NotoSansJP-Bold.ttf` を同梱して `readFile` で注入（satori は TTF/OTF のみ対応）
+  - キャラ別アクセント色（シュナ=#ef4444、ライカ=#38bdf8）、タイトル文字数で自動サイズ調整
+  - 罫線系文字（U+2500等）はサブセット欠落するため描画時のみ長音記号に置換
+- [x] **#12 RSS / ATOM フィード**
+  - `src/app/feed.xml/route.ts` 新設（RSS 2.0、dc:creator、category、atom:link）
+  - 最新30件、`revalidate: 3600` + `stale-while-revalidate: 86400`
+  - layout.tsx の `alternates.types["application/rss+xml"]` で発見可能化
+  - Footer に RSS リンク導線追加
 
 ### 残タスク（2026-04-20 以降）
 - [ ] スケジュールタスク化（毎朝自動実行）— 自動化は後回し（X API有料化で代替案要検討）

@@ -132,7 +132,16 @@ export default async function Image({
           }}
         >
           <div style={{ display: "flex", alignItems: "center", gap: 16, fontSize: 30, color: "#e5e7eb" }}>
-            <div style={{ color: accentColor, fontSize: 36, display: "flex" }}>✦</div>
+            <div
+              style={{
+                width: 14,
+                height: 14,
+                borderRadius: "9999px",
+                background: accentColor,
+                display: "flex",
+                boxShadow: `0 0 12px ${accentColor}`,
+              }}
+            />
             <div style={{ display: "flex" }}>by {author}</div>
           </div>
           <div style={{ fontSize: 22, color: "#6b7280", letterSpacing: "0.15em", display: "flex" }}>
