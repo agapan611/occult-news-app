@@ -13,19 +13,6 @@
 
 ## 優先度: 高（今月中に着手）
 
-### 8. NEWS引用の主従関係ルール化（スキル改修）
-- 現状 NEWS の一部は「引用概要 ≧ AI考察」で著作権法32条の引用要件グレー
-- `/occult-news投稿` スキルに以下を組込：
-  - 引用部分は `<blockquote>` で明示マーク
-  - 考察 > 引用 を文字数で担保（考察500字以上推奨）
-  - 出所明示（元記事URL・媒体名）
-  - 見出しのみ転載、要約は自分の言葉で数行、考察が本文という構成に寄せる
-
-### 9. NEWS考察の最低文字数ルール
-- 評価②指摘: thin content 回避のため 500〜800字最低
-- スキル側に文字数チェック組込（上記 #8 と統合可能）
-- 既存の短い記事は追記/増補の余地あり
-
 ### 10. GRIMOIRE の週2本ペース蓄積（SEO資産化）
 - 狙いクエリ例: 「ディアトロフ峠事件 真相」「数秘術 7 意味」「アトランティス 正体」
 - 週2本ペースで積み上げ → 半年〜1年で化ける可能性
@@ -215,11 +202,20 @@
   - GRIMOIRE個別ページに `Article` + `BreadcrumbList` + `Person(author)` 挿入
   - GRIMOIRE一覧ページに `BreadcrumbList` 挿入
   - generateMetadata を拡張（canonical、openGraph type=article、twitter、authors、keywords、publishedTime/modifiedTime）
+- [x] **#8 NEWS引用の主従関係ルール化（`occult-news投稿` スキル改修）**
+  - summary: 60〜120字（短い導入）／occultComment: 400〜700字（記事本体）に引き上げ
+  - 禁止事項を強化：見出し・summary の文言コピー禁止を明記
+  - 考察の構成例を追加（つかみ → 独自視点 3〜4 段階 → 問いかけ）
+- [x] **#9 NEWS考察の最低文字数ルール（`occult-news投稿` スキル改修）**
+  - Step 6-6 に文字数バリデーションを追加
+  - `occultComment >= 400字` 必須 + `occultComment.length >= summary.length * 3`（主従関係担保）
+  - 未達なら加筆、超過なら要点抽出、修正不能なら除外
 - [x] **#11 OGP画像の動的生成**
   - `src/app/grimoire/[id]/opengraph-image.tsx` 新設（`next/og` の `ImageResponse`）
   - `public/fonts/NotoSansJP-Bold.ttf` を同梱して `readFile` で注入（satori は TTF/OTF のみ対応）
   - キャラ別アクセント色（シュナ=#ef4444、ライカ=#38bdf8）、タイトル文字数で自動サイズ調整
   - 罫線系文字（U+2500等）はサブセット欠落するため描画時のみ長音記号に置換
+  - 装飾星（U+2726）も CSS描画の色付きドット＋glow に置換
 - [x] **#12 RSS / ATOM フィード**
   - `src/app/feed.xml/route.ts` 新設（RSS 2.0、dc:creator、category、atom:link）
   - 最新30件、`revalidate: 3600` + `stale-while-revalidate: 86400`
