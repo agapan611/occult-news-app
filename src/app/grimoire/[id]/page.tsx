@@ -2,13 +2,16 @@ import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import Footer from "@/components/Footer";
+import JsonLd from "@/components/JsonLd";
 import { getAllStories, getStoryById } from "@/lib/stories";
 import type { StoryAuthor } from "@/lib/stories";
 
-const authorInfo: Record<StoryAuthor, { name: string; icon: string; colorClass: string }> = {
-  shuna: { name: "シュナ", icon: "/shuna.png", colorClass: "text-accent" },
-  raika: { name: "ライカ", icon: "/raika.png", colorClass: "text-cyan" },
-  both: { name: "シュナ & ライカ", icon: "/shuna.png", colorClass: "text-foreground" },
+const SITE_URL = "https://occult.ainiwa.jp";
+
+const authorInfo: Record<StoryAuthor, { name: string; icon: string; colorClass: string; slug: string }> = {
+  shuna: { name: "シュナ", icon: "/shuna.png", colorClass: "text-accent", slug: "shuna" },
+  raika: { name: "ライカ", icon: "/raika.png", colorClass: "text-cyan", slug: "raika" },
+  both: { name: "シュナ & ライカ", icon: "/shuna.png", colorClass: "text-foreground", slug: "both" },
 };
 
 const categoryLabels: Record<string, string> = {
@@ -37,10 +40,33 @@ export async function generateMetadata({
 }) {
   const { id } = await params;
   const story = getStoryById(id);
-  if (!story) return { title: "記事が見つかりません | OCCULT WIRE" };
+  if (!story) return { title: "記事が見つかりません" };
+  const path = `/grimoire/${story.id}`;
+  const publishedIso = new Date(story.createdAt || story.date).toISOString();
+  const authorName = authorInfo[story.author].name;
   return {
-    title: `${story.title} | OCCULT WIRE`,
+    title: story.title,
     description: story.summary,
+    keywords: story.tags,
+    authors: [{ name: authorName }],
+    alternates: { canonical: path },
+    openGraph: {
+      type: "article",
+      title: `${story.title} | OCCULT WIRE`,
+      description: story.summary,
+      url: path,
+      publishedTime: publishedIso,
+      modifiedTime: publishedIso,
+      authors: [authorName],
+      tags: story.tags,
+      images: ["/shuna-raika.png"],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: `${story.title} | OCCULT WIRE`,
+      description: story.summary,
+      images: ["/shuna-raika.png"],
+    },
   };
 }
 
@@ -54,9 +80,53 @@ export default async function StoryPage({
   if (!story) notFound();
 
   const author = authorInfo[story.author];
+  const pageUrl = `${SITE_URL}/grimoire/${story.id}`;
+  const publishedIso = new Date(story.createdAt || story.date).toISOString();
+
+  const articleJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    headline: story.title,
+    description: story.summary,
+    datePublished: publishedIso,
+    dateModified: publishedIso,
+    author: {
+      "@type": "Person",
+      name: author.name,
+      url: `${SITE_URL}/grimoire/author/${author.slug}`,
+    },
+    publisher: {
+      "@type": "Organization",
+      name: "OCCULT WIRE",
+      url: SITE_URL,
+      logo: {
+        "@type": "ImageObject",
+        url: `${SITE_URL}/shuna-raika.png`,
+        width: 1200,
+        height: 630,
+      },
+    },
+    image: [`${SITE_URL}/shuna-raika.png`],
+    mainEntityOfPage: { "@type": "WebPage", "@id": pageUrl },
+    inLanguage: "ja",
+    articleSection: categoryLabels[story.category] ?? story.category,
+    keywords: story.tags,
+  };
+
+  const breadcrumbJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: [
+      { "@type": "ListItem", position: 1, name: "ホーム", item: SITE_URL },
+      { "@type": "ListItem", position: 2, name: "GRIMOIRE", item: `${SITE_URL}/grimoire` },
+      { "@type": "ListItem", position: 3, name: story.title, item: pageUrl },
+    ],
+  };
 
   return (
     <>
+      <JsonLd data={articleJsonLd} />
+      <JsonLd data={breadcrumbJsonLd} />
       <header className="sticky top-0 z-50 border-b border-card-border bg-background/80 backdrop-blur-md">
         <div className="mx-auto flex h-14 max-w-lg items-center px-4">
           <Link

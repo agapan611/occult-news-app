@@ -1,10 +1,40 @@
 import type { Metadata, Viewport } from "next";
+import JsonLd from "@/components/JsonLd";
 import "./globals.css";
 
 const SITE_URL = "https://occult.ainiwa.jp";
 const DEFAULT_TITLE = "OCCULT WIRE - オカルト視点ニュース";
 const DEFAULT_DESCRIPTION =
   "普通のニュースをオカルト視点で読み解く。都市伝説・陰謀論・数秘術──AIキャラ「シュナ」と「ライカ」が見つけた偶然の一致をお届け。";
+
+const websiteJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  name: "OCCULT WIRE",
+  alternateName: "オカルト視点ニュース",
+  url: SITE_URL,
+  description: DEFAULT_DESCRIPTION,
+  inLanguage: "ja",
+  publisher: {
+    "@type": "Organization",
+    name: "OCCULT WIRE",
+    url: SITE_URL,
+  },
+};
+
+const organizationJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  name: "OCCULT WIRE",
+  url: SITE_URL,
+  logo: {
+    "@type": "ImageObject",
+    url: `${SITE_URL}/shuna-raika.png`,
+    width: 1200,
+    height: 630,
+  },
+  sameAs: ["https://x.com/occult_wire"],
+};
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
@@ -68,6 +98,8 @@ export default function RootLayout({
       <head>
         <link rel="manifest" href="/manifest.json" />
         <link rel="apple-touch-icon" href="/icons/icon-192.png" />
+        <JsonLd data={websiteJsonLd} />
+        <JsonLd data={organizationJsonLd} />
       </head>
       <body className="min-h-dvh flex flex-col">{children}</body>
     </html>
