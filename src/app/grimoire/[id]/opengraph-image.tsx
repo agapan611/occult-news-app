@@ -1,26 +1,11 @@
 import { ImageResponse } from "next/og";
+import { readFile } from "node:fs/promises";
+import { join } from "node:path";
 import { getStoryById } from "@/lib/stories";
 
 export const alt = "OCCULT WIRE - GRIMOIRE";
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
-
-async function loadJpFont(): Promise<ArrayBuffer> {
-  // IE 互換 UA だと Google Fonts は TTF フォーマットを返す（satori は TTF/OTF しか扱えない）
-  const css = await fetch(
-    "https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@700&display=swap",
-    {
-      headers: {
-        "User-Agent":
-          "Mozilla/5.0 (compatible; MSIE 9.0; Windows NT 6.1; Trident/5.0)",
-      },
-    },
-  ).then((r) => r.text());
-
-  const urlMatch = css.match(/url\(([^)]+\.(?:ttf|otf))\)/);
-  if (!urlMatch) throw new Error("Japanese font URL not found in Google Fonts CSS");
-  return fetch(urlMatch[1]).then((r) => r.arrayBuffer());
-}
 
 const authorLabel = (author: string) =>
   author === "shuna" ? "シュナ" : author === "raika" ? "ライカ" : "シュナ & ライカ";
@@ -32,6 +17,11 @@ export default async function Image({
 }) {
   const { id } = await params;
   const story = getStoryById(id);
+
+  const font = await readFile(
+    join(process.cwd(), "public/fonts/NotoSansJP-Bold.ttf"),
+  );
+
   if (!story) {
     return new ImageResponse(
       (
@@ -45,16 +35,19 @@ export default async function Image({
             alignItems: "center",
             justifyContent: "center",
             fontSize: 48,
+            fontFamily: "Noto Sans JP",
           }}
         >
           OCCULT WIRE
         </div>
       ),
-      size,
+      {
+        ...size,
+        fonts: [{ name: "Noto Sans JP", data: font, style: "normal", weight: 700 }],
+      },
     );
   }
 
-  const font = await loadJpFont();
   const author = authorLabel(story.author);
   const titleSize = story.title.length > 44 ? 46 : story.title.length > 28 ? 58 : 68;
   const accentColor = story.author === "raika" ? "#38bdf8" : "#ef4444";
