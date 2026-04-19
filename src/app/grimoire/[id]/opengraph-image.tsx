@@ -49,7 +49,12 @@ export default async function Image({
   }
 
   const author = authorLabel(story.author);
-  const titleSize = story.title.length > 44 ? 46 : story.title.length > 28 ? 58 : 68;
+  // 日本語サブセットフォントに含まれない罫線系文字(U+2500等)を、
+  // OGPレンダリング時のみ全角ダッシュに置換（実際の記事タイトルは変更しない）
+  const displayTitle = story.title
+    .replace(/[─━]+/g, "ー")
+    .replace(/[―]+/g, "ー");
+  const titleSize = displayTitle.length > 44 ? 46 : displayTitle.length > 28 ? 58 : 68;
   const accentColor = story.author === "raika" ? "#38bdf8" : "#ef4444";
 
   return new ImageResponse(
@@ -115,7 +120,7 @@ export default async function Image({
             textShadow: "0 2px 24px rgba(0,0,0,0.8)",
           }}
         >
-          {story.title}
+          {displayTitle}
         </div>
 
         <div
