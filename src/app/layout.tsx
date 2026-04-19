@@ -46,6 +46,9 @@ export const metadata: Metadata = {
     statusBarStyle: "black-translucent",
     title: "OCCULT WIRE",
   },
+  verification: {
+    google: "pDRxt_ZZuGwtLTgRtrB3TelEzD4F5m5zlmT04g6Y9ro",
+  },
 };
 
 export const viewport: Viewport = {
