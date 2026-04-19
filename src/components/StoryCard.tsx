@@ -3,10 +3,28 @@ import Link from "next/link";
 import type { Story, StoryAuthor } from "@/lib/stories";
 import { grimoireCategoryLabels } from "@/lib/categories";
 
-const authorInfo: Record<StoryAuthor, { name: string; icon: string; colorClass: string }> = {
-  shuna: { name: "シュナ", icon: "/shuna.png", colorClass: "text-accent" },
-  raika: { name: "ライカ", icon: "/raika.png", colorClass: "text-cyan" },
-  both: { name: "シュナ & ライカ", icon: "/shuna.png", colorClass: "text-foreground" },
+const authorInfo: Record<
+  StoryAuthor,
+  { name: string; icon: string; colorClass: string; stripeStyle: string }
+> = {
+  shuna: {
+    name: "シュナ",
+    icon: "/shuna.png",
+    colorClass: "text-accent",
+    stripeStyle: "bg-accent",
+  },
+  raika: {
+    name: "ライカ",
+    icon: "/raika.png",
+    colorClass: "text-cyan",
+    stripeStyle: "bg-cyan",
+  },
+  both: {
+    name: "シュナ & ライカ",
+    icon: "/shuna.png",
+    colorClass: "text-foreground",
+    stripeStyle: "bg-gradient-to-b from-accent to-cyan",
+  },
 };
 
 export default function StoryCard({ story }: { story: Story }) {
@@ -14,8 +32,13 @@ export default function StoryCard({ story }: { story: Story }) {
   return (
     <Link
       href={`/grimoire/${story.id}`}
-      className="block border-b border-card-border px-4 py-5 active:bg-white/[0.02] transition-colors"
+      className="relative block border-b border-card-border px-4 py-5 pl-5 active:bg-white/[0.02] transition-colors"
     >
+      {/* 著者別アクセントストライプ（左端） */}
+      <span
+        aria-hidden
+        className={`absolute left-0 top-0 h-full w-0.5 ${author.stripeStyle}`}
+      />
       {/* カテゴリ + 読了時間 */}
       <div className="mb-2 flex items-center gap-2 text-xs">
         <span className="rounded bg-accent/20 px-1.5 py-0.5 text-accent">

@@ -16,9 +16,12 @@ const styleLabels: Record<string, string> = {
   prophecy: "予言", synchronicity: "シンクロニシティ", occult_history: "オカルト史",
 };
 
-const commenterInfo: Record<Commenter, { name: string; icon: string }> = {
-  shuna: { name: "シュナ", icon: "/shuna.png" },
-  raika: { name: "ライカ", icon: "/raika.png" },
+const commenterInfo: Record<
+  Commenter,
+  { name: string; icon: string; stripeClass: string }
+> = {
+  shuna: { name: "シュナ", icon: "/shuna.png", stripeClass: "bg-accent" },
+  raika: { name: "ライカ", icon: "/raika.png", stripeClass: "bg-cyan" },
 };
 
 export default function ArticleCard({ article }: { article: Article }) {
@@ -37,7 +40,12 @@ export default function ArticleCard({ article }: { article: Article }) {
   })();
 
   return (
-    <article className="border-b border-card-border px-4 py-5">
+    <article className="relative border-b border-card-border px-4 py-5 pl-5">
+      {/* 著者別アクセントストライプ（左端） */}
+      <span
+        aria-hidden
+        className={`absolute left-0 top-0 h-full w-0.5 ${commenter.stripeClass}`}
+      />
       {/* カテゴリ＋タイプ */}
       <div className="mb-1.5 flex items-center gap-2 text-xs">
         <span
