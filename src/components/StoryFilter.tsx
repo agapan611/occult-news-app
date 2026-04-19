@@ -29,13 +29,22 @@ export default function StoryFilter({ stories }: { stories: Story[] }) {
         <p className="text-xs text-foreground/70 leading-relaxed">
           シュナとライカが綴る、オカルト・都市伝説の書庫。
         </p>
-        <Link
-          href="/grimoire/random"
-          prefetch={false}
-          className="mt-4 inline-block rounded-full border border-accent/40 bg-accent/10 px-4 py-1.5 text-[11px] text-accent tracking-wider hover:bg-accent/20 hover:border-accent/60 transition-colors"
-        >
-          ランダムに1冊 &rarr;
-        </Link>
+        <div className="mt-4 flex justify-center gap-2">
+          <Link
+            href="/grimoire/daily"
+            prefetch={false}
+            className="inline-block rounded-full border border-accent/40 bg-accent/10 px-4 py-1.5 text-[11px] text-accent tracking-wider hover:bg-accent/20 hover:border-accent/60 transition-colors"
+          >
+            今日の1冊 &rarr;
+          </Link>
+          <Link
+            href="/grimoire/random"
+            prefetch={false}
+            className="inline-block rounded-full border border-cyan/40 bg-cyan/10 px-4 py-1.5 text-[11px] text-cyan tracking-wider hover:bg-cyan/20 hover:border-cyan/60 transition-colors"
+          >
+            ランダム &rarr;
+          </Link>
+        </div>
       </div>
 
       {/* フィルタタブ */}

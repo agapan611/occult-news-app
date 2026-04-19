@@ -4,8 +4,11 @@ export default function Footer() {
   return (
     <footer className="border-t border-card-border py-6 text-center text-xs text-muted">
       <nav className="mb-3 flex flex-wrap justify-center gap-x-4 gap-y-2">
+        <Link href="/grimoire/daily" prefetch={false} className="hover:text-accent transition-colors">
+          今日の1冊
+        </Link>
         <Link href="/grimoire/random" prefetch={false} className="hover:text-accent transition-colors">
-          ランダムに1冊
+          ランダム
         </Link>
         <Link href="/contact" className="hover:text-accent transition-colors">
           お問い合わせ
