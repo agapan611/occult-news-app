@@ -62,3 +62,10 @@ export function getAllCategories(): string[] {
   for (const s of getAllStories()) cats.add(s.category);
   return Array.from(cats).sort();
 }
+
+/** 同カテゴリの関連記事（自分自身を除く、最大N件、新しい順） */
+export function getRelatedStories(story: Story, limit = 4): Story[] {
+  return getAllStories()
+    .filter((s) => s.id !== story.id && s.category === story.category)
+    .slice(0, limit);
+}

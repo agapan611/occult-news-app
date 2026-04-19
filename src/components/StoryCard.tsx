@@ -1,26 +1,12 @@
 import Image from "next/image";
 import Link from "next/link";
 import type { Story, StoryAuthor } from "@/lib/stories";
+import { grimoireCategoryLabels } from "@/lib/categories";
 
 const authorInfo: Record<StoryAuthor, { name: string; icon: string; colorClass: string }> = {
   shuna: { name: "シュナ", icon: "/shuna.png", colorClass: "text-accent" },
   raika: { name: "ライカ", icon: "/raika.png", colorClass: "text-cyan" },
   both: { name: "シュナ & ライカ", icon: "/shuna.png", colorClass: "text-foreground" },
-};
-
-const categoryLabels: Record<string, string> = {
-  numerology: "数秘術",
-  ancient_civilization: "古代文明",
-  mysticism: "神秘主義",
-  ghost_stories: "心霊",
-  prophecy: "予言",
-  ufo: "UFO/UAP",
-  conspiracy: "陰謀論",
-  uma: "UMA",
-  urban_legend: "都市伝説",
-  science_occult: "科学×オカルト",
-  horror: "怪談",
-  mystery: "ミステリー",
 };
 
 export default function StoryCard({ story }: { story: Story }) {
@@ -33,7 +19,7 @@ export default function StoryCard({ story }: { story: Story }) {
       {/* カテゴリ + 読了時間 */}
       <div className="mb-2 flex items-center gap-2 text-xs">
         <span className="rounded bg-accent/20 px-1.5 py-0.5 text-accent">
-          {categoryLabels[story.category] ?? story.category}
+          {grimoireCategoryLabels[story.category] ?? story.category}
         </span>
         <span className="text-muted">{story.readingTimeMinutes}分で読める</span>
       </div>

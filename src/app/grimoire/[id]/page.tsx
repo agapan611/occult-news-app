@@ -3,8 +3,10 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import Footer from "@/components/Footer";
 import JsonLd from "@/components/JsonLd";
-import { getAllStories, getStoryById } from "@/lib/stories";
+import StoryCard from "@/components/StoryCard";
+import { getAllStories, getStoryById, getRelatedStories } from "@/lib/stories";
 import type { StoryAuthor } from "@/lib/stories";
+import { grimoireCategoryLabels } from "@/lib/categories";
 
 const SITE_URL = "https://occult.ainiwa.jp";
 
@@ -12,21 +14,6 @@ const authorInfo: Record<StoryAuthor, { name: string; icon: string; colorClass: 
   shuna: { name: "シュナ", icon: "/shuna.png", colorClass: "text-accent", slug: "shuna" },
   raika: { name: "ライカ", icon: "/raika.png", colorClass: "text-cyan", slug: "raika" },
   both: { name: "シュナ & ライカ", icon: "/shuna.png", colorClass: "text-foreground", slug: "both" },
-};
-
-const categoryLabels: Record<string, string> = {
-  numerology: "数秘術",
-  ancient_civilization: "古代文明",
-  mysticism: "神秘主義",
-  ghost_stories: "心霊",
-  prophecy: "予言",
-  ufo: "UFO/UAP",
-  conspiracy: "陰謀論",
-  uma: "UMA",
-  urban_legend: "都市伝説",
-  science_occult: "科学×オカルト",
-  horror: "怪談",
-  mystery: "ミステリー",
 };
 
 export function generateStaticParams() {
@@ -80,6 +67,8 @@ export default async function StoryPage({
   const author = authorInfo[story.author];
   const pageUrl = `${SITE_URL}/grimoire/${story.id}`;
   const publishedIso = new Date(story.createdAt || story.date).toISOString();
+  const relatedStories = getRelatedStories(story, 4);
+  const categoryLabel = grimoireCategoryLabels[story.category] ?? story.category;
 
   const articleJsonLd = {
     "@context": "https://schema.org",
@@ -107,7 +96,7 @@ export default async function StoryPage({
     image: [`${SITE_URL}/shuna-raika.png`],
     mainEntityOfPage: { "@type": "WebPage", "@id": pageUrl },
     inLanguage: "ja",
-    articleSection: categoryLabels[story.category] ?? story.category,
+    articleSection: grimoireCategoryLabels[story.category] ?? story.category,
     keywords: story.tags,
   };
 
@@ -141,9 +130,12 @@ export default async function StoryPage({
       <main className="mx-auto w-full max-w-lg flex-1 px-4 py-6">
         {/* カテゴリ + 読了時間 */}
         <div className="mb-3 flex items-center gap-2 text-xs">
-          <span className="rounded bg-accent/20 px-1.5 py-0.5 text-accent">
-            {categoryLabels[story.category] ?? story.category}
-          </span>
+          <Link
+            href={`/grimoire/category/${story.category}`}
+            className="rounded bg-accent/20 px-1.5 py-0.5 text-accent hover:bg-accent/30 transition-colors"
+          >
+            {grimoireCategoryLabels[story.category] ?? story.category}
+          </Link>
           <span className="text-muted">{story.readingTimeMinutes}分で読める</span>
           <span className="text-muted">&middot; {formatDate(story.date)}</span>
         </div>
@@ -201,6 +193,28 @@ export default async function StoryPage({
             </span>
           ))}
         </div>
+
+        {/* 関連記事（同カテゴリ） */}
+        {relatedStories.length > 0 && (
+          <section className="mt-10 border-t border-card-border pt-6">
+            <div className="mb-3 flex items-center justify-between">
+              <h2 className="text-sm font-bold tracking-wider">
+                <span className="text-accent">{categoryLabel}</span> の他の考察
+              </h2>
+              <Link
+                href={`/grimoire/category/${story.category}`}
+                className="text-[11px] text-accent hover:text-accent-dim transition-colors"
+              >
+                一覧 &rarr;
+              </Link>
+            </div>
+            <div className="-mx-4 border-t border-card-border">
+              {relatedStories.map((s) => (
+                <StoryCard key={s.id} story={s} />
+              ))}
+            </div>
+          </section>
+        )}
 
         {/* 注記 */}
         <div className="mt-8 rounded-lg border border-card-border bg-card p-3 text-[11px] text-muted leading-relaxed">

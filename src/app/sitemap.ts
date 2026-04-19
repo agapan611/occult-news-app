@@ -1,11 +1,12 @@
 import type { MetadataRoute } from "next";
-import { getAllStories } from "@/lib/stories";
+import { getAllStories, getAllCategories } from "@/lib/stories";
 
 const SITE_URL = "https://occult.ainiwa.jp";
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const stories = getAllStories();
   const latestStoryDate = stories[0]?.date ?? new Date().toISOString().slice(0, 10);
+  const categories = getAllCategories();
 
   const staticEntries: MetadataRoute.Sitemap = [
     {
@@ -65,5 +66,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.8,
   }));
 
-  return [...staticEntries, ...storyEntries];
+  const categoryEntries: MetadataRoute.Sitemap = categories.map((slug) => ({
+    url: `${SITE_URL}/grimoire/category/${slug}`,
+    lastModified: new Date(latestStoryDate),
+    changeFrequency: "weekly",
+    priority: 0.7,
+  }));
+
+  return [...staticEntries, ...categoryEntries, ...storyEntries];
 }
