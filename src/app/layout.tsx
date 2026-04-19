@@ -46,6 +46,11 @@ export const metadata: Metadata = {
   applicationName: "OCCULT WIRE",
   alternates: {
     canonical: "/",
+    types: {
+      "application/rss+xml": [
+        { url: "/feed.xml", title: "OCCULT WIRE - GRIMOIRE" },
+      ],
+    },
   },
   openGraph: {
     type: "website",

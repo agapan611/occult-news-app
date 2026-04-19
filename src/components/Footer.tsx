@@ -16,6 +16,9 @@ export default function Footer() {
         <Link href="/about" className="hover:text-accent transition-colors">
           管理人
         </Link>
+        <a href="/feed.xml" className="hover:text-accent transition-colors">
+          RSS
+        </a>
       </nav>
       <p className="px-4 leading-relaxed">
         OCCULT WIRE &copy; 2026
