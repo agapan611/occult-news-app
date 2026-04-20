@@ -2,10 +2,13 @@ import Image from "next/image";
 import Link from "next/link";
 import type { Story, StoryAuthor } from "@/lib/stories";
 
-const authorInfo: Record<StoryAuthor, { name: string; icon: string }> = {
-  shuna: { name: "シュナ", icon: "/shuna.png" },
-  raika: { name: "ライカ", icon: "/raika.png" },
-  both: { name: "シュナ & ライカ", icon: "/shuna.png" },
+const authorInfo: Record<
+  StoryAuthor,
+  { name: string; icon: string; leadlineClass: string }
+> = {
+  shuna: { name: "シュナ", icon: "/shuna.png", leadlineClass: "text-accent/85" },
+  raika: { name: "ライカ", icon: "/raika.png", leadlineClass: "text-cyan/85" },
+  both: { name: "シュナ & ライカ", icon: "/shuna.png", leadlineClass: "text-foreground/70" },
 };
 
 export default function LatestGrimoire({ stories }: { stories: Story[] }) {
@@ -72,6 +75,13 @@ export default function LatestGrimoire({ stories }: { stories: Story[] }) {
                     {author.name}・{story.readingTimeMinutes}分
                   </span>
                 </div>
+
+                {/* leadline（タイトル上、小さく） */}
+                {story.leadline && (
+                  <p className={`mb-1 text-[10px] italic leading-snug line-clamp-2 ${author.leadlineClass}`}>
+                    「{story.leadline}」
+                  </p>
+                )}
 
                 {/* タイトル（3行まで） */}
                 <h3 className="text-[13px] font-bold leading-snug text-foreground/95 line-clamp-3 min-h-[3.6em]">

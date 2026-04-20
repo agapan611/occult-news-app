@@ -68,16 +68,6 @@
   - Xでの言及を拾ってくれる影響度の高いアカウントとの接点作り
 - 黒帽子ツールは使わない（ペナルティリスク）
 
-### 38. GRIMOIRE にも leadline（タグライン）を追加
-- 現状: `title` + `summary` のみで、カード一覧・個別ページで「一言の引き」がない
-- occult-news 側は leadline を既に運用中。GRIMOIRE にも同等の「15〜30字、キャラ口調の問いかけ」を導入すれば一覧スキャン時の吸引力が上がる
-- 必要な作業:
-  - `Story` 型に `leadline: string` を追加（`src/lib/stories.ts`）
-  - `/グリモワール投稿` スキルに leadline 生成・抽出ステップを追加（本文生成後に抽出、occult-news 側と同じ順序）
-  - UI 改修: GRIMOIRE 個別ページ（タイトル上 or 下）、StoryCard（一覧カード）、LatestGrimoire（横スクロール）、OGP 画像
-  - 既存6記事へのレトロフィット（leadline を後付け）
-- 中規模タスク（設計 + UI 変更 + データ補完）
-
 ### 21. 攻撃的ボット防御の強化（Vercel Firewall / Cloudflare）
 - `robots.txt` はお行儀のよいクローラーにしか効かない
   - → 無視して帯域を食い潰す悪質スクレイパーへの対策が必要
@@ -306,6 +296,18 @@
     - Step 5 JSON 構造に references フィールド追加（歴史・科学・事件系は最低2件）
     - Step 6-2b に参考文献チェック（実在確認 + 捏造禁止）
     - 禁止事項に「実在しない references を書く」を追記
+
+### 2026-04-20 GRIMOIRE に leadline（キャラ視点サブタイトル）を追加
+- [x] **#38 GRIMOIRE leadline 追加**
+  - `Story` 型に `leadline: string` を必須フィールドとして追加（`src/lib/stories.ts`）
+  - 既存6記事（2026-04 分）に leadline をレトロフィット
+  - UI 改修: StoryCard / LatestGrimoire / 個別ページ / OGP 画像でタイトル上に表示
+  - キャラ別の色分け（シュナ=accent/80、ライカ=cyan/80、both=foreground/70）
+  - `/グリモワール投稿` スキル改修:
+    - フィールド生成順を明文化: title → summary → content → **leadline**（content 後に抽出）
+    - Step 6-6 文字数バリデーションに leadline 範囲チェック（10〜35字）を追加
+    - 禁止事項にタイトル文言コピー・content 前の leadline 決定を追記
+  - ビルド検証: TypeScript + SSG 50ページ全生成OK
 
 ### 2026-04-20 GRIMOIRE 第6本目 + スキル微調整
 - [x] **#10 GRIMOIRE 週2本ペース**: シュナ『顔のないT字の巨人たち──ギョベクリ・テペ』(ancient_civilization) 投稿

@@ -10,10 +10,13 @@ import { grimoireCategoryLabels } from "@/lib/categories";
 
 const SITE_URL = "https://occult.ainiwa.jp";
 
-const authorInfo: Record<StoryAuthor, { name: string; icon: string; colorClass: string; slug: string }> = {
-  shuna: { name: "シュナ", icon: "/shuna.png", colorClass: "text-accent", slug: "shuna" },
-  raika: { name: "ライカ", icon: "/raika.png", colorClass: "text-cyan", slug: "raika" },
-  both: { name: "シュナ & ライカ", icon: "/shuna.png", colorClass: "text-foreground", slug: "both" },
+const authorInfo: Record<
+  StoryAuthor,
+  { name: string; icon: string; colorClass: string; slug: string; leadlineClass: string }
+> = {
+  shuna: { name: "シュナ", icon: "/shuna.png", colorClass: "text-accent", slug: "shuna", leadlineClass: "text-accent/90" },
+  raika: { name: "ライカ", icon: "/raika.png", colorClass: "text-cyan", slug: "raika", leadlineClass: "text-cyan/90" },
+  both: { name: "シュナ & ライカ", icon: "/shuna.png", colorClass: "text-foreground", slug: "both", leadlineClass: "text-foreground/80" },
 };
 
 export function generateStaticParams() {
@@ -139,6 +142,13 @@ export default async function StoryPage({
           <span className="text-muted">{story.readingTimeMinutes}分で読める</span>
           <span className="text-muted">&middot; {formatDate(story.date)}</span>
         </div>
+
+        {/* キャラのリード（タイトル上、leadline） */}
+        {story.leadline && (
+          <p className={`mb-2 text-sm italic ${author.leadlineClass}`}>
+            {author.name}「{story.leadline}」
+          </p>
+        )}
 
         {/* タイトル */}
         <h1 className="text-xl sm:text-2xl font-bold leading-snug mb-4">{story.title}</h1>

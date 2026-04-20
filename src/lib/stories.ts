@@ -20,6 +20,8 @@ export type Story = {
   title: string;
   category: string;
   tags: string[];
+  /** タイトル上に表示されるキャラ視点のサブタイトル（10〜35字、問いの形推奨） */
+  leadline: string;
   summary: string;
   content: string; // Markdown形式の本文
   readingTimeMinutes: number;

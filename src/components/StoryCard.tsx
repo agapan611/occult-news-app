@@ -5,25 +5,34 @@ import { grimoireCategoryLabels } from "@/lib/categories";
 
 const authorInfo: Record<
   StoryAuthor,
-  { name: string; icon: string; colorClass: string; stripeStyle: string }
+  {
+    name: string;
+    icon: string;
+    colorClass: string;
+    stripeStyle: string;
+    leadlineClass: string;
+  }
 > = {
   shuna: {
     name: "シュナ",
     icon: "/shuna.png",
     colorClass: "text-accent",
     stripeStyle: "bg-accent",
+    leadlineClass: "text-accent/80",
   },
   raika: {
     name: "ライカ",
     icon: "/raika.png",
     colorClass: "text-cyan",
     stripeStyle: "bg-cyan",
+    leadlineClass: "text-cyan/80",
   },
   both: {
     name: "シュナ & ライカ",
     icon: "/shuna.png",
     colorClass: "text-foreground",
     stripeStyle: "bg-gradient-to-b from-accent to-cyan",
+    leadlineClass: "text-foreground/70",
   },
 };
 
@@ -46,6 +55,13 @@ export default function StoryCard({ story }: { story: Story }) {
         </span>
         <span className="text-muted">{story.readingTimeMinutes}分で読める</span>
       </div>
+
+      {/* キャラのリード（タイトル上、leadline） */}
+      {story.leadline && (
+        <p className={`mb-1 text-[11px] italic ${author.leadlineClass}`}>
+          {author.name}「{story.leadline}」
+        </p>
+      )}
 
       {/* タイトル */}
       <h2 className="text-base font-bold leading-snug mb-2">{story.title}</h2>
