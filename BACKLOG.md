@@ -68,6 +68,16 @@
   - Xでの言及を拾ってくれる影響度の高いアカウントとの接点作り
 - 黒帽子ツールは使わない（ペナルティリスク）
 
+### 38. GRIMOIRE にも leadline（タグライン）を追加
+- 現状: `title` + `summary` のみで、カード一覧・個別ページで「一言の引き」がない
+- occult-news 側は leadline を既に運用中。GRIMOIRE にも同等の「15〜30字、キャラ口調の問いかけ」を導入すれば一覧スキャン時の吸引力が上がる
+- 必要な作業:
+  - `Story` 型に `leadline: string` を追加（`src/lib/stories.ts`）
+  - `/グリモワール投稿` スキルに leadline 生成・抽出ステップを追加（本文生成後に抽出、occult-news 側と同じ順序）
+  - UI 改修: GRIMOIRE 個別ページ（タイトル上 or 下）、StoryCard（一覧カード）、LatestGrimoire（横スクロール）、OGP 画像
+  - 既存6記事へのレトロフィット（leadline を後付け）
+- 中規模タスク（設計 + UI 変更 + データ補完）
+
 ### 21. 攻撃的ボット防御の強化（Vercel Firewall / Cloudflare）
 - `robots.txt` はお行儀のよいクローラーにしか効かない
   - → 無視して帯域を食い潰す悪質スクレイパーへの対策が必要
@@ -297,6 +307,17 @@
     - Step 6-2b に参考文献チェック（実在確認 + 捏造禁止）
     - 禁止事項に「実在しない references を書く」を追記
 
+### 2026-04-20 GRIMOIRE 第6本目 + スキル微調整
+- [x] **#10 GRIMOIRE 週2本ペース**: シュナ『顔のないT字の巨人たち──ギョベクリ・テペ』(ancient_civilization) 投稿
+  - 今週（2026-04-20〜04-26）の1本目。あと1本で週2本ペース達成
+  - 1万1500年前の巨大石造神殿、Klaus Schmidt の「宗教が農業を生んだ」仮説＋2020年代の住居跡発見という新しい揺らぎまで
+  - references 3件（UNESCO / DAI Tepe Telegrams / Klaus Schmidt 2010 論文）
+- [x] **`/occult-news投稿` スキル微調整**
+  - leadline を「occultComment 生成後に抽出するステップ」として明文化
+  - フィールド順序: summary → leadline → occultComment から summary → occultComment → leadline に変更
+  - 「先に leadline を決めて本文をこじつける」失敗パターンを防止
+
 ### 残タスク（2026-04-20 以降）
+- [ ] **#10 今週の GRIMOIRE 2本目**（目安 04-23〜04-26、ライカ推奨: raika の最新は 4/19）
 - [ ] スケジュールタスク化（毎朝自動実行）— 自動化は後回し（X API有料化で代替案要検討）
 - [ ] ainiwa-portal 側の Production Domain 確認（手動 alias set の記憶なし＝既に登録済みの可能性。次回 portal 更新時に挙動確認）
