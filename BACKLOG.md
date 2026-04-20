@@ -319,7 +319,35 @@
   - フィールド順序: summary → leadline → occultComment から summary → occultComment → leadline に変更
   - 「先に leadline を決めて本文をこじつける」失敗パターンを防止
 
+### 2026-04-21 GRIMOIRE 第7本目（今週2本目）
+- [x] **#10 GRIMOIRE 週2本ペース**: ライカ『スターゲイト計画──CIAが20年、2000万ドルで続けた『念力スパイ』の全記録』(conspiracy) 投稿
+  - 今週（2026-04-20〜04-26）の2本目達成（shuna:raika = 1:1 バランス維持）
+  - SCANATE → GRILL FLAME → CENTER LANE → SUN STREAK → STAR GATE のコードネーム変遷
+  - SRI（パソフ/ターグ/スワン）、フォート・ミード、ヴューアー#001 マクモネイグル、パット・プライス（セミパラチンスクのクレーン）、1995年 AIR 評価（Utts vs Hyman）、FOIA 公開 2000万ドル
+  - references 4件（CIA FOIA Reading Room / FAS IRP / AIR 1995 PDF / Wikipedia）
+
+### 2026-04-21 GRIMOIRE 分量規定の拡張（SEO対応）
+- [x] **分量: 1500〜2500字 → 3500〜5000字に拡張**
+  - 別セッションSEO評価で「読み応え・網羅性・滞在時間」の観点で指摘
+  - `/グリモワール投稿` スキル6箇所更新（JSON構造例、content生成ルール、readingTimeMinutes換算、見出し数、Step 6-6 バリデーション）
+    - 見出し（##）: 2〜4個 → **4〜6個**（章立てを豊かに、SEO網羅性を確保）
+    - references: 最低2件 → **最低3件**（歴史・科学・事件系）
+    - readingTime 目安: 6〜10分 → **9〜14分**
+  - `CHARACTERS.md` の分量セクションも同期（長編記事: 1500〜2500字 → 3500〜5000字）
+  - 既存記事のリライトは不要（新規記事から適用）
+
+### 2026-04-21 #29 GRIMOIRE URL 日付除去 + 301 redirect
+- [x] **GRIMOIRE URL から日付プレフィックスを除去**（SEO: 考察記事のURL永続化）
+  - `/grimoire/YYYY-MM-DD-author-slug` → **`/grimoire/author-slug`** に刷新
+  - 既存7記事の `id` フィールドを `{author}-{slug}` 形式に統一（ファイル名は `{YYYY-MM-DD}-{author}-{slug}.json` のまま＝時系列整理のため）
+  - `data/stories-index.json` の 7 id を同期
+  - `next.config.ts` に 301 permanent redirect を追加:
+    - `source: "/grimoire/:year(\\d{4})-:month(\\d{2})-:day(\\d{2})-:rest"` → `destination: "/grimoire/:rest"`
+    - path-to-regexp 名前付きパラメータで日付形式のみマッチ（`/grimoire/daily` `/grimoire/random` `/grimoire/category/*` `/grimoire/tag/*` `/grimoire/author/*` は影響なし）
+  - `/グリモワール投稿` スキルの id 生成ルールを更新（「日付を含めない」理由を明記）
+  - ビルド検証: SSG 全ページ生成OK（新URL 7件 + redirect で旧URLも到達可能）
+
 ### 残タスク（2026-04-20 以降）
-- [ ] **#10 今週の GRIMOIRE 2本目**（目安 04-23〜04-26、ライカ推奨: raika の最新は 4/19）
+- [x] **#10 今週の GRIMOIRE 2本目**（2026-04-21 ライカ『スターゲイト計画』で達成）
 - [ ] スケジュールタスク化（毎朝自動実行）— 自動化は後回し（X API有料化で代替案要検討）
 - [ ] ainiwa-portal 側の Production Domain 確認（手動 alias set の記憶なし＝既に登録済みの可能性。次回 portal 更新時に挙動確認）
