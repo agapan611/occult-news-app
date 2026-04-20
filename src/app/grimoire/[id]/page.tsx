@@ -154,7 +154,10 @@ export default async function StoryPage({
         <h1 className="text-xl sm:text-2xl font-bold leading-snug mb-4">{story.title}</h1>
 
         {/* 著者 */}
-        <div className="mb-6 flex items-center gap-2 rounded-lg bg-card border border-card-border p-3">
+        <Link
+          href={`/grimoire/author/${author.slug}`}
+          className="mb-6 flex items-center gap-2 rounded-lg bg-card border border-card-border p-3 hover:bg-card-hover hover:border-accent/40 transition-colors"
+        >
           {story.author === "both" ? (
             <div className="flex -space-x-2">
               <Image
@@ -181,11 +184,12 @@ export default async function StoryPage({
               className="rounded-full border border-card-border"
             />
           )}
-          <div>
+          <div className="flex-1">
             <p className={`text-sm font-bold ${author.colorClass}`}>{author.name}</p>
             <p className="text-[10px] text-muted">OCCULT WIRE 管理人</p>
           </div>
-        </div>
+          <span className="text-xs text-muted" aria-hidden>&rarr;</span>
+        </Link>
 
         {/* 本文 */}
         <div className="story-content">
