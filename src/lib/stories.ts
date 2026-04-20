@@ -4,6 +4,15 @@ import type { Commenter } from "./articles";
 
 export type StoryAuthor = Commenter | "both";
 
+export type Reference = {
+  /** 参考資料のタイトル（書名・記事名・機関名など） */
+  title: string;
+  /** 一次資料URL（あれば） */
+  url?: string;
+  /** 補足：どの部分を参考にしたか、出版年、著者など */
+  note?: string;
+};
+
 export type Story = {
   id: string;
   date: string;
@@ -15,6 +24,8 @@ export type Story = {
   content: string; // Markdown形式の本文
   readingTimeMinutes: number;
   createdAt: string;
+  /** 参考にした一次資料・書籍・論文・外部リソース（任意） */
+  references?: Reference[];
 };
 
 const STORIES_DIR = path.join(process.cwd(), "data", "stories");

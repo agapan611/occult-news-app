@@ -195,6 +195,33 @@ export default async function StoryPage({
           ))}
         </div>
 
+        {/* X シェア CTA */}
+        <section className="mt-8 flex flex-wrap items-center justify-center gap-2 rounded-lg border border-card-border bg-card/40 p-4">
+          <span className="text-[11px] text-muted">この考察が刺さったら</span>
+          <a
+            href={`https://x.com/intent/tweet?url=${encodeURIComponent(pageUrl)}&text=${encodeURIComponent(story.title)}&via=occult_wire`}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-1.5 rounded-full border border-card-border bg-background px-3 py-1.5 text-[11px] text-foreground hover:border-accent hover:text-accent transition-colors"
+          >
+            <svg viewBox="0 0 24 24" width={10} height={10} fill="currentColor" aria-hidden="true">
+              <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
+            </svg>
+            <span>Xでシェア</span>
+          </a>
+          <a
+            href="https://x.com/occult_wire"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-1.5 rounded-full border border-card-border bg-background px-3 py-1.5 text-[11px] text-foreground hover:border-accent hover:text-accent transition-colors"
+          >
+            <svg viewBox="0 0 24 24" width={10} height={10} fill="currentColor" aria-hidden="true">
+              <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
+            </svg>
+            <span>@occult_wire をフォロー</span>
+          </a>
+        </section>
+
         {/* 関連記事（同カテゴリ） */}
         {relatedStories.length > 0 && (
           <section className="mt-10 border-t border-card-border pt-6">
@@ -214,6 +241,36 @@ export default async function StoryPage({
                 <StoryCard key={s.id} story={s} />
               ))}
             </div>
+          </section>
+        )}
+
+        {/* 参考文献・外部リソース（あれば） */}
+        {story.references && story.references.length > 0 && (
+          <section className="mt-10 border-t border-card-border pt-6">
+            <h2 className="mb-3 text-sm font-bold tracking-wider text-accent">
+              参考にした一次資料・外部リソース
+            </h2>
+            <ul className="space-y-3">
+              {story.references.map((ref, i) => (
+                <li key={i} className="text-[12px] leading-relaxed text-foreground/85">
+                  {ref.url ? (
+                    <a
+                      href={ref.url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-foreground hover:text-accent transition-colors underline decoration-muted/40 underline-offset-2"
+                    >
+                      {ref.title}
+                    </a>
+                  ) : (
+                    <span className="text-foreground">{ref.title}</span>
+                  )}
+                  {ref.note && (
+                    <span className="mt-1 block text-[11px] text-muted">{ref.note}</span>
+                  )}
+                </li>
+              ))}
+            </ul>
           </section>
         )}
 
@@ -253,7 +310,7 @@ function renderMarkdown(content: string): React.ReactNode[] {
   const flushList = () => {
     if (listBuffer.length > 0) {
       blocks.push(
-        <ul key={`l-${idx++}`} className="mb-4 space-y-1.5 pl-5 list-disc text-[14.5px] leading-relaxed text-foreground/90">
+        <ul key={`l-${idx++}`} className="mb-5 space-y-2 pl-5 list-disc text-[14.5px] leading-[1.85] text-foreground/90">
           {listBuffer.map((item, i) => (
             <li key={i}>{renderInline(item)}</li>
           ))}
@@ -266,7 +323,7 @@ function renderMarkdown(content: string): React.ReactNode[] {
   const flushPara = () => {
     if (paraBuffer.length > 0) {
       blocks.push(
-        <p key={`p-${idx++}`} className="mb-4 text-[14.5px] leading-[1.9] text-foreground/90">
+        <p key={`p-${idx++}`} className="mb-5 text-[14.5px] leading-[1.9] text-foreground/90">
           {paraBuffer.map((line, i) => (
             <span key={i}>
               {renderInline(line)}
