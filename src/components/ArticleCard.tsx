@@ -3,6 +3,7 @@
 import { useState } from "react";
 import Image from "next/image";
 import type { Article, Commenter } from "@/lib/articles";
+import NewsThumbnail from "./NewsThumbnail";
 
 const categoryLabels: Record<string, string> = {
   science: "科学", society: "社会", politics: "政治", economy: "経済",
@@ -70,20 +71,27 @@ export default function ArticleCard({ article }: { article: Article }) {
         </p>
       )}
 
-      {/* ニュース見出し */}
-      <h2 className="text-[15px] font-bold leading-snug mb-2">{article.title}</h2>
-
-      {/* ソース + 元記事リンク（冒頭表示） */}
-      <div className="mb-2 flex items-center gap-2 text-[11px]">
-        <span className="text-muted">{article.source}</span>
-        <a
-          href={article.sourceUrl}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="text-cyan underline underline-offset-2 hover:text-cyan/70"
-        >
-          元記事（{sourceHost}）&rarr;
-        </a>
+      {/* 見出し + サムネイル */}
+      <div className="mb-2 flex items-start gap-3">
+        <div className="min-w-0 flex-1">
+          <h2 className="text-[15px] font-bold leading-snug mb-2">{article.title}</h2>
+          <div className="flex items-center gap-2 text-[11px]">
+            <span className="text-muted">{article.source}</span>
+            <a
+              href={article.sourceUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-cyan underline underline-offset-2 hover:text-cyan/70"
+            >
+              元記事（{sourceHost}）&rarr;
+            </a>
+          </div>
+        </div>
+        <NewsThumbnail
+          category={article.category}
+          type={article.type}
+          className="h-16 w-16 shrink-0 rounded border border-card-border"
+        />
       </div>
 
       {/* 記事概要（短縮版） */}
