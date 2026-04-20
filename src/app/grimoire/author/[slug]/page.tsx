@@ -8,7 +8,6 @@ import { getStoriesByAuthor } from "@/lib/stories";
 import type { StoryAuthor } from "@/lib/stories";
 
 type Expertise = { category: string; approach: string };
-type SpeechSample = { mood: string; line: string };
 
 type CharacterProfile = {
   name: string;
@@ -18,9 +17,6 @@ type CharacterProfile = {
   description: string;
   appearance: string[];
   personality: string[];
-  firstPerson: string;
-  endings: string;
-  speechSamples: SpeechSample[];
   expertise: Expertise[];
   relationshipNote: string;
   accentClass: string;
@@ -42,14 +38,6 @@ const authorInfo: Record<StoryAuthor, CharacterProfile> = {
       "親しみやすく、読者を友達のように語りかける",
       "ちょっと寂しがり屋。怖い話は自分も怖がる",
       "古いもの・隠されたものに強く惹かれる",
-    ],
-    firstPerson: "わたし",
-    endings: "〜なの / 〜だよ / 〜でしょ？ / 〜かもね / 〜だよね",
-    speechSamples: [
-      { mood: "誘いかけ", line: "ねぇ、気づいた？この数字、ゾロ目になってるの" },
-      { mood: "考察", line: "偶然にしては、出来すぎてない？" },
-      { mood: "示唆", line: "古代シュメールの粘土板には、こんな記述があるんだよ" },
-      { mood: "ためらい", line: "……もしかして、ね？" },
     ],
     expertise: [
       { category: "古代文明", approach: "失われた文明、壁画・遺跡の謎、伝承との一致を掘り下げる" },
@@ -78,14 +66,6 @@ const authorInfo: Record<StoryAuthor, CharacterProfile> = {
       "決めつけない。「判断は任せる」が口癖",
       "妹のシュナを陰で気にかけている",
     ],
-    firstPerson: "俺",
-    endings: "〜だ / 〜だろう / 〜と言える / 〜だったそうだ",
-    speechSamples: [
-      { mood: "提示", line: "日付を計算してみろ" },
-      { mood: "確信", line: "既知の技術では不可能な機動だ" },
-      { mood: "突き放し", line: "判断は任せる。データは存在する" },
-      { mood: "皮肉", line: "公式見解では、問題なし。だが、現実は違う" },
-    ],
     expertise: [
       { category: "UFO/UAP", approach: "機密解除文書、AARO報告書、既知技術との乖離を検証" },
       { category: "陰謀論", approach: "記録と公式見解の矛盾、「誰が得をするか」の視点" },
@@ -111,14 +91,6 @@ const authorInfo: Record<StoryAuthor, CharacterProfile> = {
       "シュナ＝感受性と問いかけ、ライカ＝事実と突き放し",
       "同じ題材でも、見える景色が違う",
       "結論は読者に委ねる姿勢は共通",
-    ],
-    firstPerson: "わたし / 俺",
-    endings: "交互に台詞を配置（キャラ別語尾を維持）",
-    speechSamples: [
-      { mood: "シュナ", line: "ねぇ、これ気づいた？" },
-      { mood: "ライカ", line: "ああ、数字の並びか" },
-      { mood: "シュナ", line: "そう、これ偶然じゃないよね" },
-      { mood: "ライカ", line: "一致は確かにある。ただ、因果とは別の話だ" },
     ],
     expertise: [
       { category: "テーマ対談", approach: "一つの大きな題材を二つの視点で多面的に論じる" },
@@ -303,34 +275,6 @@ export default async function AuthorPage({
               <li key={p} className="flex gap-2 text-[13px] leading-relaxed text-foreground/80">
                 <span className={`${info.accentClass}/60 shrink-0`}>●</span>
                 <span>{p}</span>
-              </li>
-            ))}
-          </ul>
-        </section>
-
-        {/* 口調・サンプル台詞 */}
-        <section className="border-b border-card-border px-4 py-5">
-          <h3 className={`text-[11px] font-bold tracking-widest mb-3 ${info.accentClass}`}>
-            SPEECH / 口調
-          </h3>
-          <dl className="mb-4 space-y-1.5 text-[12px]">
-            <div className="flex gap-3">
-              <dt className="w-14 shrink-0 text-muted">一人称</dt>
-              <dd className="text-foreground/80">{info.firstPerson}</dd>
-            </div>
-            <div className="flex gap-3">
-              <dt className="w-14 shrink-0 text-muted">語尾</dt>
-              <dd className="text-foreground/80">{info.endings}</dd>
-            </div>
-          </dl>
-          <ul className="space-y-2">
-            {info.speechSamples.map((s, i) => (
-              <li
-                key={i}
-                className={`rounded-lg border border-card-border bg-card px-3 py-2`}
-              >
-                <p className={`text-[10px] mb-0.5 ${info.accentClass}/70`}>{s.mood}</p>
-                <p className="text-[13px] leading-relaxed text-foreground/90">「{s.line}」</p>
               </li>
             ))}
           </ul>
