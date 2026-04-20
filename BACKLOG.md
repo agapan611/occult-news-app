@@ -347,6 +347,28 @@
   - `/グリモワール投稿` スキルの id 生成ルールを更新（「日付を含めない」理由を明記）
   - ビルド検証: SSG 全ページ生成OK（新URL 7件 + redirect で旧URLも到達可能）
 
+### 2026-04-21 #31 NEWSカードのサムネイル画像
+- [x] **カテゴリ別SVGプレースホルダー画像**（選択肢c、最小コスト・外部依存ゼロ）
+  - `NewsThumbnail` コンポーネント新設（80x80 viewBox のインラインSVG）
+  - シンボル15種: ufo（円盤）/ uma・cryptid（足跡）/ ghost（幽霊）/ urban_legend（目）/ paranormal（渦）/ mystery（？）/ science（原子）/ society（ビル）/ politics（天秤）/ economy（折れ線）/ tech（チップ）/ world（地球儀）/ sports（トロフィー）/ entertainment（星）/ default
+  - オカルト系（ufo/uma/ghost/urban_legend/paranormal/mystery/cryptid + type=occult_news）は紫グラデ、一般ニュースはシアングラデ
+  - `ArticleCard` のタイトル横に 64x64px で配置（flex、min-w-0 shrink-0）
+  - 視覚的引きを底上げ、画像フェッチ不要
+
+### 2026-04-21 #36 キャラプロフィールページ拡張
+- [x] **`/grimoire/author/[shuna|raika|both]` を公開向けプロフィール特化に刷新**
+  - タグライン（キャラ一言紹介）
+  - APPEARANCE: 外見チップ（シュナ=紫、ライカ=シアン）
+  - PERSONALITY: 性格リスト
+  - SPEECH: 一人称・語尾・サンプル台詞4件（吹き出し風カード）
+  - EXPERTISE: 得意分野 × アプローチ説明（JSON-LD `knowsAbout` にも反映）
+  - RELATIONSHIP: 双子関係 + 他キャラクロスリンク
+  - ARCHIVE: 既存の記事一覧（StoryCard）は下部に維持
+  - 構造化データ: `Person` JSON-LD（shuna/raika）+ `BreadcrumbList` JSON-LD
+  - メタデータ: canonical / openGraph type=profile / twitter card
+  - CHARACTERS.md の設定書を公開可能な形で抽出（NG例などは非公開のまま）
+  - URL は従来通り（sitemap・Footer導線に影響なし）
+
 ### 残タスク（2026-04-20 以降）
 - [x] **#10 今週の GRIMOIRE 2本目**（2026-04-21 ライカ『スターゲイト計画』で達成）
 - [ ] スケジュールタスク化（毎朝自動実行）— 自動化は後回し（X API有料化で代替案要検討）
