@@ -9,7 +9,8 @@
   --color-card: rgba(255, 255, 255, 0.04);
   --color-card-border: rgba(255, 255, 255, 0.08);
   --color-muted: #71717a;
-  --font-sans: system-ui, -apple-system, "Hiragino Sans", "Yu Gothic UI", sans-serif;
+  --font-sans: var(--font-noto-jp), system-ui, -apple-system, "Hiragino Sans", "Yu Gothic UI", sans-serif;
+  --font-display: var(--font-zen-kaku), var(--font-noto-jp), system-ui, -apple-system, "Hiragino Sans", "Yu Gothic UI", sans-serif;
 }
 
 html {
@@ -22,6 +23,12 @@ body {
   color: var(--color-foreground);
   font-family: var(--font-sans);
   -webkit-font-smoothing: antialiased;
+  font-feature-settings: "palt" 1;
+}
+
+h1, h2, h3 {
+  font-family: var(--font-display);
+  letter-spacing: 0.01em;
 }
 
 /* オカルト感のある背景グラデーション */

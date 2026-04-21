@@ -1,8 +1,23 @@
 import type { Metadata, Viewport } from "next";
+import { Noto_Sans_JP, Zen_Kaku_Gothic_New } from "next/font/google";
 import { Analytics } from "@vercel/analytics/next";
 import JsonLd from "@/components/JsonLd";
 import ScrollToTop from "@/components/ScrollToTop";
 import "./globals.css";
+
+const notoSansJp = Noto_Sans_JP({
+  subsets: ["latin"],
+  weight: ["400", "500", "700"],
+  variable: "--font-noto-jp",
+  display: "swap",
+});
+
+const zenKakuGothicNew = Zen_Kaku_Gothic_New({
+  subsets: ["latin"],
+  weight: ["700", "900"],
+  variable: "--font-zen-kaku",
+  display: "swap",
+});
 
 const SITE_URL = "https://occult.ainiwa.jp";
 const DEFAULT_TITLE = "OCCULT WIRE - オカルト視点ニュース";
@@ -101,7 +116,10 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="ja">
+    <html
+      lang="ja"
+      className={`${notoSansJp.variable} ${zenKakuGothicNew.variable}`}
+    >
       <head>
         <link rel="manifest" href="/manifest.json" />
         <link rel="apple-touch-icon" href="/icons/icon-192.png" />

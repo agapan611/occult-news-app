@@ -153,11 +153,6 @@
 - 現状: `/contact` は Google Forms 依存
 - 候補: 収益規模が上がったら自前フォーム検討（現状は問題なしと評価）
 
-### 47. タイポグラフィ強化
-- 2026-04-20 評価由来（評価側優先度:低）
-- 失点: 推定値（通常のNext.js+Tailwind平均レベル、実機未検証）
-- 候補: 和文Webフォント（Noto Sans JP 等）導入、見出し/本文のメリハリ強化
-
 ### 48. 購読チャネルの拡張（PUSH通知 / JSON Feed）
 - 2026-04-20 評価由来（評価側優先度:中）
 - 失点: メルマガなし（#24重複）／PUSH通知なし／JSON feedなし（RSSはあり）
@@ -448,6 +443,19 @@
   - メタデータ: canonical / openGraph type=profile / twitter card
   - CHARACTERS.md の設定書を公開可能な形で抽出（NG例などは非公開のまま）
   - URL は従来通り（sitemap・Footer導線に影響なし）
+
+### 2026-04-21 #47 タイポグラフィ強化（和文Webフォント導入）
+- [x] **`next/font/google` で 2種類の和文フォントを導入**
+  - `Noto Sans JP` (400/500/700) — 本文用、`--font-noto-jp` variable
+  - `Zen Kaku Gothic New` (700/900) — 見出し用、`--font-zen-kaku` variable（重厚感のある丸ゴシック）
+- [x] **`globals.css` 更新**
+  - `--font-sans` 冒頭に `var(--font-noto-jp)` を追加（既存フォールバックは維持）
+  - `--font-display` を新設（`Zen Kaku Gothic New` → `Noto Sans JP` → system）
+  - `body` に `font-feature-settings: "palt" 1`（プロポーショナルメトリクスでカーニング改善）
+  - `h1, h2, h3` を `--font-display` + `letter-spacing: 0.01em` に
+- `layout.tsx` の html に両 variable を適用（Next.js 標準 SSR フォントロード、CLS なし）
+- 既存デザインを壊さず、本文と見出しのメリハリを強化
+- 評価スコア見込み: 27. タイポグラフィ 75→88
 
 ### 2026-04-21 #43 エラーページ（404/500）のキャラトーン化
 - [x] **`src/app/not-found.tsx` 新設（404）**
