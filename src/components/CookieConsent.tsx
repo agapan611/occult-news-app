@@ -1,35 +1,48 @@
 "use client";
 
 import Link from "next/link";
-import { useEffect, useState } from "react";
+import { useState, useSyncExternalStore } from "react";
 
 const STORAGE_KEY = "occult-wire-cookie-consent";
+const CONSENT_EVENT = "occult-wire-consent-change";
 
 type Consent = "accepted" | "rejected";
 
-export default function CookieConsent() {
-  const [visible, setVisible] = useState(false);
+function subscribe(callback: () => void) {
+  window.addEventListener("storage", callback);
+  window.addEventListener(CONSENT_EVENT, callback);
+  return () => {
+    window.removeEventListener("storage", callback);
+    window.removeEventListener(CONSENT_EVENT, callback);
+  };
+}
 
-  useEffect(() => {
-    try {
-      const stored = localStorage.getItem(STORAGE_KEY);
-      if (!stored) setVisible(true);
-    } catch {
-      setVisible(false);
-    }
-  }, []);
+function getSnapshot(): string {
+  try {
+    return localStorage.getItem(STORAGE_KEY) ?? "unset";
+  } catch {
+    return "unavailable";
+  }
+}
+
+function getServerSnapshot(): string {
+  return "ssr";
+}
+
+export default function CookieConsent() {
+  const stored = useSyncExternalStore(subscribe, getSnapshot, getServerSnapshot);
+  const [dismissed, setDismissed] = useState(false);
 
   const setConsent = (value: Consent) => {
     try {
       localStorage.setItem(STORAGE_KEY, value);
-      window.dispatchEvent(new Event("occult-wire-consent-change"));
+      window.dispatchEvent(new Event(CONSENT_EVENT));
     } catch {
-      // localStorage unavailable (private mode etc) → gracefully ignore
+      setDismissed(true);
     }
-    setVisible(false);
   };
 
-  if (!visible) return null;
+  if (stored !== "unset" || dismissed) return null;
 
   return (
     <div
