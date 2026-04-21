@@ -12,7 +12,17 @@ export default function LegalPage() {
     <>
       <Header />
       <main className="mx-auto w-full max-w-lg flex-1 px-4 py-8 text-sm leading-relaxed">
-        <h1 className="text-xl font-bold mb-6 text-accent">運営・プライバシー・免責</h1>
+        <h1 className="text-xl font-bold mb-3 text-accent">運営・プライバシー・免責</h1>
+
+        <p className="mb-6 text-xs text-foreground/70">
+          利用規約は別ページに分離しました →{" "}
+          <Link
+            href="/terms"
+            className="text-cyan underline underline-offset-2 hover:text-accent"
+          >
+            利用規約
+          </Link>
+        </p>
 
         {/* 運営者情報 */}
         <section id="operator" className="mb-10">

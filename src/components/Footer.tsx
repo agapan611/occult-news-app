@@ -80,6 +80,9 @@ export default function Footer() {
           <Link href="/legal" className="hover:text-accent transition-colors">
             運営・プライバシー
           </Link>
+          <Link href="/terms" className="hover:text-accent transition-colors">
+            利用規約
+          </Link>
           <Link href="/legal#disclaimer" className="hover:text-accent transition-colors">
             免責事項
           </Link>

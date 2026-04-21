@@ -108,6 +108,14 @@ export default function SitemapPage() {
             </li>
             <li>
               <Link
+                href="/terms"
+                className="text-accent hover:text-accent-dim"
+              >
+                利用規約
+              </Link>
+            </li>
+            <li>
+              <Link
                 href="/search"
                 className="text-accent hover:text-accent-dim"
               >
