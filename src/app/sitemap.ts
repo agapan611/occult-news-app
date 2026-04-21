@@ -63,6 +63,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: "weekly",
       priority: 0.4,
     },
+    {
+      url: `${SITE_URL}/search`,
+      lastModified: new Date(latestStoryDate),
+      changeFrequency: "weekly",
+      priority: 0.4,
+    },
   ];
 
   const storyEntries: MetadataRoute.Sitemap = stories.map((s) => ({

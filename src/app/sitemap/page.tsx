@@ -106,6 +106,14 @@ export default function SitemapPage() {
                 運営者情報・プライバシーポリシー・免責
               </Link>
             </li>
+            <li>
+              <Link
+                href="/search"
+                className="text-accent hover:text-accent-dim"
+              >
+                サイト内検索
+              </Link>
+            </li>
           </ul>
         </section>
 

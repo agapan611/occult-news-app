@@ -29,6 +29,26 @@ export default function Header() {
           </h1>
         </Link>
         <div className="flex-1" />
+        <Link
+          href="/search"
+          aria-label="サイト内検索"
+          className="shrink-0 text-muted hover:text-accent transition-colors"
+        >
+          <svg
+            viewBox="0 0 24 24"
+            width={15}
+            height={15}
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="2"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            aria-hidden="true"
+          >
+            <circle cx="11" cy="11" r="7" />
+            <path d="M21 21l-4.35-4.35" />
+          </svg>
+        </Link>
         <a
           href="https://x.com/occult_wire"
           target="_blank"

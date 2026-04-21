@@ -122,10 +122,17 @@ export default function NotFound() {
         <section>
           <h2 className="mb-3 flex items-center gap-2 text-xs font-bold tracking-[0.25em] text-foreground/90">
             <span className="h-4 w-1 bg-accent" />
-            サイト内検索
+            記事を探す
           </h2>
           <p className="text-xs leading-relaxed text-foreground/70">
-            全ページ一覧は{" "}
+            キーワードで探すなら{" "}
+            <Link
+              href="/search"
+              className="text-accent underline underline-offset-2 hover:text-accent-dim"
+            >
+              サイト内検索
+            </Link>
+            、全ページ一覧は{" "}
             <Link
               href="/sitemap"
               className="text-accent underline underline-offset-2 hover:text-accent-dim"

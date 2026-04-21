@@ -139,11 +139,6 @@
   - 1周年・キャラ誕生日記念などの特集
 - #23 の「キャラ画像の見せ場拡大」と同時進行で効く
 
-### 45. サイト内検索
-- 2026-04-20 評価由来（評価側優先度:中）
-- 失点: 検索ボックスなし／検索精度／オートサジェスト／検索結果ページ／ハイライト すべてなし
-- 候補: Pagefind / Fuse.js / Algolia DocSearch のいずれかでクライアント側検索
-
 ### 46. フォーム・CV設計（将来検討）
 - 2026-04-20 評価由来（評価側優先度:低）
 - 現状: `/contact` は Google Forms 依存
@@ -439,6 +434,24 @@
   - メタデータ: canonical / openGraph type=profile / twitter card
   - CHARACTERS.md の設定書を公開可能な形で抽出（NG例などは非公開のまま）
   - URL は従来通り（sitemap・Footer導線に影響なし）
+
+### 2026-04-21 #45 サイト内検索
+- [x] **`fuse.js` 導入**（ファジー検索、小サイト向けに最適）
+- [x] **`src/lib/search-index.ts` 新設**（GRIMOIRE + NEWS 両方を統合した SearchItem 配列を build 時生成）
+- [x] **`src/components/SearchClient.tsx` 新設（client component）**
+  - Fuse.js の keys 重み付け（title:3 / leadline:2 / summary:1.5 / tags:1.5 / categoryLabel:1 / category:0.8）
+  - threshold 0.4、ignoreLocation、minMatchCharLength 2
+  - GRIMOIRE は内部リンク、NEWS は `sourceUrl` の外部リンク（`target=_blank`）
+- [x] **`src/app/search/page.tsx` 新設**（server component で index を build、client component に initialQuery 渡し）
+  - クエリパラメータ `?q=xxx` 対応
+  - robots: noindex（検索結果ページをインデックス対象外に）
+- [x] **導線追加**
+  - Header: 検索アイコン（X アイコンの左）
+  - Footer: ナビに「検索」追加
+  - `/sitemap` HTML: メインページ一覧に追加
+  - `sitemap.xml` (機械向け) にも追加（priority 0.4）
+  - `not-found.tsx` に「サイト内検索」誘導を追加
+- 評価スコア見込み: 24. サイト内検索 21→70 / 16. ナビゲーション 88→92
 
 ### 2026-04-21 #30 Cookie同意バナー
 - [x] **`src/components/CookieConsent.tsx` 新設（client component）**
