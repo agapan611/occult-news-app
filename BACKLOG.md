@@ -126,24 +126,6 @@
   - 1周年・キャラ誕生日記念などの特集
 - #23 の「キャラ画像の見せ場拡大」と同時進行で効く
 
-### 40. グリモワール投稿スキルのカテゴリ名整合（記事↔knowledge）
-- 2026-04-21 スキル改善セッションで発見した不整合メモ
-- **現状の齟齬**（`~/.claude/skills/グリモワール投稿/SKILL.md` Step 3 ↔ Step 3.8）
-  - Step 3 ライカ: `ufo`（UFO/UAP）→ knowledge 側は `ufo_uap`（不一致）
-  - Step 3 シュナ: `prophecy`（予言）→ knowledge 11カテゴリに未登録
-  - Step 3 ライカ: `uma`（UMA）→ knowledge 11カテゴリに未登録
-  - Step 3 に `unsolved_cases` がライカ得意分野として未記載（knowledge にはある）
-- **想定される影響**
-  - 記事 JSON の category が knowledge カテゴリと対応しないテーマ（ufo/uma/prophecy）で、Step 3.8 の verified 閾値テーブルが引けず鮮度チェックがスキップされる
-  - 将来的にカテゴリベースのフィルタ・検索・UI で分類が崩れる可能性
-- **対応候補**
-  - (a) Step 3 の `ufo` → `ufo_uap` に統一（+ 既存記事の ufo 系を確認して同期）
-  - (b) `prophecy` / `uma` を knowledge 11カテゴリに昇格、または Step 3 から削除のどちらかを決定
-  - (c) `unsolved_cases` をライカ得意分野に追加
-- **着手タイミング**
-  - 現状は knowledge 連携5機能そのものは機能しているため実害は小さい
-  - #39 の knowledge ベース詳細化と同じタイミングで整理するのが効率的
-
 ---
 
 ## 見送り
@@ -368,6 +350,14 @@
   - オカルト系（ufo/uma/ghost/urban_legend/paranormal/mystery/cryptid + type=occult_news）は紫グラデ、一般ニュースはシアングラデ
   - `ArticleCard` のタイトル横に 64x64px で配置（flex、min-w-0 shrink-0）
   - 視覚的引きを底上げ、画像フェッチ不要
+
+### 2026-04-21 #40 グリモワール投稿スキルのカテゴリ名整合
+- [x] **最小変更方針（案A）で実施**：`ufo` → `ufo_uap` を全体で統一、`unsolved_cases` をライカ得意分野に追加、`prophecy` / `uma` はジャンル別名として残しマッピング注記で knowledge 側と橋渡し
+  - `src/lib/categories.ts`：`ufo` → `ufo_uap` にキー統一、`unsolved_cases` ラベル・説明追加
+  - `data/stories/2026-04/2026-04-19-raika-rendlesham-ufo.json`：category を `ufo_uap` に書換
+  - `data/stories-index.json`：`category_rotation_hint.raika_preferred` と該当 `published` の category を同期
+  - `next.config.ts`：`/grimoire/category/ufo` → `/grimoire/category/ufo_uap` の 301 redirect 追加（旧URLのSEO温存）
+  - `~/.claude/skills/グリモワール投稿/SKILL.md` Step 3：ライカ得意分野を knowledge と整合、`prophecy` → `mysticism` / `uma` → `mystery` のマッピング注記追加
 
 ### 2026-04-21 #39 knowledge ベース本格化（完成判定クリア）
 - [x] **knowledge メンテスキル強化**（`index` / `stubs` モード新設、`full` モード順序更新）

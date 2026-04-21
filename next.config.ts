@@ -9,6 +9,11 @@ const nextConfig: NextConfig = {
         destination: "/grimoire/:rest",
         permanent: true,
       },
+      {
+        source: "/grimoire/category/ufo",
+        destination: "/grimoire/category/ufo_uap",
+        permanent: true,
+      },
     ];
   },
 };

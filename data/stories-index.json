@@ -11,7 +11,7 @@
   ],
   "category_rotation_hint": {
     "shuna_preferred": ["numerology", "ancient_civilization", "mysticism", "ghost_stories", "prophecy"],
-    "raika_preferred": ["ufo", "conspiracy", "uma", "mystery", "science_occult"],
+    "raika_preferred": ["ufo_uap", "conspiracy", "uma", "mystery", "unsolved_cases", "science_occult"],
     "both_preferred": ["urban_legend", "horror"]
   },
   "published": [
@@ -37,7 +37,7 @@
       "id": "raika-rendlesham-ufo",
       "date": "2026-04-19",
       "author": "raika",
-      "category": "ufo",
+      "category": "ufo_uap",
       "title": "レンデルシャムの森事件──英国の米軍基地で起きた「3夜の遭遇」と将校の録音テープ",
       "theme": "英国のロズウェルと公文書に残るUFO遭遇",
       "keywords": ["レンデルシャム", "RAF Woodbridge", "ホルト・メモ", "ジム・ペニストン", "チャールズ・ホルト", "オーフォードネス灯台", "1980年", "バイナリコード"]
