@@ -43,6 +43,19 @@ body::before {
   pointer-events: none;
 }
 
+/* 紙っぽい粒子ノイズ（フィルムグレイン風） */
+body::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='2' stitchTiles='stitch'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>");
+  background-repeat: repeat;
+  opacity: 0.04;
+  mix-blend-mode: screen;
+  pointer-events: none;
+}
+
 /* 横スクロールのスクロールバー非表示 */
 .scrollbar-hide {
   -ms-overflow-style: none;

@@ -14,11 +14,43 @@ const SITE_URL = "https://occult.ainiwa.jp";
 
 const authorInfo: Record<
   StoryAuthor,
-  { name: string; icon: string; colorClass: string; slug: string; leadlineClass: string }
+  {
+    name: string;
+    icon: string;
+    colorClass: string;
+    slug: string;
+    leadlineClass: string;
+    ringClass: string;
+    closingLine: string;
+  }
 > = {
-  shuna: { name: "シュナ", icon: "/shuna.png", colorClass: "text-accent", slug: "shuna", leadlineClass: "text-accent/90" },
-  raika: { name: "ライカ", icon: "/raika.png", colorClass: "text-cyan", slug: "raika", leadlineClass: "text-cyan/90" },
-  both: { name: "シュナ & ライカ", icon: "/shuna.png", colorClass: "text-foreground", slug: "both", leadlineClass: "text-foreground/80" },
+  shuna: {
+    name: "シュナ",
+    icon: "/shuna.png",
+    colorClass: "text-accent",
+    slug: "shuna",
+    leadlineClass: "text-accent/90",
+    ringClass: "border-accent/40 shadow-[0_0_32px_-8px_rgba(139,92,246,0.5)]",
+    closingLine: "……また一つ、境界の向こうを覗いてしまったね。",
+  },
+  raika: {
+    name: "ライカ",
+    icon: "/raika.png",
+    colorClass: "text-cyan",
+    slug: "raika",
+    leadlineClass: "text-cyan/90",
+    ringClass: "border-cyan/40 shadow-[0_0_32px_-8px_rgba(6,182,212,0.5)]",
+    closingLine: "どう、ゾクッとした？ わたしは大満足！",
+  },
+  both: {
+    name: "シュナ & ライカ",
+    icon: "/shuna.png",
+    colorClass: "text-foreground",
+    slug: "both",
+    leadlineClass: "text-foreground/80",
+    ringClass: "border-card-border shadow-[0_0_32px_-8px_rgba(139,92,246,0.35)]",
+    closingLine: "読み切ったあなたに、静かな夜と、遠い囁きが届きますように。",
+  },
 };
 
 export function generateStaticParams() {
@@ -274,6 +306,42 @@ export default async function StoryPage({
             </div>
           </section>
         )}
+
+        {/* 著者立ち絵 + 締めセリフ（読了後の余韻） */}
+        <section className="mt-10 border-t border-card-border pt-8 text-center">
+          {story.author === "both" ? (
+            <div className="mx-auto mb-4 flex justify-center -space-x-6">
+              <Image
+                src="/shuna.png"
+                alt="シュナ"
+                width={104}
+                height={104}
+                className="rounded-full border-2 border-accent/40 bg-background shadow-[0_0_32px_-8px_rgba(139,92,246,0.5)] z-10"
+              />
+              <Image
+                src="/raika.png"
+                alt="ライカ"
+                width={104}
+                height={104}
+                className="rounded-full border-2 border-cyan/40 bg-background shadow-[0_0_32px_-8px_rgba(6,182,212,0.5)]"
+              />
+            </div>
+          ) : (
+            <Image
+              src={author.icon}
+              alt={author.name}
+              width={128}
+              height={128}
+              className={`mx-auto mb-4 rounded-full border-2 bg-background ${author.ringClass}`}
+            />
+          )}
+          <p className={`text-sm italic leading-relaxed ${author.leadlineClass}`}>
+            {author.name}「{author.closingLine}」
+          </p>
+          <p className="mt-2 text-[11px] tracking-[0.2em] text-muted">
+            — {story.readingTimeMinutes}分の逸脱、ありがとう。
+          </p>
+        </section>
 
         {/* 次の一冊・購読誘導（離脱防止CTA） */}
         <section className="mt-10 border-t border-card-border pt-6">

@@ -17,6 +17,9 @@ function formatDate(dateStr: string): string {
 export default function ArticleFeed({ days }: { days: DailyArticles[] }) {
   const [tab, setTab] = useState<ArticleType | "all">("all");
 
+  // 最新日＝フィルタ前の全件ベースで判定（タブ切替で NEW バッジが消えないように）
+  const latestDate = days[0]?.date;
+
   const filtered = days
     .map((day) => ({
       ...day,
@@ -45,7 +48,11 @@ export default function ArticleFeed({ days }: { days: DailyArticles[] }) {
                 </time>
               </div>
               {day.articles.map((article) => (
-                <ArticleCard key={article.id} article={article} />
+                <ArticleCard
+                  key={article.id}
+                  article={article}
+                  isNew={day.date === latestDate}
+                />
               ))}
             </section>
           ))

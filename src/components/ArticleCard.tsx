@@ -25,7 +25,13 @@ const commenterInfo: Record<
   raika: { name: "ライカ", icon: "/raika.png", stripeClass: "bg-cyan" },
 };
 
-export default function ArticleCard({ article }: { article: Article }) {
+export default function ArticleCard({
+  article,
+  isNew = false,
+}: {
+  article: Article;
+  isNew?: boolean;
+}) {
   const [expanded, setExpanded] = useState(false);
   const isOccultNews = article.type === "occult_news";
   const commenter = commenterInfo[article.commentBy] ?? commenterInfo.shuna;
@@ -49,6 +55,11 @@ export default function ArticleCard({ article }: { article: Article }) {
       />
       {/* カテゴリ＋タイプ */}
       <div className="mb-1.5 flex items-center gap-2 text-xs">
+        {isNew && (
+          <span className="rounded bg-accent px-1.5 py-0.5 text-[10px] font-bold leading-none tracking-wider text-background shadow-[0_0_8px_rgba(139,92,246,0.45)]">
+            NEW
+          </span>
+        )}
         <span
           className={`rounded px-1.5 py-0.5 ${
             isOccultNews ? "bg-cyan/20 text-cyan" : "bg-accent/20 text-accent"
@@ -101,8 +112,10 @@ export default function ArticleCard({ article }: { article: Article }) {
 
       {/* コメント（吹き出し風） */}
       <div
-        className={`rounded-lg border p-3 cursor-pointer ${
-          isOccultNews ? "bg-cyan/[0.03] border-cyan/10" : "bg-card border-card-border"
+        className={`rounded-lg border p-3 cursor-pointer transition-shadow ${
+          isOccultNews
+            ? "bg-cyan/[0.03] border-cyan/10 shadow-[0_0_24px_-8px_rgba(139,92,246,0.35)]"
+            : "bg-card border-card-border shadow-[0_0_18px_-10px_rgba(139,92,246,0.25)]"
         }`}
         onClick={() => setExpanded(!expanded)}
       >

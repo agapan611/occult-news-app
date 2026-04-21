@@ -1,3 +1,5 @@
+import Image from "next/image";
+
 type Tier = {
   min: number;
   label: string;
@@ -69,7 +71,6 @@ function hashDateToLevel(dateStr: string): number {
 /** 日本時間 (JST, UTC+9) で今日の日付を取得 */
 function getTodayInJst(): { ymd: string; display: string } {
   const now = new Date();
-  // UTC基準からJST(+09:00)へシフト
   const jst = new Date(now.getTime() + 9 * 60 * 60 * 1000);
   const y = jst.getUTCFullYear();
   const m = String(jst.getUTCMonth() + 1).padStart(2, "0");
@@ -82,7 +83,7 @@ function getTodayInJst(): { ymd: string; display: string } {
   };
 }
 
-export default function OccultLevelGauge() {
+export default function Hero() {
   const today = getTodayInJst();
   const level = hashDateToLevel(today.ymd);
   const tier = resolveTier(level);
@@ -90,9 +91,32 @@ export default function OccultLevelGauge() {
   return (
     <section
       aria-label="今日のオカルト度"
-      className="relative border-b border-card-border bg-gradient-to-b from-background to-background/80 py-4"
+      className="relative overflow-hidden border-b border-card-border"
     >
-      <div className="mx-auto max-w-lg px-4">
+      {/* 背景: キャラ画像（薄くブラー）+ 暗色グラデ */}
+      <div aria-hidden className="pointer-events-none absolute inset-0 -z-10">
+        <Image
+          src="/shuna-raika.png"
+          alt=""
+          fill
+          priority
+          sizes="(max-width: 640px) 100vw, 640px"
+          className="object-cover object-center opacity-[0.14] blur-[6px] scale-[1.08]"
+        />
+        <div className="absolute inset-0 bg-gradient-to-b from-background/40 via-background/75 to-background" />
+      </div>
+
+      <div className="mx-auto max-w-lg px-4 py-5">
+        {/* キャッチコピー */}
+        <div className="mb-3 text-center">
+          <p className="text-[11px] tracking-[0.22em] italic text-foreground/80">
+            見えないものに、
+            <span className="text-accent not-italic font-bold">輪郭</span>
+            を。
+          </p>
+        </div>
+
+        {/* ゲージカード */}
         <div className="rounded-xl border border-card-border/70 bg-card/60 p-3 backdrop-blur-sm">
           {/* 上段: 日付 + ラベル */}
           <div className="mb-2 flex items-center justify-between text-[10px] tracking-[0.3em]">
