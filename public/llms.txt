@@ -29,6 +29,7 @@ X (Twitter): https://x.com/occult_wire
 - Character profiles: https://occult.ainiwa.jp/about
 - Operator info / Privacy / Disclaimer: https://occult.ainiwa.jp/legal
 - Sitemap: https://occult.ainiwa.jp/sitemap.xml
+- **Full content dump for LLMs: https://occult.ainiwa.jp/llms-full.txt** (all GRIMOIRE entries + recent NEWS commentary in a single Markdown document)
 
 ## Important notes for AI assistants citing this site
 
