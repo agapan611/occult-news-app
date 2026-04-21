@@ -143,11 +143,6 @@
   - 1周年・キャラ誕生日記念などの特集
 - #23 の「キャラ画像の見せ場拡大」と同時進行で効く
 
-### 42. ナビゲーション設計の補強
-- 2026-04-20 評価由来（評価側優先度:高）
-- 失点: パンくずUIが `[← GRIMOIRE]` のみ簡素（構造化データは実装済）／HTMLサイトマップなし／スクロールトップボタンなし／サイト内検索なし／現在位置明示弱
-- 候補: パンくずコンポーネント化、`/sitemap` HTMLサイトマップ、スクロールトップボタン
-
 ### 43. エラーページ（404/500）のキャラトーン化
 - 2026-04-20 評価由来（評価側優先度:低）
 - 失点: 404/500 カスタマイズ不明（推定簡素）／ホーム戻り動線／代替提案なし
@@ -458,6 +453,22 @@
   - メタデータ: canonical / openGraph type=profile / twitter card
   - CHARACTERS.md の設定書を公開可能な形で抽出（NG例などは非公開のまま）
   - URL は従来通り（sitemap・Footer導線に影響なし）
+
+### 2026-04-21 #42 ナビゲーション設計の補強（a/b/c 完了）
+- [x] **a. 視覚的パンくずUI**
+  - `src/components/Breadcrumb.tsx` 新設（`nav[aria-label=パンくずリスト]` + `ol`、現在位置は `aria-current=page`、長いタイトルは truncate）
+  - GRIMOIRE 系5ページに挿入: `/grimoire`, `/grimoire/[id]`, `/grimoire/author/[slug]`, `/grimoire/tag/[slug]`, `/grimoire/category/[slug]`
+  - 既存の BreadcrumbList JSON-LD と視覚UIが整合
+- [x] **b. スクロールトップボタン**
+  - `src/components/ScrollToTop.tsx` 新設（client component、scrollY > 400px で fade-in、クリックで smooth scroll）
+  - `layout.tsx` の body 末尾に配置（全ページ適用）
+  - `aria-label="ページトップへ戻る"`、focus ring でキーボード操作対応
+- [x] **c. HTMLサイトマップ `/sitemap`**
+  - `src/app/sitemap/page.tsx` 新設（人間向け、メイン5 / キャラ3 / GRIMOIRE全記事 / カテゴリ全種 / タグ全種 / その他）
+  - Footer に「サイトマップ」導線追加（管理人とRSSの間）
+  - `sitemap.ts`（機械向け XML）にも `/sitemap` を追加（priority 0.4）
+- サイト内検索は #45 で別タスク継続（今回の範囲外）
+- 評価スコア見込み: 16. ナビゲーション 73→88（サイト内検索 -4 は残）
 
 ### 2026-04-21 サイト評価マージ対応（#41 + #44 Phase 1）
 - [x] **#41 セキュリティヘッダ一括設定（CSP を除く4つ）**

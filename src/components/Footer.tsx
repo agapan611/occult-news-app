@@ -86,6 +86,9 @@ export default function Footer() {
           <Link href="/about" className="hover:text-accent transition-colors">
             管理人
           </Link>
+          <Link href="/sitemap" className="hover:text-accent transition-colors">
+            サイトマップ
+          </Link>
           <a href="/feed.xml" className="hover:text-accent transition-colors">
             RSS
           </a>

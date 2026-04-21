@@ -57,6 +57,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: "monthly",
       priority: 0.3,
     },
+    {
+      url: `${SITE_URL}/sitemap`,
+      lastModified: new Date(latestStoryDate),
+      changeFrequency: "weekly",
+      priority: 0.4,
+    },
   ];
 
   const storyEntries: MetadataRoute.Sitemap = stories.map((s) => ({
