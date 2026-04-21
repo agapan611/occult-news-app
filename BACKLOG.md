@@ -131,10 +131,6 @@
 - 時事性の薄い考察記事は日付なしの方が息が長い（評価①指摘）
 - 既存URLのリダイレクト設計が必要なので、早期にやるかは慎重判断
 
-### 30. Cookie同意バナー
-- Google Analytics 導入時に必要
-- APPI改正 + EU アクセス対応
-- ※ 2026-04-20 評価でも指摘あり（評価14 法令対応：Cookie同意バナーなし）
 
 ### 36. キャラ深掘りコンテンツ（残：小話・記念特集）
 - ~~キャラページの拡張（口調例・好き嫌い・設定資料）~~ → 2026-04-21 対応済み
@@ -443,6 +439,16 @@
   - メタデータ: canonical / openGraph type=profile / twitter card
   - CHARACTERS.md の設定書を公開可能な形で抽出（NG例などは非公開のまま）
   - URL は従来通り（sitemap・Footer導線に影響なし）
+
+### 2026-04-21 #30 Cookie同意バナー
+- [x] **`src/components/CookieConsent.tsx` 新設（client component）**
+  - `role="dialog"` + `aria-labelledby` / `aria-describedby` でスクリーンリーダ対応
+  - `localStorage` キー: `occult-wire-cookie-consent`（値: `accepted` / `rejected`）
+  - 初回アクセスで画面下部に fixed 表示、ボタンクリック後は以降非表示
+  - プライバシーモードで localStorage 不可時も安全フォールバック
+- `layout.tsx` の body 末尾に配置（全ページ共通）
+- 現状は Cookieless な Vercel Analytics のみ稼働のため、同意 UI は「将来の GA4 導入」への前段階
+- 評価スコア見込み: 14. 法令対応 56→66（Cookie -10 回収、特商法・利用規約独立・GDPR等は別タスクで残）
 
 ### 2026-04-21 #47 タイポグラフィ強化（和文Webフォント導入）
 - [x] **`next/font/google` で 2種類の和文フォントを導入**

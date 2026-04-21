@@ -3,6 +3,7 @@ import { Noto_Sans_JP, Zen_Kaku_Gothic_New } from "next/font/google";
 import { Analytics } from "@vercel/analytics/next";
 import JsonLd from "@/components/JsonLd";
 import ScrollToTop from "@/components/ScrollToTop";
+import CookieConsent from "@/components/CookieConsent";
 import "./globals.css";
 
 const notoSansJp = Noto_Sans_JP({
@@ -129,6 +130,7 @@ export default function RootLayout({
       <body className="min-h-dvh flex flex-col">
         {children}
         <ScrollToTop />
+        <CookieConsent />
         <Analytics />
       </body>
     </html>
