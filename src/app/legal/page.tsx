@@ -34,7 +34,21 @@ export default function LegalPage() {
             </div>
             <div className="flex">
               <dt className="w-24 shrink-0 text-muted">運営元</dt>
-              <dd>AiNiwa（個人運営）</dd>
+              <dd>AiNiwa（運営者: 庭師）</dd>
+            </div>
+            <div className="flex">
+              <dt className="w-24 shrink-0 text-muted">関連サイト</dt>
+              <dd>
+                <a
+                  href="https://ainiwa.jp/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-cyan underline underline-offset-2"
+                >
+                  ainiwa.jp
+                </a>
+                （AiNiwa ポータル）
+              </dd>
             </div>
             <div className="flex">
               <dt className="w-24 shrink-0 text-muted">お問い合わせ</dt>
@@ -90,6 +104,31 @@ export default function LegalPage() {
           <h3 className="font-bold text-foreground/90 mt-4 mb-1.5">情報の第三者提供</h3>
           <p className="text-foreground/80">
             法令に基づく場合を除き、ユーザーの個人情報を第三者に提供することはありません。
+          </p>
+        </section>
+
+        {/* 訂正ポリシー */}
+        <section id="correction" className="mb-10">
+          <h2 className="text-lg font-bold mb-3 border-l-2 border-accent pl-3">訂正ポリシー</h2>
+          <p className="text-foreground/80 mb-3">
+            本サイトに記載の事実関係に誤りを発見された場合、
+            <Link
+              href="/contact"
+              className="text-cyan underline underline-offset-2"
+            >
+              お問い合わせフォーム
+            </Link>
+            または{" "}
+            <a
+              href="mailto:shunaraika@gmail.com"
+              className="text-cyan underline underline-offset-2"
+            >
+              shunaraika@gmail.com
+            </a>
+            までご連絡ください。確認後、該当記事を修正し、主要な訂正については記事末尾に訂正履歴を明記します。
+          </p>
+          <p className="text-foreground/80">
+            AIキャラクターによる考察部分は創作物であり、事実誤認の訂正対象外ですが、参考文献の誤りはこの限りではありません。
           </p>
         </section>
 

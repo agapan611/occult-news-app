@@ -68,6 +68,35 @@ export default function AboutPage() {
             </section>
           ))}
         </div>
+
+        <section className="mt-12 border-t border-card-border pt-6 text-center">
+          <p className="mb-1 text-[11px] tracking-[0.25em] text-muted">
+            SITE OPERATOR
+          </p>
+          <p className="text-sm text-foreground/85">
+            運営: <span className="font-bold text-accent">庭師</span>（AiNiwa）
+          </p>
+          <p className="mt-2 text-[11px] text-muted">
+            関連サイト:{" "}
+            <a
+              href="https://ainiwa.jp/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-cyan underline underline-offset-2"
+            >
+              ainiwa.jp
+            </a>
+          </p>
+          <p className="mt-2 text-[11px] text-muted">
+            詳細は{" "}
+            <Link
+              href="/legal"
+              className="text-accent underline underline-offset-2"
+            >
+              運営・プライバシー
+            </Link>
+          </p>
+        </section>
       </main>
 
       <Footer />
