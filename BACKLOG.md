@@ -160,14 +160,15 @@
   3. `Content-Security-Policy-Report-Only` を `Content-Security-Policy` にキー変更（`next.config.ts` 1行のみ）
 - 注意: #50 GA4 導入時に `https://www.googletagmanager.com` `https://www.google-analytics.com` を script-src/connect-src に追加要
 
-### 50. 分析・計測の拡張（GA4 / GTM / ヒートマップ / Sentry）
-- 2026-04-21 #44 分離（Vercel Analytics は対応済み）
-- 失点残: GA4未設置／ヒートマップなし／イベント計測／コンバージョン計測／GTM／Sentry等なし
+### 50. 分析・計測の拡張（残: イベント計測 / ヒートマップ / GTM / Sentry）
+- 2026-04-21 GA4 コード側土台は対応済（下部参照）、本項目は残の拡張
+- 失点残: ヒートマップなし／主要イベント計測なし／GTM経由化なし／Sentry等エラー計測なし
 - 候補:
-  1. GA4（GTM経由推奨） ※ Cookie同意バナー #30 実装後
-  2. 主要イベント計測（Xフォロークリック、記事スクロール深度等）
-  3. Sentry（将来のエラー計測）
-- 依存: Cookie同意バナー #30 が前提
+  1. `gtag('event', ...)` でイベント計測（Xフォロークリック、スクロール深度等）
+  2. GTM 経由化（GA4 を GTM タグとして管理）
+  3. Microsoft Clarity 等でヒートマップ（無料 + Cookieless 選択肢あり）
+  4. Sentry（ランタイムエラー計測）
+- 注意: ヒートマップ/GTM 追加時は CSP 許可リスト拡張要
 
 ---
 
@@ -433,6 +434,20 @@
   - メタデータ: canonical / openGraph type=profile / twitter card
   - CHARACTERS.md の設定書を公開可能な形で抽出（NG例などは非公開のまま）
   - URL は従来通り（sitemap・Footer導線に影響なし）
+
+### 2026-04-21 #50 GA4 コード側土台（Cookie consent 連動）
+- [x] **`src/components/GoogleAnalytics.tsx` 新設（client component）**
+  - `localStorage.occult-wire-cookie-consent === "accepted"` の場合のみ gtag.js を `<Script strategy="afterInteractive">` で挿入
+  - `anonymize_ip: true` 付き（IP 匿名化）
+  - `storage` event + カスタムイベント `occult-wire-consent-change` を listen して consent 変更に即応
+- [x] **`CookieConsent.tsx`** で consent 変更時に `window.dispatchEvent(new Event("occult-wire-consent-change"))` を追加
+- [x] **`layout.tsx`** で `process.env.NEXT_PUBLIC_GA_ID` が設定されていれば `<GoogleAnalytics>` を挿入（未設定なら何もしない）
+- [x] **`next.config.ts` CSP 拡張**
+  - script-src: `https://www.googletagmanager.com` 追加
+  - connect-src: `https://www.google-analytics.com` + `https://region1.google-analytics.com` 追加
+- [x] **`.env.example` 新設**（`NEXT_PUBLIC_GA_ID` の設定方法をドキュメント化）
+- 実運用化には海斗さん側で GA4 プロパティ作成 + Measurement ID を Vercel 環境変数に設定が必要
+- 評価スコア見込み: GA4 プロパティ稼働時、18. 分析・計測 55→75
 
 ### 2026-04-21 #49 CSP 段階導入（Report-Only）
 - [x] **`next.config.ts` の `headers()` に `Content-Security-Policy-Report-Only` を追加**

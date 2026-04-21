@@ -22,6 +22,7 @@ export default function CookieConsent() {
   const setConsent = (value: Consent) => {
     try {
       localStorage.setItem(STORAGE_KEY, value);
+      window.dispatchEvent(new Event("occult-wire-consent-change"));
     } catch {
       // localStorage unavailable (private mode etc) → gracefully ignore
     }

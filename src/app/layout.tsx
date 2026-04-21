@@ -4,7 +4,10 @@ import { Analytics } from "@vercel/analytics/next";
 import JsonLd from "@/components/JsonLd";
 import ScrollToTop from "@/components/ScrollToTop";
 import CookieConsent from "@/components/CookieConsent";
+import GoogleAnalytics from "@/components/GoogleAnalytics";
 import "./globals.css";
+
+const GA_ID = process.env.NEXT_PUBLIC_GA_ID;
 
 const notoSansJp = Noto_Sans_JP({
   subsets: ["latin"],
@@ -135,6 +138,7 @@ export default function RootLayout({
         <ScrollToTop />
         <CookieConsent />
         <Analytics />
+        {GA_ID && <GoogleAnalytics gaId={GA_ID} />}
       </body>
     </html>
   );
