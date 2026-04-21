@@ -1,6 +1,7 @@
 import type { Metadata, Viewport } from "next";
 import { Analytics } from "@vercel/analytics/next";
 import JsonLd from "@/components/JsonLd";
+import ScrollToTop from "@/components/ScrollToTop";
 import "./globals.css";
 
 const SITE_URL = "https://occult.ainiwa.jp";
@@ -109,6 +110,7 @@ export default function RootLayout({
       </head>
       <body className="min-h-dvh flex flex-col">
         {children}
+        <ScrollToTop />
         <Analytics />
       </body>
     </html>
