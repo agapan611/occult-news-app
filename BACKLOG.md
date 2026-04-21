@@ -166,17 +166,14 @@
 - 2026-04-21 再評価でも**効率順 2位**指定（工数極小、+0.24）
 - 注意: #50 の GA4 ホストは既に CSP 許可リストに追加済
 
-### 50. 分析・計測の拡張（残: GA4 実運用化 + イベント計測 / ヒートマップ / GTM / Sentry）
-- 2026-04-21 GA4 コード側土台は対応済（下部参照）、本項目は実運用化と拡張
-- 2026-04-21 再評価で**効率順 1位**指定（工数極小、+0.24）
-- **実運用化の手順**: 海斗さん側で GA4 プロパティ作成 → Vercel に環境変数 `NEXT_PUBLIC_GA_ID=G-XXXXXXXXXX` を設定 → 自動デプロイで有効化
-- 失点残: GA4 ID 未設定／ヒートマップなし／主要イベント計測なし／GTM経由化なし／Sentry等なし
+### 50. 分析・計測の拡張（残: イベント計測 / ヒートマップ / GTM / Sentry）
+- 2026-04-21 GA4 実運用化完了（下部参照）、本項目は残の拡張
+- 失点残: ヒートマップなし／主要イベント計測なし／GTM経由化なし／Sentry等なし
 - 候補:
-  1. GA4 プロパティ作成 + ID を Vercel 環境変数に設定（海斗さん作業）
-  2. `gtag('event', ...)` でイベント計測（Xフォロークリック、スクロール深度等）
-  3. GTM 経由化（GA4 を GTM タグとして管理）
-  4. Microsoft Clarity 等でヒートマップ（無料 + Cookieless 選択肢あり）
-  5. Sentry（ランタイムエラー計測）
+  1. `gtag('event', ...)` でイベント計測（Xフォロークリック、スクロール深度、アフィリエイトリンククリック等）
+  2. GTM 経由化（GA4 を GTM タグとして管理、イベント追加を GA UI で可能に）
+  3. Microsoft Clarity 等でヒートマップ（無料 + Cookieless 選択肢あり）
+  4. Sentry（ランタイムエラー計測、海斗さん側 Sentry アカウント必要）
 - 注意: ヒートマップ/GTM 追加時は CSP 許可リスト拡張要
 
 ---
@@ -568,6 +565,17 @@
   - Cookieless tracking なので Cookie 同意バナー（#30）不要
   - GA4 / GTM / ヒートマップ / Sentry は別タスク #50 に分離（Cookie バナー実装後に対応）
   - ビルド検証: `npm run build` 全ルート（Static/SSG/Dynamic）正常生成
+
+### 2026-04-21 #50 GA4 実運用化（Measurement ID 設定 + 本番動作確認）
+- [x] 海斗さんが GA4 プロパティ「OCCULT WIRE」作成 → Measurement ID `G-CDGLNNRHL3` 取得
+- [x] Vercel 環境変数 `NEXT_PUBLIC_GA_ID=G-CDGLNNRHL3` 設定（Production/Preview、Sensitive:OFF）
+- [x] 空コミット push で Redeploy → 自動反映
+- [x] **本番動作確認（Playwright）**:
+  - Cookie 同意バナー表示 → 「同意する」クリック → `localStorage.occult-wire-cookie-consent = "accepted"`
+  - DOM に `https://www.googletagmanager.com/gtag/js?id=G-CDGLNNRHL3` スクリプト挿入
+  - gtag init スクリプト 1件、`dataLayer.length=4`（pageview 含む）、`window.gtag` 関数定義
+- 評価スコア見込み: 18. 分析・計測 55→75（GA4 稼働、イベント計測・ヒートマップ・Sentry は残）
+- 注意: CSP Report-Only 下で `upgrade-insecure-requests` ignored 警告はブラウザ仕様（enforce #49 切替時に有効化）
 
 ### 2026-04-21 #10 運営者プロフィール強化（E-E-A-T）
 - 海斗さん承認の公開範囲で反映（本名/住所/GitHub は非公開）
