@@ -47,7 +47,10 @@ const nextConfig: NextConfig = {
               "camera=(), microphone=(), geolocation=(), interest-cohort=()",
           },
           {
-            key: "Content-Security-Policy-Report-Only",
+            // Report-Only から enforce に昇格（2026-04-22、#49）
+            // 外部リソースは va.vercel-scripts.com / googletagmanager / google-analytics / vercel-insights のみ、
+            // それ以外の href 型リンク（x.com / forms.gle / ainiwa.jp 等）は遷移のため CSP 対象外
+            key: "Content-Security-Policy",
             value: cspDirectives,
           },
         ],
