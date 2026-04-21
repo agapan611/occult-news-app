@@ -144,13 +144,13 @@
 - 現状: `/contact` は Google Forms 依存
 - 候補: 収益規模が上がったら自前フォーム検討（現状は問題なしと評価）
 
-### 48. 購読チャネルの拡張（PUSH通知 / JSON Feed）
-- 2026-04-20 評価由来（評価側優先度:中）
-- 失点: メルマガなし（#24重複）／PUSH通知なし／JSON feedなし（RSSはあり）
+### 48. 購読チャネルの拡張（PUSH通知）
+- 2026-04-21 #48 JSON Feed 部分対応済（下部参照）、本項目は残の PUSH 通知
+- 失点残: PUSH 通知なし／メルマガなし（#24重複）
 - 候補:
-  1. PWA の manifest.json を拡張して PUSH 通知
-  2. JSON Feed 追加（feed.xml は実装済）
-  3. メルマガは #24 側で検討
+  1. PWA Service Worker を拡張して Push Notification API 対応（VAPID キー生成 + 購読 UI + 通知送信サーバー）
+  2. メルマガは #24 側で検討
+- 注意: service worker の大改修 + 通知送信バックエンド構築が必要、工数大
 
 ### 49. CSP（Content-Security-Policy）の段階導入
 - 2026-04-21 #41 分離（評価11 セキュリティの残失点 -8点分）
@@ -434,6 +434,18 @@
   - メタデータ: canonical / openGraph type=profile / twitter card
   - CHARACTERS.md の設定書を公開可能な形で抽出（NG例などは非公開のまま）
   - URL は従来通り（sitemap・Footer導線に影響なし）
+
+### 2026-04-21 #48 JSON Feed 追加（#48 の一部対応）
+- [x] **`src/app/feed.json/route.ts` 新設**（JSON Feed 1.1 仕様準拠）
+  - `content-type: application/feed+json; charset=utf-8`
+  - 30件の GRIMOIRE 記事、カテゴリラベル + タグをまとめて `tags`、author は日本語キャラ名
+  - `summary` は leadline + summary を `｜` で連結（RSSより情報密度高）
+  - キャッシュ戦略は feed.xml と同じ（`s-maxage=3600, stale-while-revalidate=86400`）
+  - `force-static` + `revalidate: 3600`
+- [x] **layout.tsx の alternates に追加**（`application/feed+json` type として発見可能化）
+- [x] **HTMLサイトマップ `/sitemap` に JSON Feed 導線追加**
+- PUSH 通知は #48 本体タスクに残置（工数大、service worker 大改修 + VAPID キー + 通知送信バックエンド）
+- 評価スコア見込み: 29. RSS・購読チャネル 45→60（JSON feed -7 回収、PUSH -13 / メルマガ -18 は残）
 
 ### 2026-04-21 #45 サイト内検索
 - [x] **`fuse.js` 導入**（ファジー検索、小サイト向けに最適）

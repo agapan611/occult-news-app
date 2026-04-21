@@ -227,6 +227,14 @@ export default function SitemapPage() {
             </li>
             <li>
               <a
+                href="/feed.json"
+                className="text-accent hover:text-accent-dim"
+              >
+                JSON Feed（feed.json）
+              </a>
+            </li>
+            <li>
+              <a
                 href="/sitemap.xml"
                 className="text-accent hover:text-accent-dim"
               >

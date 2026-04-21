@@ -68,6 +68,9 @@ export const metadata: Metadata = {
       "application/rss+xml": [
         { url: "/feed.xml", title: "OCCULT WIRE - GRIMOIRE" },
       ],
+      "application/feed+json": [
+        { url: "/feed.json", title: "OCCULT WIRE - GRIMOIRE (JSON Feed)" },
+      ],
     },
   },
   openGraph: {
