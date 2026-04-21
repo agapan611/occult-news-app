@@ -132,11 +132,6 @@
 - コミュニティ化への布石
 - ※ 2026-04-20 評価でも指摘あり（評価33 コメント・コミュニティ：機能なし）
 
-### 29. GRIMOIRE の URL から日付除去
-- 時事性の薄い考察記事は日付なしの方が息が長い（評価①指摘）
-- 既存URLのリダイレクト設計が必要なので、早期にやるかは慎重判断
-
-
 ### 36. キャラ深掘りコンテンツ（残：小話・記念特集）
 - ~~キャラページの拡張（口調例・好き嫌い・設定資料）~~ → 2026-04-21 対応済み
 - 残候補:
@@ -661,3 +656,50 @@
 - [x] **#10 今週の GRIMOIRE 2本目**（2026-04-21 ライカ『スターゲイト計画』で達成）
 - [ ] スケジュールタスク化（毎朝自動実行）— 自動化は後回し（X API有料化で代替案要検討）
 - [ ] ainiwa-portal 側の Production Domain 確認（手動 alias set の記憶なし＝既に登録済みの可能性。次回 portal 更新時に挙動確認）
+
+---
+
+## 次セッション引き継ぎメモ（2026-04-21 セッション終了時点）
+
+### 今日の実績
+- **通算 20 コミット**（`4a98631` 〜 `0cea36c`）
+- サイト評価: 2026-04-20 初回 **78.8** → 2026-04-21 2回目 **82.0** → 本セッション後半追加改善で **85 前後見込み**（次回再評価で実測）
+- 評価ファイル: `~/.claude/skills/site-evaluation/results/occult-wire/2026-04-21.md`
+- **site-evaluation スキル改修**: Playwright MCP で PageSpeed Insights を自動実測するステップを追加済（Step 2b）
+
+### 今日の対応済み（BACKLOG から消化）
+#30 Cookie同意 / #41 セキュリティ4ヘッダ / #42a-c パンくず・スクロールトップ・HTMLサイトマップ / #43 404/500 キャラトーン / #44 Vercel Analytics / #45 サイト内検索 / #47 タイポ導入→部分巻戻し / #48 JSON Feed（PUSH除く）/ #49 CSP Report-Only / #50 GA4 実運用化 / #51 関連記事スコア順 / #52 検索ハイライト / #53 利用規約独立 / #10 運営者プロフィール / 収益動線第一弾（離脱防止CTA + アフィリUI土台）
+
+### 次セッション開始時に優先度高いもの
+
+**🔧 私で即着手（海斗さん負担なし）**
+- #50 イベント計測: `gtag('event', ...)` で X フォロークリック / スクロール深度 / アフィリエイトクリックを送信（gtag は既に稼働中なので追加実装だけ、工数小、加点 +0.2）
+- #23 デザイン世界観強化: カテゴリ色分け / 🔥新着マーク / キャラヒーロー画像（工数小、視覚メリハリ）
+- #27 「今日のオカルト度」ゲージ: 日替わり装飾要素（工数小、世界観）
+
+**⏳ 時間待ち → 私で即対応可**
+- #49 CSP enforce 昇格: 本番 Report-Only で数日運用し CSP violation ログを観測、違反なければ `next.config.ts` の `Content-Security-Policy-Report-Only` キーを `Content-Security-Policy` に変更（1行）
+
+**👤 海斗さんの外部アカウント作業**
+- #17 Amazon アソシエイト申請 → 審査通過後 `NEXT_PUBLIC_AMAZON_ASSOCIATE_TAG` を Vercel 環境変数に設定（UI 土台は実装済）
+- #24 メルマガ SaaS 選定（Buttondown / Substack / LINE公式 / Benchmark Email 等）→ 私が購読フォーム UI を埋込
+- #15 AdSense 審査対応（GRIMOIRE 20 記事到達後、現 7 本）
+- #16 キャラIP 収益化（LINEスタンプ / BOOTH / note / Kindle）
+- #25 ショート動画 / #35 被リンク施策
+
+**📊 次セッション開始直後のおすすめアクション**
+1. `/grimoire/shuna-gobekli-tepe-ancient-temple` を PSI で再計測（Playwright 自動でサイト評価スキルから呼べる）→ フォント preload 削減の効果を実測
+2. サイト再評価を回す（本日 20 コミット分の総合効果確認）
+3. 残タスクの効率順から着手
+
+### 注意・既知事項
+- GA4 稼働中（ID `G-CDGLNNRHL3`、Cookie 同意後のみ発火、anonymize_ip=true）
+- `upgrade-insecure-requests` CSP 警告は Report-Only の仕様で無害（enforce #49 切替時に有効化）
+- `/contact` は Google Forms 依存のまま（#46 は据え置き評価）
+- #47 タイポ部分巻戻しで Noto Sans JP は 400/700、Zen Kaku は 700 のみに削減、`preload: false` に設定済
+
+### 開発環境メモ
+- Next.js 16.2.4 + React 19.2.4 + Tailwind 4
+- デプロイ: `git push origin master` → Vercel 自動
+- dev server: `npm run dev`（port 3000、`.claude/launch.json` に設定済）
+- 本番 URL: https://occult.ainiwa.jp
