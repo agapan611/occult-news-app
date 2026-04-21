@@ -8,6 +8,7 @@ import Breadcrumb from "@/components/Breadcrumb";
 import { getAllStories, getStoryById, getRelatedStories } from "@/lib/stories";
 import type { StoryAuthor } from "@/lib/stories";
 import { grimoireCategoryLabels } from "@/lib/categories";
+import { getAffiliateKeywords, buildAmazonSearchUrl } from "@/lib/affiliate";
 
 const SITE_URL = "https://occult.ainiwa.jp";
 
@@ -73,6 +74,7 @@ export default async function StoryPage({
   const publishedIso = new Date(story.createdAt || story.date).toISOString();
   const relatedStories = getRelatedStories(story, 8);
   const categoryLabel = grimoireCategoryLabels[story.category] ?? story.category;
+  const affiliateKeywords = getAffiliateKeywords(story.category);
 
   const articleJsonLd = {
     "@context": "https://schema.org",
@@ -266,6 +268,78 @@ export default async function StoryPage({
             </div>
           </section>
         )}
+
+        {/* 次の一冊・購読誘導（離脱防止CTA） */}
+        <section className="mt-10 border-t border-card-border pt-6">
+          <h2 className="mb-3 text-sm font-bold tracking-wider">
+            読み終えたら、<span className="text-accent">次の扉</span>へ
+          </h2>
+          <div className="grid grid-cols-2 gap-3">
+            <Link
+              href="/grimoire/random"
+              prefetch={false}
+              className="rounded-lg border border-cyan/40 bg-cyan/10 px-4 py-3 text-center text-sm font-bold text-cyan transition-colors hover:bg-cyan/20"
+            >
+              ランダムな1冊
+            </Link>
+            <Link
+              href="/grimoire/daily"
+              prefetch={false}
+              className="rounded-lg border border-accent/40 bg-accent/10 px-4 py-3 text-center text-sm font-bold text-accent transition-colors hover:bg-accent/20"
+            >
+              今日の1冊
+            </Link>
+            <a
+              href="/feed.xml"
+              className="rounded-lg border border-card-border bg-card/60 px-4 py-3 text-center text-xs text-foreground/85 transition-colors hover:border-accent hover:text-accent"
+            >
+              RSS を購読
+            </a>
+            <a
+              href="https://x.com/occult_wire"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="rounded-lg border border-card-border bg-card/60 px-4 py-3 text-center text-xs text-foreground/85 transition-colors hover:border-accent hover:text-accent"
+            >
+              X でフォロー
+            </a>
+          </div>
+        </section>
+
+        {/* アフィリエイト: 関連書籍 */}
+        <section className="mt-10 border-t border-card-border pt-6">
+          <h2 className="mb-2 text-sm font-bold tracking-wider">
+            <span className="text-accent">{categoryLabel}</span> をもっと深掘りするなら
+          </h2>
+          <p className="mb-3 text-[11px] text-muted">
+            Amazon の検索結果を開きます（関連書籍を探す）
+          </p>
+          <ul className="space-y-2">
+            {affiliateKeywords.map((kw) => (
+              <li key={kw}>
+                <a
+                  href={buildAmazonSearchUrl(kw)}
+                  target="_blank"
+                  rel="noopener noreferrer sponsored nofollow"
+                  className="flex items-center justify-between rounded-lg border border-card-border bg-card/60 px-3 py-2.5 text-[13px] text-foreground/90 transition-colors hover:border-accent hover:text-accent"
+                >
+                  <span>
+                    <span className="text-muted">#</span>
+                    {kw}
+                    <span className="ml-1 text-muted"> で探す</span>
+                  </span>
+                  <span className="text-[10px] text-muted" aria-hidden>
+                    Amazon &rarr;
+                  </span>
+                </a>
+              </li>
+            ))}
+          </ul>
+          <p className="mt-3 text-[10px] leading-relaxed text-muted">
+            ※ 将来 Amazon アソシエイト等のアフィリエイトプログラムに参加する場合、
+            本リンクに識別タグを付与します（現状は通常の検索リンクです）。
+          </p>
+        </section>
 
         {/* 参考文献・外部リソース（あれば） */}
         {story.references && story.references.length > 0 && (

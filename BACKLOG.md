@@ -57,11 +57,13 @@
 - **Kindle 電子書籍**（GRIMOIRE 第1集）
 - AdSense よりも審査リスクが圧倒的に低く、キャラIPと親和性が高い
 
-### 17. アフィリエイト設計
-- タロット、パワーストーン、ムー等書籍、占い鑑定、UFO観測機器、ホラーゲーム
-- Amazonアソシエイト、楽天、もしもアフィリエイト、A8.net
-- GRIMOIRE記事末尾に関連商品リンク枠
-- 審査は AdSense より緩い
+### 17. アフィリエイト設計（UI土台は対応済、ID設定待ち）
+- 2026-04-21 **UI土台対応済**（下部参照）: GRIMOIRE 記事末尾に Amazon 検索リンク枠実装（カテゴリ別キーワード）
+- 残り手順:
+  1. Amazon アソシエイト申請（GRIMOIRE 20 記事到達後または今でも可）
+  2. 取得したタグを Vercel に `NEXT_PUBLIC_AMAZON_ASSOCIATE_TAG=xxxxx-22` として設定
+  3. 自動デプロイで全リンクに tag 付与（既存コードで対応済、環境変数を読むだけ）
+  4. 楽天・もしもアフィリエイト・A8.net は余裕が出たら追加
 - ※ 2026-04-20 評価でも指摘あり（評価9 収益動線：アフィリエイト未実装）
 
 ### 18. NEWS軸の再設計（評価②の保守的提案）
@@ -566,6 +568,21 @@
   - Cookieless tracking なので Cookie 同意バナー（#30）不要
   - GA4 / GTM / ヒートマップ / Sentry は別タスク #50 に分離（Cookie バナー実装後に対応）
   - ビルド検証: `npm run build` 全ルート（Static/SSG/Dynamic）正常生成
+
+### 2026-04-21 収益動線の第一弾（離脱防止 CTA + アフィリエイト UI 土台）
+- [x] **GRIMOIRE 記事末尾に「読み終えたら、次の扉へ」セクション新設**
+  - ランダム1冊 / 今日の1冊 / RSS購読 / X フォロー の4ボタン（2x2 グリッド）
+  - 記事読了後の離脱を、再訪動線4種で吸収
+- [x] **`src/lib/affiliate.ts` 新設**
+  - カテゴリ別 Amazon 検索キーワードマップ（11カテゴリ）
+  - `buildAmazonSearchUrl(keyword)`: `NEXT_PUBLIC_AMAZON_ASSOCIATE_TAG` 環境変数があれば tag 付与、なければ通常検索URL
+  - `getAffiliateKeywords(category)`: 未定義カテゴリは汎用フォールバック
+- [x] **GRIMOIRE 記事末尾に「{カテゴリ} をもっと深掘りするなら」セクション新設**
+  - カテゴリ別3キーワードを Amazon 検索リンクで表示
+  - `rel="sponsored nofollow"` + `target="_blank"` で透明性確保
+  - 「将来アソシエイトタグ付与する」旨の注意書き
+- [x] **`.env.example` に `NEXT_PUBLIC_AMAZON_ASSOCIATE_TAG` 追加**
+- 評価スコア見込み: 9. 収益動線 43→55（アフィリエイト -6 回収 + 離脱防止 -5 の半分 + 複数収益源の下地）
 
 ### 2026-04-21 #52 検索結果ハイライト
 - [x] **`SearchClient.tsx` 強化**
