@@ -177,12 +177,6 @@
   5. Sentry（ランタイムエラー計測）
 - 注意: ヒートマップ/GTM 追加時は CSP 許可リスト拡張要
 
-### 52. 検索結果ハイライト
-- 2026-04-21 再評価由来（効率順 4位、+0.09）
-- Fuse.js の `includeMatches: true` で matches 情報を取得
-- マッチしたキーワードを `<mark>` で囲んで可視化
-- 対象: タイトル / leadline / summary
-
 ---
 
 ## 見送り
@@ -572,6 +566,15 @@
   - Cookieless tracking なので Cookie 同意バナー（#30）不要
   - GA4 / GTM / ヒートマップ / Sentry は別タスク #50 に分離（Cookie バナー実装後に対応）
   - ビルド検証: `npm run build` 全ルート（Static/SSG/Dynamic）正常生成
+
+### 2026-04-21 #52 検索結果ハイライト
+- [x] **`SearchClient.tsx` 強化**
+  - Fuse.js options に `includeMatches: true` 追加
+  - `highlight(text, matches, key)` ヘルパー関数でマッチ部分を `<mark>` で囲む
+  - 対象フィールド: title / leadline / summary / categoryLabel
+  - スタイル: `bg-accent/30` + rounded + px-0.5 で既存デザインと整合
+- 動作確認: 「ギョベクリ」検索でタイトル・本文両方に `<mark>` 2箇所反映
+- 評価スコア見込み: 24. サイト内検索 70→79（ハイライト -9 回収）
 
 ### 2026-04-21 #53 利用規約独立ページ `/terms` 新設 + 未成年対応
 - [x] **`src/app/terms/page.tsx` 新設**（8条構成）

@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import Fuse from "fuse.js";
+import Fuse, { type FuseResultMatch } from "fuse.js";
 import { useMemo, useState } from "react";
 import type { SearchItem } from "@/lib/search-index";
 
@@ -9,6 +9,8 @@ type Props = {
   items: SearchItem[];
   initialQuery?: string;
 };
+
+type Matches = ReadonlyArray<FuseResultMatch>;
 
 export default function SearchClient({ items, initialQuery = "" }: Props) {
   const [query, setQuery] = useState(initialQuery);
@@ -27,6 +29,7 @@ export default function SearchClient({ items, initialQuery = "" }: Props) {
         threshold: 0.4,
         ignoreLocation: true,
         minMatchCharLength: 2,
+        includeMatches: true,
       }),
     [items],
   );
@@ -59,9 +62,9 @@ export default function SearchClient({ items, initialQuery = "" }: Props) {
       )}
 
       <ul className="space-y-3">
-        {results.map(({ item }) => (
+        {results.map(({ item, matches }) => (
           <li key={`${item.kind}-${item.id}`}>
-            <ResultCard item={item} />
+            <ResultCard item={item} matches={matches ?? []} />
           </li>
         ))}
       </ul>
@@ -76,7 +79,33 @@ export default function SearchClient({ items, initialQuery = "" }: Props) {
   );
 }
 
-function ResultCard({ item }: { item: SearchItem }) {
+function highlight(
+  text: string,
+  matches: Matches,
+  key: string,
+): React.ReactNode[] {
+  const match = matches.find((m) => m.key === key);
+  if (!match || !text) return [text];
+
+  const parts: React.ReactNode[] = [];
+  let cursor = 0;
+  for (const [start, end] of match.indices) {
+    if (start > cursor) parts.push(text.slice(cursor, start));
+    parts.push(
+      <mark
+        key={`${key}-${start}-${end}`}
+        className="rounded bg-accent/30 px-0.5 text-foreground"
+      >
+        {text.slice(start, end + 1)}
+      </mark>,
+    );
+    cursor = end + 1;
+  }
+  if (cursor < text.length) parts.push(text.slice(cursor));
+  return parts;
+}
+
+function ResultCard({ item, matches }: { item: SearchItem; matches: Matches }) {
   const isExternal = item.kind === "news";
   const kindLabel = item.kind === "grimoire" ? "GRIMOIRE" : "NEWS";
   const kindClass =
@@ -91,19 +120,23 @@ function ResultCard({ item }: { item: SearchItem }) {
           {kindLabel}
         </span>
         {item.categoryLabel && (
-          <span className="text-muted">{item.categoryLabel}</span>
+          <span className="text-muted">
+            {highlight(item.categoryLabel, matches, "categoryLabel")}
+          </span>
         )}
         <span className="ml-auto text-muted">{item.date}</span>
       </div>
       <h3 className="mb-1 text-sm font-bold leading-snug text-foreground group-hover:text-accent">
-        {item.title}
+        {highlight(item.title, matches, "title")}
       </h3>
       {item.leadline && (
         <p className="mb-1 text-xs italic text-foreground/70">
-          「{item.leadline}」
+          「{highlight(item.leadline, matches, "leadline")}」
         </p>
       )}
-      <p className="line-clamp-2 text-xs text-foreground/80">{item.summary}</p>
+      <p className="line-clamp-2 text-xs text-foreground/80">
+        {highlight(item.summary, matches, "summary")}
+      </p>
     </>
   );
 
