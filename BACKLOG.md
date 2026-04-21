@@ -152,14 +152,13 @@
   2. メルマガは #24 側で検討
 - 注意: service worker の大改修 + 通知送信バックエンド構築が必要、工数大
 
-### 49. CSP（Content-Security-Policy）の段階導入
-- 2026-04-21 #41 分離（評価11 セキュリティの残失点 -8点分）
-- SSG 運用のため nonce ベース CSP は使えず、`script-src 'self' 'unsafe-inline'` 妥協形か Report-Only からの段階導入が必要
-- 候補手順:
-  1. `Content-Security-Policy-Report-Only` で違反検知のみ（本番数日）
-  2. 違反ログから許可ホスト精査
-  3. 問題なければ enforce に切替
-- 依存: #50 GA4 導入・OGP画像ホスト追加等の許可リスト変動要因が落ち着いてから着手推奨
+### 49. CSP enforce 切替（Report-Only→enforce）
+- 2026-04-21 Report-Only で導入済（下部参照）。本項目は **enforce モードへの昇格**
+- 手順:
+  1. 本番で Report-Only 数日運用して違反ログを観測
+  2. 違反があれば許可リスト精査 or ソース側修正
+  3. `Content-Security-Policy-Report-Only` を `Content-Security-Policy` にキー変更（`next.config.ts` 1行のみ）
+- 注意: #50 GA4 導入時に `https://www.googletagmanager.com` `https://www.google-analytics.com` を script-src/connect-src に追加要
 
 ### 50. 分析・計測の拡張（GA4 / GTM / ヒートマップ / Sentry）
 - 2026-04-21 #44 分離（Vercel Analytics は対応済み）
@@ -434,6 +433,19 @@
   - メタデータ: canonical / openGraph type=profile / twitter card
   - CHARACTERS.md の設定書を公開可能な形で抽出（NG例などは非公開のまま）
   - URL は従来通り（sitemap・Footer導線に影響なし）
+
+### 2026-04-21 #49 CSP 段階導入（Report-Only）
+- [x] **`next.config.ts` の `headers()` に `Content-Security-Policy-Report-Only` を追加**
+  - `default-src 'self'`
+  - `script-src 'self' 'unsafe-inline' https://va.vercel-scripts.com`（Next.js inline + Vercel Analytics）
+  - `style-src 'self' 'unsafe-inline'`（Tailwind + inline style）
+  - `img-src 'self' data: blob: https:`（OGP画像 + 将来の外部画像対応余地）
+  - `font-src 'self' data:`
+  - `connect-src 'self' https://va.vercel-scripts.com https://vitals.vercel-insights.com`
+  - `frame-ancestors 'none'` / `base-uri 'self'` / `object-src 'none'` / `form-action 'self'` / `upgrade-insecure-requests`
+- SSG 運用のため nonce ベース不使用、`'unsafe-inline'` 妥協形
+- **Report-Only** なのでブロックはせず違反のみ検知、本番数日運用後に enforce へ切替（新規 #49 タスクに再設定）
+- 評価スコア見込み: 11. セキュリティ 92→100（Report-Only で部分加点、enforce 昇格で満点）
 
 ### 2026-04-21 #48 JSON Feed 追加（#48 の一部対応）
 - [x] **`src/app/feed.json/route.ts` 新設**（JSON Feed 1.1 仕様準拠）
