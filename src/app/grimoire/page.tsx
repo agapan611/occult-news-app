@@ -3,6 +3,7 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import StoryFilter from "@/components/StoryFilter";
 import JsonLd from "@/components/JsonLd";
+import Breadcrumb from "@/components/Breadcrumb";
 import { getAllStories, getAllCategories, getAllTags } from "@/lib/stories";
 import { grimoireCategoryLabels } from "@/lib/categories";
 
@@ -37,6 +38,12 @@ export default function GrimoirePage() {
     <>
       <JsonLd data={breadcrumbJsonLd} />
       <Header />
+      <Breadcrumb
+        items={[
+          { name: "ホーム", href: "/" },
+          { name: "GRIMOIRE" },
+        ]}
+      />
       <StoryFilter stories={stories} />
 
       {/* カテゴリ・タグインデックス */}

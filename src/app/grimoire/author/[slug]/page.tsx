@@ -4,6 +4,7 @@ import { notFound } from "next/navigation";
 import Footer from "@/components/Footer";
 import StoryCard from "@/components/StoryCard";
 import JsonLd from "@/components/JsonLd";
+import Breadcrumb from "@/components/Breadcrumb";
 import { getStoriesByAuthor } from "@/lib/stories";
 import type { StoryAuthor } from "@/lib/stories";
 
@@ -203,6 +204,14 @@ export default async function AuthorPage({
           <div className="w-20" />
         </div>
       </header>
+
+      <Breadcrumb
+        items={[
+          { name: "ホーム", href: "/" },
+          { name: "GRIMOIRE", href: "/grimoire" },
+          { name: `${info.name}のプロフィール` },
+        ]}
+      />
 
       <main className="mx-auto w-full max-w-lg flex-1">
         {/* プロフィールヘッダー */}

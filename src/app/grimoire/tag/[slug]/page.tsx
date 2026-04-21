@@ -3,6 +3,7 @@ import { notFound } from "next/navigation";
 import Footer from "@/components/Footer";
 import JsonLd from "@/components/JsonLd";
 import StoryCard from "@/components/StoryCard";
+import Breadcrumb from "@/components/Breadcrumb";
 import { getAllTags, getStoriesByTag } from "@/lib/stories";
 
 const SITE_URL = "https://occult.ainiwa.jp";
@@ -105,6 +106,14 @@ export default async function TagPage({
           <div className="w-20" />
         </div>
       </header>
+
+      <Breadcrumb
+        items={[
+          { name: "ホーム", href: "/" },
+          { name: "GRIMOIRE", href: "/grimoire" },
+          { name: `#${tag}` },
+        ]}
+      />
 
       <main className="mx-auto w-full max-w-lg flex-1">
         {/* タグ説明 */}

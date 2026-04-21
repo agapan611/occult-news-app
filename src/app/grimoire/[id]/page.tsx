@@ -4,6 +4,7 @@ import { notFound } from "next/navigation";
 import Footer from "@/components/Footer";
 import JsonLd from "@/components/JsonLd";
 import StoryCard from "@/components/StoryCard";
+import Breadcrumb from "@/components/Breadcrumb";
 import { getAllStories, getStoryById, getRelatedStories } from "@/lib/stories";
 import type { StoryAuthor } from "@/lib/stories";
 import { grimoireCategoryLabels } from "@/lib/categories";
@@ -129,6 +130,14 @@ export default async function StoryPage({
           <div className="w-20" />
         </div>
       </header>
+
+      <Breadcrumb
+        items={[
+          { name: "ホーム", href: "/" },
+          { name: "GRIMOIRE", href: "/grimoire" },
+          { name: story.title },
+        ]}
+      />
 
       <main className="mx-auto w-full max-w-lg flex-1 px-4 py-6">
         {/* カテゴリ + 読了時間 */}
