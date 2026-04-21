@@ -11,6 +11,12 @@
 
 ---
 
+## 優先度: 最優先
+
+（現在なし。#39 は 2026-04-21 に完成判定クリア → 対応済みへ移動）
+
+---
+
 ## 優先度: 高（今月中に着手）
 
 ### 10. GRIMOIRE の週2本ペース蓄積（SEO資産化）
@@ -49,15 +55,6 @@
 - → **コンセプトの核に関わるのでユーザー判断必要**。AdSense通すかどうかと連動
 - 一次取材・一次資料入り記事も数本仕込むと E-E-A-T 的に強い
 - **HCU直撃リスク**: Google の Helpful Content Update は「AI生成 × 外部ニュース転載」を最も厳しく扱う形式。現状のNEWS軸はこの構造に該当するため、中長期のオーガニック流入はGRIMOIRE側に依存する可能性が高い
-
-### 31. NEWSカードのサムネイル画像
-- 現状、NEWS一覧カードに画像がなく視覚的引きが弱い（別セッション評価で指摘）
-- 選択肢:
-  - a) 元記事OGP画像を引用表示（`<img>` with 元URL、キャッシュ困難・外部依存）
-  - b) Vercel 側でOGP画像をフェッチ→R2/Blob にキャッシュ→配信（堅牢だがストレージコスト）
-  - c) カテゴリ別のプレースホルダー画像のみ（最小コスト、視覚は底上げ）
-  - d) 自前OGP画像を NEWS 用にも自動生成（#11 の流用）
-- 引用ルール上 a) は元サイト規約次第。無難なのは c) → 徐々に d) へ移行
 
 ### 35. 被リンク施策
 - 別セッション評価指摘: 新規サイトのため被リンクがほぼなく、SEO的底上げが必要
@@ -122,13 +119,30 @@
 - Google Analytics 導入時に必要
 - APPI改正 + EU アクセス対応
 
-### 36. キャラ深掘りコンテンツ
-- 別セッション評価指摘: シュナ・ライカのファン化を促す「深掘り」がまだ薄い
-- 候補:
-  - キャラページの拡張（口調例・好き嫌い・設定資料）
+### 36. キャラ深掘りコンテンツ（残：小話・記念特集）
+- ~~キャラページの拡張（口調例・好き嫌い・設定資料）~~ → 2026-04-21 対応済み
+- 残候補:
   - キャラ小話（短編）を GRIMOIRE とは別枠で配置
   - 1周年・キャラ誕生日記念などの特集
 - #23 の「キャラ画像の見せ場拡大」と同時進行で効く
+
+### 40. グリモワール投稿スキルのカテゴリ名整合（記事↔knowledge）
+- 2026-04-21 スキル改善セッションで発見した不整合メモ
+- **現状の齟齬**（`~/.claude/skills/グリモワール投稿/SKILL.md` Step 3 ↔ Step 3.8）
+  - Step 3 ライカ: `ufo`（UFO/UAP）→ knowledge 側は `ufo_uap`（不一致）
+  - Step 3 シュナ: `prophecy`（予言）→ knowledge 11カテゴリに未登録
+  - Step 3 ライカ: `uma`（UMA）→ knowledge 11カテゴリに未登録
+  - Step 3 に `unsolved_cases` がライカ得意分野として未記載（knowledge にはある）
+- **想定される影響**
+  - 記事 JSON の category が knowledge カテゴリと対応しないテーマ（ufo/uma/prophecy）で、Step 3.8 の verified 閾値テーブルが引けず鮮度チェックがスキップされる
+  - 将来的にカテゴリベースのフィルタ・検索・UI で分類が崩れる可能性
+- **対応候補**
+  - (a) Step 3 の `ufo` → `ufo_uap` に統一（+ 既存記事の ufo 系を確認して同期）
+  - (b) `prophecy` / `uma` を knowledge 11カテゴリに昇格、または Step 3 から削除のどちらかを決定
+  - (c) `unsolved_cases` をライカ得意分野に追加
+- **着手タイミング**
+  - 現状は knowledge 連携5機能そのものは機能しているため実害は小さい
+  - #39 の knowledge ベース詳細化と同じタイミングで整理するのが効率的
 
 ---
 
@@ -354,6 +368,24 @@
   - オカルト系（ufo/uma/ghost/urban_legend/paranormal/mystery/cryptid + type=occult_news）は紫グラデ、一般ニュースはシアングラデ
   - `ArticleCard` のタイトル横に 64x64px で配置（flex、min-w-0 shrink-0）
   - 視覚的引きを底上げ、画像フェッチ不要
+
+### 2026-04-21 #39 knowledge ベース本格化（完成判定クリア）
+- [x] **knowledge メンテスキル強化**（`index` / `stubs` モード新設、`full` モード順序更新）
+- [x] **stub 15件を詳細化**（全件 WebSearch 裏取り + 一次資料URL付与、`stub: true` フラグ全削除）
+  - ancient_civilization: atlantis, nazca_lines, stonehenge, gobekli_tepe（既存詳細版）
+  - conspiracy: area_51, kennedy_assassination, mk_ultra, stargate_project（既存詳細版）
+  - mystery: bermuda_triangle, eilean_mor_lighthouse, hinterkaifeck, dyatlov_pass（既存詳細版）
+  - science_occult: deja_vu, near_death_experience, quantum_consciousness, mandela_effect（既存詳細版）
+  - ufo_uap: nimitz_ufo, phoenix_lights, roswell_1947, rendlesham_ufo（既存詳細版）
+- [x] **双方向リンク整備**（既存詳細5件の related 空配列を解消）
+- [x] **`_index.json` 全面リビルド**（22トピックのメタデータを `.md` 真実に同期）
+- [x] **`categories/` 5件の所属トピック索引補完**（index モードで自動抽出）
+- **完成判定**:
+  - [x] 全カテゴリに 3 件以上の詳細版トピック（記事あり5カテゴリで各4件、mysticism/numerology は単独だが詳細版）
+  - [x] 全トピックに一次資料 URL 1 つ以上（22/22 達成）
+  - [x] `_untrusted/` 0件
+  - [x] 壊れたリンク 0件
+- 今後は月次 `knowledge メンテ` で verified 再検証 + 新規追加トピック
 
 ### 2026-04-21 #36 キャラプロフィールページ拡張
 - [x] **`/grimoire/author/[shuna|raika|both]` を公開向けプロフィール特化に刷新**
