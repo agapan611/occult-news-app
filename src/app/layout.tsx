@@ -5,6 +5,7 @@ import JsonLd from "@/components/JsonLd";
 import ScrollToTop from "@/components/ScrollToTop";
 import CookieConsent from "@/components/CookieConsent";
 import GoogleAnalytics from "@/components/GoogleAnalytics";
+import AnalyticsListener from "@/components/AnalyticsListener";
 import "./globals.css";
 
 const GA_ID = process.env.NEXT_PUBLIC_GA_ID;
@@ -141,6 +142,7 @@ export default function RootLayout({
         <CookieConsent />
         <Analytics />
         {GA_ID && <GoogleAnalytics gaId={GA_ID} />}
+        <AnalyticsListener />
       </body>
     </html>
   );

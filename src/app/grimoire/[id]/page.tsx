@@ -227,6 +227,9 @@ export default async function StoryPage({
             href={`https://x.com/intent/tweet?url=${encodeURIComponent(pageUrl)}&text=${encodeURIComponent(story.title)}&via=occult_wire`}
             target="_blank"
             rel="noopener noreferrer"
+            data-ga-event="click_x_share"
+            data-ga-label={story.id}
+            data-ga-category={story.category}
             className="inline-flex items-center gap-1.5 rounded-full border border-card-border bg-background px-3 py-1.5 text-[11px] text-foreground hover:border-accent hover:text-accent transition-colors"
           >
             <svg viewBox="0 0 24 24" width={10} height={10} fill="currentColor" aria-hidden="true">
@@ -238,6 +241,9 @@ export default async function StoryPage({
             href="https://x.com/occult_wire"
             target="_blank"
             rel="noopener noreferrer"
+            data-ga-event="click_x_follow"
+            data-ga-label="article_cta"
+            data-ga-category={story.category}
             className="inline-flex items-center gap-1.5 rounded-full border border-card-border bg-background px-3 py-1.5 text-[11px] text-foreground hover:border-accent hover:text-accent transition-colors"
           >
             <svg viewBox="0 0 24 24" width={10} height={10} fill="currentColor" aria-hidden="true">
@@ -291,6 +297,8 @@ export default async function StoryPage({
             </Link>
             <a
               href="/feed.xml"
+              data-ga-event="click_rss"
+              data-ga-label="exit_cta"
               className="rounded-lg border border-card-border bg-card/60 px-4 py-3 text-center text-xs text-foreground/85 transition-colors hover:border-accent hover:text-accent"
             >
               RSS を購読
@@ -299,6 +307,9 @@ export default async function StoryPage({
               href="https://x.com/occult_wire"
               target="_blank"
               rel="noopener noreferrer"
+              data-ga-event="click_x_follow"
+              data-ga-label="exit_cta"
+              data-ga-category={story.category}
               className="rounded-lg border border-card-border bg-card/60 px-4 py-3 text-center text-xs text-foreground/85 transition-colors hover:border-accent hover:text-accent"
             >
               X でフォロー
@@ -321,6 +332,9 @@ export default async function StoryPage({
                   href={buildAmazonSearchUrl(kw)}
                   target="_blank"
                   rel="noopener noreferrer sponsored nofollow"
+                  data-ga-event="click_affiliate"
+                  data-ga-label={kw}
+                  data-ga-category={story.category}
                   className="flex items-center justify-between rounded-lg border border-card-border bg-card/60 px-3 py-2.5 text-[13px] text-foreground/90 transition-colors hover:border-accent hover:text-accent"
                 >
                   <span>

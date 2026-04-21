@@ -51,6 +51,8 @@ export default function Footer() {
             href="https://x.com/occult_wire"
             target="_blank"
             rel="noopener noreferrer"
+            data-ga-event="click_x_follow"
+            data-ga-label="footer"
             className="inline-flex items-center gap-2 rounded-full border border-card-border bg-card/40 px-4 py-2 text-[12px] text-foreground hover:border-accent hover:text-accent transition-colors"
           >
             <svg
