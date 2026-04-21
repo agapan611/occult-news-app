@@ -71,7 +71,7 @@ export default async function StoryPage({
   const author = authorInfo[story.author];
   const pageUrl = `${SITE_URL}/grimoire/${story.id}`;
   const publishedIso = new Date(story.createdAt || story.date).toISOString();
-  const relatedStories = getRelatedStories(story, 4);
+  const relatedStories = getRelatedStories(story, 8);
   const categoryLabel = grimoireCategoryLabels[story.category] ?? story.category;
 
   const articleJsonLd = {
@@ -245,18 +245,18 @@ export default async function StoryPage({
           </a>
         </section>
 
-        {/* 関連記事（同カテゴリ） */}
+        {/* 関連記事（スコア順: カテゴリ / 著者 / タグ / 新しさ） */}
         {relatedStories.length > 0 && (
           <section className="mt-10 border-t border-card-border pt-6">
             <div className="mb-3 flex items-center justify-between">
               <h2 className="text-sm font-bold tracking-wider">
-                <span className="text-accent">{categoryLabel}</span> の他の考察
+                <span className="text-accent">関連</span>の考察
               </h2>
               <Link
                 href={`/grimoire/category/${story.category}`}
                 className="text-[11px] text-accent hover:text-accent-dim transition-colors"
               >
-                一覧 &rarr;
+                {categoryLabel}一覧 &rarr;
               </Link>
             </div>
             <div className="-mx-4 border-t border-card-border">

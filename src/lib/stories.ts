@@ -76,11 +76,30 @@ export function getAllCategories(): string[] {
   return Array.from(cats).sort();
 }
 
-/** 同カテゴリの関連記事（自分自身を除く、最大N件、新しい順） */
-export function getRelatedStories(story: Story, limit = 4): Story[] {
+/**
+ * 関連記事をスコア順で返す（自分自身を除く、最大N件）
+ * スコア: カテゴリ一致 +100 / 著者一致 +30 / タグ一致 +20 × 件数 / 新しさ補正 最大+30
+ */
+export function getRelatedStories(story: Story, limit = 8): Story[] {
+  const now = Date.now();
+  const DAY_MS = 1000 * 60 * 60 * 24;
+  const baseTags = new Set(story.tags);
+
   return getAllStories()
-    .filter((s) => s.id !== story.id && s.category === story.category)
-    .slice(0, limit);
+    .filter((s) => s.id !== story.id)
+    .map((s) => {
+      let score = 0;
+      if (s.category === story.category) score += 100;
+      if (s.author === story.author) score += 30;
+      const matchedTags = s.tags.filter((t) => baseTags.has(t)).length;
+      score += matchedTags * 20;
+      const ageDays = (now - new Date(s.date).getTime()) / DAY_MS;
+      score += Math.max(0, 30 - ageDays / 30);
+      return { story: s, score };
+    })
+    .sort((a, b) => b.score - a.score)
+    .slice(0, limit)
+    .map((x) => x.story);
 }
 
 /** 全タグ一覧（件数の多い順） */
