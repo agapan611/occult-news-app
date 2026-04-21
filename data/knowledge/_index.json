@@ -1,0 +1,41 @@
+{
+  "version": 1,
+  "updated": "2026-04-21",
+  "categories": [
+    { "id": "ancient_civilization", "title": "古代文明", "threshold_days": 730, "topics": ["atlantis", "gobekli_tepe", "nazca_lines", "stonehenge"] },
+    { "id": "conspiracy", "title": "陰謀論・機密", "threshold_days": 180, "topics": ["area_51", "kennedy_assassination", "mk_ultra", "stargate_project"] },
+    { "id": "ghost_stories", "title": "怪談・心霊", "threshold_days": null, "topics": [] },
+    { "id": "horror", "title": "ホラー・不気味な実話", "threshold_days": null, "topics": [] },
+    { "id": "mystery", "title": "ミステリー・怪事件", "threshold_days": 365, "topics": ["bermuda_triangle", "dyatlov_pass", "eilean_mor_lighthouse", "hinterkaifeck"] },
+    { "id": "mysticism", "title": "神秘主義・呪術", "threshold_days": 730, "topics": ["mirror_mysticism"] },
+    { "id": "numerology", "title": "数秘術・数字の神秘", "threshold_days": 730, "topics": ["number_seven"] },
+    { "id": "science_occult", "title": "科学と境界領域のオカルト", "threshold_days": 180, "topics": ["deja_vu", "mandela_effect", "near_death_experience", "quantum_consciousness"] },
+    { "id": "ufo_uap", "title": "UFO・UAP", "threshold_days": 180, "topics": ["nimitz_ufo", "phoenix_lights", "rendlesham_ufo", "roswell_1947"] },
+    { "id": "unsolved_cases", "title": "未解決事件", "threshold_days": 365, "topics": [] },
+    { "id": "urban_legend", "title": "都市伝説", "threshold_days": null, "topics": [] }
+  ],
+  "topics": [
+    { "id": "area_51", "title": "エリア51", "category": "conspiracy", "tags": ["area_51", "groom_lake", "cia", "u2", "sr71", "f117", "bob_lazar", "nevada", "nellis"], "related": ["roswell_1947", "mk_ultra", "stargate_project"], "verified": "2026-04-21" },
+    { "id": "atlantis", "title": "アトランティス", "category": "ancient_civilization", "tags": ["atlantis", "plato", "timaeus", "critias", "lost_continent", "solon", "thera", "minoan"], "related": ["gobekli_tepe", "stonehenge", "nazca_lines"], "verified": "2026-04-21" },
+    { "id": "bermuda_triangle", "title": "バミューダ・トライアングル", "category": "mystery", "tags": ["bermuda_triangle", "flight_19", "mary_celeste", "methane_hydrate", "atlantic", "charles_berlitz", "vincent_gaddis"], "related": ["eilean_mor_lighthouse", "atlantis"], "verified": "2026-04-21" },
+    { "id": "deja_vu", "title": "デジャヴュ（既視感）", "category": "science_occult", "tags": ["deja_vu", "memory", "temporal_lobe_epilepsy", "anne_cleary", "boirac", "dual_processing", "gestalt_familiarity"], "related": ["mandela_effect", "near_death_experience", "quantum_consciousness"], "verified": "2026-04-21" },
+    { "id": "dyatlov_pass", "title": "ディアトロフ峠事件", "category": "mystery", "tags": ["unsolved", "ussr", "1959", "ural", "avalanche", "radiation"], "related": ["eilean_mor_lighthouse", "hinterkaifeck"], "verified": "2026-04-21" },
+    { "id": "eilean_mor_lighthouse", "title": "フランネン諸島灯台守失踪事件", "category": "mystery", "tags": ["flannan_isles", "eilean_mor", "lighthouse", "1900", "scotland", "hebrides", "northern_lighthouse_board", "joseph_moore"], "related": ["bermuda_triangle", "dyatlov_pass", "hinterkaifeck"], "verified": "2026-04-21" },
+    { "id": "gobekli_tepe", "title": "ギョベクリ・テペ", "category": "ancient_civilization", "tags": ["gobekli_tepe", "neolithic", "turkey", "archaeology", "klaus_schmidt", "unesco", "t_pillar"], "related": ["atlantis", "stonehenge", "nazca_lines"], "verified": "2026-04-21" },
+    { "id": "hinterkaifeck", "title": "ヒンターカイフェック事件", "category": "mystery", "tags": ["hinterkaifeck", "bavaria", "1922", "gruber", "mattock", "schlittenbauer", "germany", "unsolved_murder"], "related": ["eilean_mor_lighthouse", "dyatlov_pass"], "verified": "2026-04-21" },
+    { "id": "kennedy_assassination", "title": "ケネディ大統領暗殺事件", "category": "conspiracy", "tags": ["jfk", "dallas", "1963", "oswald", "warren_commission", "hsca", "zapruder", "grassy_knoll", "nara"], "related": ["mk_ultra", "area_51"], "verified": "2026-04-21" },
+    { "id": "mandela_effect", "title": "マンデラ効果", "category": "science_occult", "tags": ["mandela_effect", "collective_memory", "parallel_world", "quantum", "cognitive_psychology"], "related": ["deja_vu", "near_death_experience", "quantum_consciousness"], "verified": "2026-04-21" },
+    { "id": "mirror_mysticism", "title": "鏡の神秘主義と呪術", "category": "mysticism", "tags": ["mirror", "magic", "da_vinci", "mirror_writing", "reflection", "yata_no_kagami", "sankakubuchi"], "related": [], "verified": "2026-04-21" },
+    { "id": "mk_ultra", "title": "MKウルトラ計画", "category": "conspiracy", "tags": ["mk_ultra", "cia", "lsd", "gottlieb", "frank_olson", "church_committee", "declassified", "foia", "1953"], "related": ["stargate_project", "kennedy_assassination", "area_51"], "verified": "2026-04-21" },
+    { "id": "nazca_lines", "title": "ナスカの地上絵", "category": "ancient_civilization", "tags": ["nazca", "peru", "geoglyph", "maria_reiche", "yamagata_university", "unesco", "paracas", "water_ritual"], "related": ["stonehenge", "atlantis", "gobekli_tepe"], "verified": "2026-04-21" },
+    { "id": "near_death_experience", "title": "臨死体験（NDE）", "category": "science_occult", "tags": ["nde", "raymond_moody", "parnia", "aware_study", "pam_reynolds", "tunnel", "obe", "iands", "dmt"], "related": ["quantum_consciousness", "deja_vu", "mandela_effect"], "verified": "2026-04-21" },
+    { "id": "nimitz_ufo", "title": "ニミッツ空母UFO遭遇事件（ティックタック）", "category": "ufo_uap", "tags": ["nimitz", "tic_tac", "david_fravor", "atflir", "flir1", "aatip", "uap_task_force", "2004"], "related": ["rendlesham_ufo", "roswell_1947", "phoenix_lights"], "verified": "2026-04-21" },
+    { "id": "number_seven", "title": "数字「7」の偏在と数秘術", "category": "numerology", "tags": ["seven", "numerology", "seven_wonders", "rainbow", "mythology", "cognitive_limit"], "related": [], "verified": "2026-04-21" },
+    { "id": "phoenix_lights", "title": "フェニックス・ライト事件", "category": "ufo_uap", "tags": ["phoenix_lights", "arizona", "1997", "symington", "v_formation", "flares", "a_10", "march_13"], "related": ["nimitz_ufo", "rendlesham_ufo", "roswell_1947"], "verified": "2026-04-21" },
+    { "id": "quantum_consciousness", "title": "量子意識仮説", "category": "science_occult", "tags": ["quantum_consciousness", "orch_or", "penrose", "hameroff", "microtubule", "tegmark", "hard_problem", "decoherence"], "related": ["near_death_experience", "deja_vu", "mandela_effect"], "verified": "2026-04-21" },
+    { "id": "rendlesham_ufo", "title": "レンデルシャムの森事件", "category": "ufo_uap", "tags": ["rendlesham", "ufo", "halt_memo", "british_roswell", "1980", "usaf", "penniston", "foia"], "related": ["nimitz_ufo", "phoenix_lights", "roswell_1947"], "verified": "2026-04-21" },
+    { "id": "roswell_1947", "title": "ロズウェル事件（1947年）", "category": "ufo_uap", "tags": ["roswell", "new_mexico", "1947", "brazel", "jesse_marcel", "project_mogul", "usaf_report", "flying_disc"], "related": ["area_51", "nimitz_ufo", "phoenix_lights", "rendlesham_ufo"], "verified": "2026-04-21" },
+    { "id": "stargate_project", "title": "スターゲイト計画（CIA）", "category": "conspiracy", "tags": ["cia", "remote_viewing", "cold_war", "declassified", "scanate", "sri", "psychotronics", "foia"], "related": ["mk_ultra", "area_51"], "verified": "2026-04-21" },
+    { "id": "stonehenge", "title": "ストーンヘンジ", "category": "ancient_civilization", "tags": ["stonehenge", "wiltshire", "bluestone", "sarsen", "neolithic", "unesco", "durrington_walls", "mike_parker_pearson"], "related": ["gobekli_tepe", "nazca_lines", "atlantis"], "verified": "2026-04-21" }
+  ]
+}
