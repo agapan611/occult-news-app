@@ -569,6 +569,16 @@
   - GA4 / GTM / ヒートマップ / Sentry は別タスク #50 に分離（Cookie バナー実装後に対応）
   - ビルド検証: `npm run build` 全ルート（Static/SSG/Dynamic）正常生成
 
+### 2026-04-21 #47 タイポグラフィ部分巻戻し（PSI Performance 対策）
+- **背景**: 2026-04-21 PSI 実測で Performance **55/100**、LCP **17.3秒**・FCP **8.7秒**と致命的に悪化
+  - 原因: 今日 #47 で導入した和文 Webフォント（Noto Sans JP + Zen Kaku Gothic New）の preload が 38+ 個、Render-Blocking 10.0 秒
+- **対策（B案: 中庸）**:
+  - Noto Sans JP: weight `["400", "500", "700"]` → `["400", "700"]`（500 削減）
+  - Zen Kaku Gothic New: weight `["700", "900"]` → `["700"]`（900 削減）
+  - 両フォントに `preload: false` 追加（初回描画はフォールバックフォント、完了後 display: swap で切替）
+- **検証（dev）**: preload font 数 38+ → **0**、body/h1 の font-family は Next.js 自動生成 Fallback（メトリクス調整済）→ 実フォントの順に配置
+- 評価スコア見込み: 4. パフォーマンス 55→75+ 復帰、27. タイポ 88→82 程度（実効果はほぼ維持）
+
 ### 2026-04-21 収益動線の第一弾（離脱防止 CTA + アフィリエイト UI 土台）
 - [x] **GRIMOIRE 記事末尾に「読み終えたら、次の扉へ」セクション新設**
   - ランダム1冊 / 今日の1冊 / RSS購読 / X フォロー の4ボタン（2x2 グリッド）

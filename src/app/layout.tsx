@@ -11,16 +11,18 @@ const GA_ID = process.env.NEXT_PUBLIC_GA_ID;
 
 const notoSansJp = Noto_Sans_JP({
   subsets: ["latin"],
-  weight: ["400", "500", "700"],
+  weight: ["400", "700"],
   variable: "--font-noto-jp",
   display: "swap",
+  preload: false,
 });
 
 const zenKakuGothicNew = Zen_Kaku_Gothic_New({
   subsets: ["latin"],
-  weight: ["700", "900"],
+  weight: ["700"],
   variable: "--font-zen-kaku",
   display: "swap",
+  preload: false,
 });
 
 const SITE_URL = "https://occult.ainiwa.jp";
