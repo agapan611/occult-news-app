@@ -136,6 +136,7 @@ export default function Footer() {
           </Link>
           <Link
             href="/search"
+            prefetch={false}
             data-ga-event="click_footer_nav"
             data-ga-label="search"
             className="hover:text-accent transition-colors"
@@ -144,6 +145,7 @@ export default function Footer() {
           </Link>
           <Link
             href="/sitemap"
+            prefetch={false}
             data-ga-event="click_footer_nav"
             data-ga-label="sitemap"
             className="hover:text-accent transition-colors"

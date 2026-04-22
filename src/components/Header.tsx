@@ -31,6 +31,7 @@ export default function Header() {
         <div className="flex-1" />
         <Link
           href="/search"
+          prefetch={false}
           aria-label="サイト内検索"
           data-ga-event="click_header_nav"
           data-ga-label="search"
