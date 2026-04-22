@@ -167,25 +167,26 @@ data/
 - カテゴリページ `/category/[slug]`（未実装）
 - AdSense 審査（GRIMOIRE 20記事貯まるまで据え置き）
 
-## 15. 次セッション引き継ぎ（2026-04-22 夜時点）
+## 15. 次セッション引き継ぎ（2026-04-22 夜時点 / v6 Phase 2 実装後）
 
 ### 直前セッションの成果
 - **サイト評価 v5 実施**（87.42 / 100、v4 +1.07、v1 +5.42、20 コミット累積）
   - 評価ファイル: `~/.claude/skills/site-evaluation/results/occult-wire/2026-04-22_v5.md`
 - **BACKLOG に v5 マージ**（#54 対応済みへ移動、#57〜#61 を新規追加）
 - **site-evaluation スキルに Step 4.5「BACKLOG マージ」追加**（今後の評価時に自動発動）
+- **site-evaluation スキルに Step 4a「世界観整合性チェック」追加**（#58 類似の乖離案件を事前フラグ化）
 - **v6 Phase 1 実装+push 済み**（commit `895a9e2` / `aae279a`）
   - #60 a11y コントラスト（Footer × に aria-hidden、text-foreground/60 → /70）
   - #61 /search /sitemap の prefetch={false}（First Load JS -27 KiB）
+- **v6 Phase 2 実装**（#23 デザインの世界観強化）
+  - NEWS カテゴリ色分け（occult_core=紫グロー / mystery=シアン / normal=従来トーン）
+  - 🔥 注目案件マーク（最新日 × occult_core カテゴリ）
+  - 背景演出の強化（radial-gradient opacity ↑、フィルムグレインノイズ opacity ↑）
+  - 見出しグロー（h1/h2 に控えめな紫 text-shadow）
+- **#58 ライトモード OS 追従切替は見送り**（世界観一貫性を優先、BACKLOG 見送りセクション参照）
+- **BACKLOG 整合性チェック**（#60/#61 を対応済みへ移動、#27 ゲージ実装済みと判明し整理）
 
 ### 次セッションで着手する作業
-
-#### Claude 単独で進められる
-- **#58 ライトモード OS 追従切替**（工数 3-4h、未着手）
-  - `prefers-color-scheme: light` で自動切替、globals.css に light variant 追加
-  - Tailwind dark: prefix で色トークンを2セット化
-  - 全ページの色トークン洗い直しが必要
-  - 見込み: 30. UX 7x→80、加重加点 +0.29
 
 #### 海斗さん作業が前提のもの（待ち）
 - **#57 Giscus コメント統合**（工数 2-3h、ユーザー作業待ち）

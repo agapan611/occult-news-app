@@ -45,14 +45,6 @@ v5 再評価由来の新規タスク: #57（Giscus コメント）/ #58（ライ
 - 見込み: 33. コメント 0→60（加重加点 **+0.44**、v5 トップ5 最大効果）
 - 注意: GitHub アカウント必須なのでコメント数は多くない想定、E-E-A-T ブースト目的
 
-### 58. ライトモード OS 追従切替
-- **v5 評価由来**、`#23 デザインの世界観強化` のダークモード追従と対をなす
-- 現状: ダークモード固定、`prefers-color-scheme: light` でもダーク表示
-- 対応案: globals.css に light variant を追加、Tailwind dark: prefix 切替
-- 工数: 3-4h（全ページの色トークン洗い直し）
-- 見込み: 30. UX 7x→80、加重加点 **+0.29**
-- 注意: サイトの世界観はダーク主体。ライトは「昼間の電車で読む用」ポジション
-
 ### 59. お問い合わせフォーム内製化（React Hook Form + Supabase）
 - **v5 評価由来**、`#46 フォーム・CV設計` を具体化
 - 現状: `/contact` は mailto: + Google Forms 依存
@@ -123,20 +115,6 @@ v5 再評価由来の新規タスク: #57（Giscus コメント）/ #58（ライ
 - **トリガー**: 実際にアクセスログで不審なUA・帯域スパイクが観測されたら着手
 - 現状: アクセス少・立ち上げ直後なので様子見
 
-### 60. a11y コントラスト残（PSI 警告消化）
-- **v5 評価由来**、PSI Accessibility 96 のうち残2失点のコントラスト警告
-- 対象: Footer 極小テキスト（著作権表記周り）の #888 相当
-- 対応: `text-foreground/50` 等を `text-foreground/65` 以上へ昇格 or CSS 変数 `--color-muted-subtle` 新設
-- 工数: 30 分
-- 見込み: 7. a11y 93→96、加重加点 **+0.14**
-
-### 61. 未使用 JS 27 KiB の dynamic import 化
-- **v5 評価由来**、PSI insight 「Unused JavaScript 27 KiB」警告
-- 候補: Hero 配下のスクロール駆動要素（OccultLevelGauge など）を `dynamic(..., { ssr: false })` で遅延
-- 工数: 1h
-- 見込み: 4. パフォーマンス mobile 88→91、加重加点 **+0.08**
-- 注意: LCP 悪化させないよう、Above-the-fold は遅延しない
-
 ---
 
 ## 優先度: 低
@@ -162,11 +140,6 @@ v5 再評価由来の新規タスク: #57（Giscus コメント）/ #58（ライ
 - 残り: AI著者で権威性は構造的に不利な点
   - 独自ドメイン + 継続実績 + 読者数 + 人間監修者表記 で補完
   - 長期テーマ
-
-### 27. 「占いモード」「今日のオカルト度」（残：占い要素のみ）
-- ~~ランダム記事表示~~ → 2026-04-20 実装済み（`/grimoire/random`）
-- ~~日替わり（date-based seed）~~ → 2026-04-20 実装済み（`/grimoire/daily`）
-- 残：「今日のオカルト度」ゲージ（装飾寄り、優先度低）
 
 ### 28. 読者投稿受付
 - 「このニュースを2人に解釈してほしい」投稿フォーム
@@ -225,9 +198,40 @@ v5 再評価由来の新規タスク: #57（Giscus コメント）/ #58（ライ
 - `/occult-wire全更新` で ニュース+GRIMOIRE+X を順次実行する構想
 - **見送り理由**: 個別スキルが成熟しているため統合のメリットが薄い。段階実行の方がエラー制御しやすい
 
+### 58. ライトモード OS 追従切替（v5 評価由来）
+- `prefers-color-scheme: light` でライト配色に切替する案
+- 工数 3-4h、見込み +0.29（UX 30: 7x→80）で検討したが不採用
+- **見送り理由**（2026-04-22 判断）: OCCULT WIRE はダークが世界観の核。ライト表示を追加しても既存ユーザー（大半がダーク前提で閲覧）への価値が薄く、OS light 環境の人だけに別の顔を作る労力に対して効果が不明瞭。UX 加点より世界観の一貫性を優先
+
 ---
 
 ## 対応済み
+
+### 2026-04-22 v6 Phase 2 #23 デザインの世界観強化
+- [x] **NEWS カテゴリ色分け実装**（`src/components/ArticleCard.tsx`）
+  - `CategoryGroup` 型を導入: `occult_core`（ghost/paranormal/cryptid）/ `mystery`（ufo/uma/mystery/urban_legend）/ `normal`
+  - `groupStyles` で badge / caption / commentBox / commentLabel / readMore / sourceLink の 6 要素を一括切替
+  - occult_core は紫グロー shadow、mystery はシアン系、normal は従来のトーン維持
+- [x] **🔥 注目案件マーク**（`ArticleFeed.tsx` + `ArticleCard.tsx`）
+  - 最新日 × `occult_core` カテゴリの記事に 🔥 表示（`isHot` prop 経由）
+  - NEW バッジと併置、タブ切替で消えないよう `ArticleFeed` の `latestDate` を使用
+- [x] **背景演出の強化**（`src/app/globals.css`）
+  - 紫 radial-gradient: opacity 0.08 → 0.11
+  - シアン radial-gradient: opacity 0.05 → 0.07
+  - フィルムグレインノイズ opacity 0.04 → 0.06
+- [x] **見出しグロー**（`src/app/globals.css`）
+  - h1/h2 に `text-shadow: 0 0 16px rgba(139, 92, 246, 0.15)` を追加（控えめな紫グロー）
+- 評価スコア見込み: 2. デザイン / 30. ダークモード / 27. タイポに加点見込み（v6 評価で計測）
+
+### 2026-04-22 v6 Phase 1 #60 a11y コントラスト残 + #61 未使用 JS 削減
+- [x] **#60 a11y コントラスト残対応**（commit `895a9e2`）
+  - Footer の `×` セパレータに `aria-hidden="true"` を付与（スクリーンリーダー読み上げ抑止）
+  - `text-foreground/60` → `text-foreground/70` 昇格でコントラスト比改善
+  - 見込み: 7. a11y 93→96、加重加点 **+0.14**
+- [x] **#61 prefetch={false} 適用**（commit `aae279a`）
+  - Footer の `/search` / `/sitemap` リンクに `prefetch={false}` 適用
+  - 効果: First Load JS -27 KiB（未使用 JS 削減）
+  - 見込み: 4. パフォーマンス mobile 88→91、加重加点 **+0.08**
 
 ### 2026-04-22 v5 #54 Hero 画像最適化 + サイト再評価（v5、5回目実施）
 - [x] **#54 Hero 画像 WebP 化**
