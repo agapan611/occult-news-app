@@ -11,6 +11,56 @@
   ],
   "recent": [
     {
+      "id": "2026-04-23-001",
+      "date": "2026-04-23",
+      "title": "三陸沖でM7.7、「北海道・三陸沖後発地震注意情報」発表──1週間、Mw8級は100回に1回",
+      "commentBy": "raika",
+      "commentStyle": "mystery",
+      "category": "society",
+      "keyAngles": ["北海道三陸沖後発地震注意情報", "M7.7先発", "100回に1回", "Mw8級7日以内", "4月27日まで注意期間"],
+      "sourceUrl": "https://tenki.jp/feature/bousai/2026/04/21/194.html"
+    },
+    {
+      "id": "2026-04-23-002",
+      "date": "2026-04-23",
+      "title": "ロスアラモス元責任者の遺品から「本物のUFOファイル」流出──ジェレミー・コーベル新作『Sleeping Dog』5月12日公開",
+      "commentBy": "raika",
+      "commentStyle": "ufo",
+      "category": "ufo",
+      "keyAngles": ["ロスアラモス遺品ファイル", "Sleeping Dog", "ジェレミーコーベル", "5月12日公開", "緑色の火の玉"],
+      "sourceUrl": "https://tocana.jp/2026/04/post_294124_entry.html"
+    },
+    {
+      "id": "2026-04-23-003",
+      "date": "2026-04-23",
+      "title": "Amazon、Anthropicに最大250億ドル追加出資──Anthropicは10年で1000億ドル超をAWSへ、5GW級の専用計算能力を確保",
+      "commentBy": "raika",
+      "commentStyle": "conspiracy",
+      "category": "tech",
+      "keyAngles": ["Amazon250億ドル", "Anthropic1000億ドルAWS", "5GW計算能力", "Trainium垂直統合", "電力主権単位"],
+      "sourceUrl": "https://gigazine.net/news/20260421-amazon-anthropic-invest/"
+    },
+    {
+      "id": "2026-04-23-004",
+      "date": "2026-04-23",
+      "title": "「ゴルゴタの丘」はどこなのか──聖墳墓教会の地下で2025年に古代庭園跡が検出、論争が再燃",
+      "commentBy": "shuna",
+      "commentStyle": "ancient_civilization",
+      "category": "world",
+      "keyAngles": ["ゴルゴタの丘論争", "聖墳墓教会地下庭園跡", "園の墓", "ハウアートン牧師", "コンスタンティヌス帝ヘレナ"],
+      "sourceUrl": "https://web-mu.jp/history/76731/"
+    },
+    {
+      "id": "2026-04-23-005",
+      "date": "2026-04-23",
+      "title": "米イリノイ州・築100年の廃屋でSOSモールス信号を発する防犯灯──郡保安事務所「ソーラー灯の故障」と公式発表",
+      "commentBy": "shuna",
+      "commentStyle": "ghost_stories",
+      "category": "ghost",
+      "keyAngles": ["イリノイSOS防犯灯", "築100年廃屋", "ソーラー灯故障", "モールス信号3短3長3短", "ジョセフTikTok"],
+      "sourceUrl": "https://web-mu.jp/paranormal/76647/"
+    },
+    {
       "id": "2026-04-21-001",
       "date": "2026-04-21",
       "title": "三陸沖でM7.5の地震、青森・階上町で最大震度5強──津波警報は後に解除",
