@@ -96,11 +96,12 @@ export default function Hero() {
       {/* 背景: キャラ画像（薄くブラー）+ 暗色グラデ */}
       <div aria-hidden className="pointer-events-none absolute inset-0 -z-10">
         <Image
-          src="/shuna-raika.png"
+          src="/shuna-raika-hero.webp"
           alt=""
           fill
           priority
-          sizes="(max-width: 640px) 100vw, 640px"
+          quality={70}
+          sizes="(max-width: 768px) 100vw, 512px"
           className="object-cover object-center opacity-[0.14] blur-[6px] scale-[1.08]"
         />
         <div className="absolute inset-0 bg-gradient-to-b from-background/40 via-background/75 to-background" />

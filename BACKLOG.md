@@ -13,17 +13,17 @@
 
 ## サイト評価マージ情報
 
-最新評価: **2026-04-21（82.0 / 100、前回 +3.2）**
-前回評価: 2026-04-20（78.8 / 100、初回基準値）
+最新評価: **2026-04-22（86.35 / 100、前回 +1.15）**
+前回評価: 2026-04-21 v3（85.2 / 100）
 評価ファイル:
-- `~/.claude/skills/site-evaluation/results/occult-wire/2026-04-21.md`
-- `~/.claude/skills/site-evaluation/results/occult-wire/2026-04-20.md`
+- `~/.claude/skills/site-evaluation/results/occult-wire/2026-04-22.md`
+- `~/.claude/skills/site-evaluation/results/occult-wire/2026-04-21_v3.md`
 
-2026-04-21 で合格ライン昇格（20→24 / 33）: 11 セキュリティ / 16 ナビ / 17 エラーページ / 27 タイポ
-残最大ボトルネック: **9. 収益動線 40/100（加重 -3.64）**
+2026-04-22 合格項目 25→26 / 33（新規合格: #24 検索 79→88）
+Best Practices 96→100 到達（#49 CSP enforce 完了）
+残最大ボトルネック: 9. 収益動線（#17 アフィリ申請 / #24 メルマガ / #15 AdSense が外部承認待ち）
 
-再評価由来の新規タスク: #51（関連記事拡張）/ #52（検索ハイライト）/ #53（利用規約独立）
-既存 #49 #50 にも「再評価トップ2」注記あり。
+再評価由来の新規タスク: #54（Hero 画像最適化）/ #55（コントラスト）/ #56（a11y viewport・alt）
 
 ---
 
@@ -35,11 +35,33 @@
 
 ## 優先度: 高（今月中に着手）
 
-（現在なし）
+### 54. Hero 画像最適化（v4 評価由来・最優先）
+- **背景**: 2026-04-22 v4 PSI 実測で `/public/shuna-raika.png` が `next/image` 最適化の効果を享受できておらず、モバイルで約 53 KiB 無駄、Speed Index +2.1 秒
+- 原因: Hero の表示幅は max-w-lg = 512px までだが `sizes="(max-width: 640px) 100vw, 640px"` で大きめに取っている + PNG のまま
+- 対応案:
+  1. `sizes` を `(max-width: 640px) 100vw, 512px` に縮小
+  2. `quality={70}` を明示（背景の blur-6px なので品質落としても見た目変化なし）
+  3. ソース画像を WebP or AVIF に差し替え（`shuna-raika.webp`）
+  4. それでも重い場合は Hero 背景を SVG グラデ + 透かしの軽量版に置換する選択肢
+- 評価スコア見込み: 4. パフォーマンス モバイル 92→95+、15. 読了体験 CLS改善（加重加点 +0.24）
 
 ---
 
 ## 優先度: 中
+
+### 55. テキストコントラスト改善（v4 評価由来）
+- **背景**: 2026-04-22 v4 PSI Accessibility でコントラスト警告（`text-muted` の灰色、tracking 広い見出し）
+- 対応案:
+  - `text-muted` のカラー値を foreground 寄りに（現状 cyan 系薄め → もう1段明るく）
+  - 極細 tracking（tracking-[0.3em] 等）を適用している箇所は文字サイズを少し上げるか tracking tighten
+  - Hero の CRITICAL/HIGH/MEDIUM ラベル部分の視認性も確認
+- 評価スコア見込み: 7. a11y 91→94、27. タイポ 76→82（加重加点 +0.12）
+
+### 56. a11y: viewport / alt 属性精緻化（v4 評価由来）
+- viewport meta の `maximum-scale` を緩和（ズーム抑止は WCAG 違反）
+- `NewsThumbnail` / Hero 背景 / OGP 画像の alt 属性文言を精緻化
+- 装飾画像は `alt=""` + `aria-hidden`、情報画像は記事主題を含む alt に
+- 評価スコア見込み: 7. a11y 91→94（#55 と合算で 91→96 も視野）
 
 ### 15. AdSense審査対応（GRIMOIRE 20記事蓄積後）
 - **NEWS欄の陰謀論/数秘術カテゴリは審査リスク高**
@@ -182,6 +204,43 @@
 ---
 
 ## 対応済み
+
+### 2026-04-22 早朝 v3 残タスク消化（Plan C の前段）
+- [x] **#6 llms-full.txt 設置**（`src/app/llms-full.txt/route.ts`）
+  - llmstxt.org 規格準拠、サイト全ページ要約を1ファイルに統合
+  - GRIMOIRE 全記事の title + leadline + summary + content 抜粋
+  - `revalidate: 3600`、`stale-while-revalidate: 86400`
+- [x] **#24 検索オートサジェスト**（`src/components/SearchClient.tsx`）
+  - 入力中 5 件候補を浮き表示（`showSuggestions` state）
+  - キーボードナビ対応（↑↓ / Enter / Escape）
+  - 外側クリックで閉じる
+  - → v4 評価で 79→88 合格ライン突破の決定打
+- [x] **#27 今日のオカルト度ゲージ**（後に Plan C B-1 で Hero コンポーネントに統合）
+- コミット: `feat: v3 改善トップ3（#6 llms-full.txt / #24 検索サジェスト / #27 オカルト度ゲージ）`（2026-04-22 03:35 JST）
+
+### 2026-04-22 Plan C（デザイン世界観強化）+ CSP enforce + サイト再評価
+
+- [x] **A-3 ノイズテクスチャ**: `src/app/globals.css` の `body::after` に SVG fractalNoise（160x160 タイル、opacity 0.04、mix-blend-mode: screen）を追加
+- [x] **A-1 NEWS色強化**: `ArticleCard.tsx` の本文ボックスに紫グロー shadow を追加（cursor pointer 維持）
+- [x] **A-2 NEW バッジ**: 最新日の記事にパルスする紫 NEW バッジ。タブ切替で消えないよう `ArticleFeed.tsx` で pre-filter の `latestDate` を基準判定
+- [x] **B-1 Hero**: `OccultLevelGauge.tsx` を削除し `Hero.tsx` 新設
+  - キャラ画像背景（`shuna-raika.png`、opacity 0.14、blur-6px）+ 背景グラデ
+  - キャッチコピー「見えないものに、輪郭を。」
+  - オカルト度ゲージ統合（#27 消化）: FNV-1a hash で JST 日付から 35〜92 の決定値、5 Tier 分類（CALM/LOW/MEDIUM/HIGH/CRITICAL）
+- [x] **B-2 GRIMOIRE 筆者立ち絵**: 読了後セクションに 128x128 著者アイコン + キャラ別締め台詞（`authorInfo` に `ringClass` / `closingLine` を追加）
+- [x] **#49 CSP enforce 昇格**: `Content-Security-Policy-Report-Only` → `Content-Security-Policy` 1 行切替 → BP モバイル 96→100 / デスクトップ 96→100
+- [x] **#47 フォント preload 削減**: `/grimoire/shuna-gobekli-tepe-ancient-temple` の個別ページ preload 削減（render-blocking 低減）
+
+### 2026-04-22 サイト再評価（v4、4回目実施）
+- [x] **site-evaluation スキル 4 回目実施**
+  - 評価ファイル: `~/.claude/skills/site-evaluation/results/occult-wire/2026-04-22.md`
+  - 総合 **86.35 / 100**（v3 比 +1.15）
+  - モバイル PSI: Performance 92 / A11y 91 / **Best Practices 100 (+4)** / SEO 100
+  - デスクトップ PSI: Performance 99 / A11y 91 / **Best Practices 100** / SEO 100
+  - 合格項目 25→26 / 33（新規合格: **#24 検索 79→88**）
+  - Best Practices 100 到達は #49 CSP enforce の効果
+- 新規タスク #54〜#56 を追加（Hero 画像最適化 / コントラスト / a11y viewport・alt）
+- v3 残タスクのうち **#23 デザイン世界観強化 / #27 今日のオカルト度ゲージ / #49 CSP enforce** は完了、**#24 検索オートサジェスト / #6 llms-full.txt** は優先度 高に維持
 
 ### 〜 2026-04-17 初期構築
 - [x] OCCULT WIRE 本体アプリ構築（Next.js 16 + Vercel）
@@ -659,69 +718,61 @@
 
 ---
 
-## 次セッション引き継ぎメモ（2026-04-21 v3 セッション終了時点）
+## 次セッション引き継ぎメモ（2026-04-22 v4 セッション時点）
 
-### 今日の実績（2026-04-21 通算）
-- **通算 22 コミット**（`4a98631` 〜 `ee81dd3` Web フォント削除）
-- サイト評価: 2026-04-20 初回 **78.8** → v1 **82.0** → v2 **84.0** → **v3 85.2**（+1.2、フル再評価確定値）
-- 評価ファイル: `~/.claude/skills/site-evaluation/results/occult-wire/2026-04-21_v3.md`（33項目フル採点、PSI 実測込）
+### 今日の実績（2026-04-22 通算）
+- Plan C（A-3 ノイズ / A-1 NEWS 色 / A-2 NEW バッジ / B-1 Hero / B-2 筆者立ち絵）実装
+- #49 CSP enforce 昇格 → Best Practices 96→100 到達
+- サイト評価 v4: **86.35 / 100**（v3 85.2 → +1.15）
+- 評価ファイル: `~/.claude/skills/site-evaluation/results/occult-wire/2026-04-22.md`
 
-### 🎯 PSI 実測（Web フォント削除後、2026-04-21 23:33 JST）
-| 指標 | v2 実測 | v3 実測 | 差分 |
+### 🎯 PSI 実測（2026-04-22）
+| 指標 | v3 実測 | v4 実測 | 差分 |
 |---|---|---|---|
-| **モバイル Performance** | **57** | **99** | **+42** 🚀 |
-| **デスクトップ Performance** | **89** | **100** | **+11** |
+| モバイル Performance | 99 | **92** | -7（Hero 画像 unoptimized で SI 悪化） |
+| デスクトップ Performance | 100 | **99** | -1 |
 | Accessibility | 91 | 91 | ±0 |
-| Best Practices | 96 | 96 | ±0 |
+| **Best Practices** | 96 | **100** | **+4** 🎯（CSP enforce 効果） |
 | SEO | 100 | 100 | ±0 |
-| モバイル LCP | 9.3s | **2.1s** | -7.2s（Good 突入） |
-| モバイル FCP | 8.7s | **1.2s** | -7.5s |
 
-- **render-blocking 9,380ms が根本解消**: `next/font/google` の Noto Sans JP + Zen Kaku Gothic New の @font-face CSS 317KB（unicode-range 日本語分割で 249+122 個）がモバイル低速4Gで描画を長時間ブロックしていた主因と特定
-- **対策**: `src/app/layout.tsx` から next/font 2種を import ごと削除、`globals.css` の `--font-sans` / `--font-display` をシステムフォント（Hiragino Sans / Yu Gothic UI / sans-serif）のみに
-- **見た目のトレードオフ**: OS 依存になる（iOS=Hiragino Sans、Win=Yu Gothic UI、Android=Noto/Roboto）が、日本人ユーザー向けにはほぼ違和感なし
-- **site-evaluation スキル改修**: Playwright MCP で PageSpeed Insights を自動実測するステップを追加済（Step 2b）
+- **新規ボトルネック**: Hero キャラ画像 `/shuna-raika.png` が next/image 最適化を享受できておらず約53 KiB ムダ、Speed Index +2.1 秒 → **#54 として最優先化**
 
-### 今日の対応済み（BACKLOG から消化）
-#30 Cookie同意 / #41 セキュリティ4ヘッダ / #42a-c パンくず・スクロールトップ・HTMLサイトマップ / #43 404/500 キャラトーン / #44 Vercel Analytics / #45 サイト内検索 / #47 タイポ導入→部分巻戻し→**完全削除（v3）** / #48 JSON Feed（PUSH除く）/ #49 CSP Report-Only / #50 GA4 実運用化 / #50 イベント計測（v2 追加）/ #51 関連記事スコア順 / #52 検索ハイライト / #53 利用規約独立 / #10 運営者プロフィール / 収益動線第一弾（離脱防止CTA + アフィリUI土台）/ **#4 パフォーマンス根本改善（v3 追加、Mobile Perf 57→99）**
-
-### v3 評価後の改善トップ5（優先順）
+### v4 評価後の改善トップ3（優先順）
 | 順位 | 項目 | 内容 | 工数 | 加重加点 |
 |---|---|---|---|---|
-| 1 | #24 検索オートサジェスト | `/search` に入力中 5 件候補表示（80ライン到達） | 中 | +0.13 |
-| 2 | #49 CSP enforce 昇格 | Report-Only → enforce（1 行変更、数日観測後） | 極小 | +0.15 |
-| 3 | #6 llms-full.txt 設置 | AIO 80→84（サイト全ページ要約） | 小 | +0.32 |
-| 4 | #23 デザイン世界観強化 | カテゴリ色分け / 🔥新着マーク / キャラヒーロー画像 | 中 | +0.10 |
-| 5 | #27 今日のオカルト度ゲージ | 日替わり装飾（タイポ 76→78 救済含む） | 小 | +0.08 |
+| 1 | **#54 Hero 画像最適化** | sizes 縮小 + WebP 化 + quality=70（1.8MB → 46KB、SI -2.1s 見込み） | 小 | +0.24 |
+| 2 | #55 コントラスト改善 | `text-muted` 明度上げ / tracking 調整 | 小 | +0.12 |
+| 3 | #56 a11y viewport・alt 精緻化 | maximum-scale 緩和 / alt 文言見直し | 中 | +0.12 |
 
-トップ5 実施で **85.2 → 86.0** 射程。外部承認（#17 / #24 / #15）到達で **88+** 射程。
+トップ3 実施で **86.35 → 86.85** 射程。外部承認（#17 / #24 / #15）到達で **88+** 射程。
+
+※ v3 トップ5 の #6 llms-full.txt / #24 検索オートサジェスト / #27 オカルト度ゲージ は 2026-04-22 早朝に実装済み（対応済みに移動）。#23 デザイン世界観 / #49 CSP enforce は Plan C で完了。
 
 ### 次セッション開始時に優先度高いもの
 
-**🔧 私で即着手（海斗さん負担なし）**
-- **#24 検索オートサジェスト**: 既存の `/search` に候補表示追加（工数中、合格ライン到達、加点 +0.13）
-- **#6 llms-full.txt 設置**: サイト全ページ要約を生成（工数小、AIO +4、加点 +0.32）
-- #49 CSP enforce 昇格: 本番 Report-Only 数日観測後、1 行変更（工数極小、加点 +0.15）
-- #23 デザイン世界観強化: カテゴリ色分け / 🔥新着マーク / キャラヒーロー画像（工数中、加点 +0.10）
-- #27 「今日のオカルト度」ゲージ: 日替わり装飾要素（工数小、タイポ救済含む、加点 +0.08）
+**🔧 Claude 側で即着手（海斗さん負担なし）**
+- **#54 Hero 画像最適化**: sizes + WebP + quality で即効改善（工数小、Performance モバイル 92→95+）
+- #55 コントラスト改善: `text-muted` 値調整（工数小）
+- #56 a11y viewport・alt 精緻化（工数中）
 
-**👤 海斗さんの外部アカウント作業**
-- #17 Amazon アソシエイト申請 → 審査通過後 `NEXT_PUBLIC_AMAZON_ASSOCIATE_TAG` を Vercel 環境変数に設定（UI 土台は実装済、加点 +0.42）
-- #24 メルマガ SaaS 選定（Buttondown / Substack / LINE公式 / Benchmark Email 等）→ 私が購読フォーム UI を埋込（加点 +0.28）
+**👤 海斗さんの外部アカウント作業（据え置き）**
+- #17 Amazon アソシエイト申請（UI 土台は実装済、加点 +0.42）
+- #24 メルマガ SaaS 選定 → 購読フォーム UI 埋込（加点 +0.28）
 - #15 AdSense 審査対応（GRIMOIRE 20 記事到達後、現 7 本、加点 +0.49）
 - #16 キャラIP 収益化（LINEスタンプ / BOOTH / note / Kindle）
 - #25 ショート動画 / #35 被リンク施策
 
 **📊 次セッション開始直後のおすすめアクション**
-1. **#24 検索オートサジェスト**で合格ライン突破（要改善 8→7 に）
-2. **#6 llms-full.txt 設置**で AIO 底上げ（加重インパクト大）
-3. 残りトップ5 を順次消化して 86 台突破を目指す
+1. **#54 Hero 画像最適化**で Performance 復帰（即効）
+2. **#55 / #56** で a11y 底上げ
+3. 87 到達後は外部承認（#17 / #24 / #15）待ち or #16 キャラIP 収益化着手
 
 ### 注意・既知事項
 - GA4 稼働中（ID `G-CDGLNNRHL3`、Cookie 同意後のみ発火、anonymize_ip=true）
-- `upgrade-insecure-requests` CSP 警告は Report-Only の仕様で無害（enforce #49 切替時に有効化）
+- **CSP enforce モード稼働中**（#49 完了、2026-04-22 切替）
 - `/contact` は Google Forms 依存のまま（#46 は据え置き評価）
-- **タイポグラフィは完全にシステムフォント**（v3 で next/font 削除、#47 は #4 パフォ優先で完全巻戻し、27. タイポ評価項目はスコア微減想定だが日本人ユーザーには違和感なし）
+- タイポグラフィは完全にシステムフォント（v3 で next/font 削除、#47 は #4 パフォ優先で完全巻戻し）
+- **Hero 背景画像は blur-6px + opacity-0.14 なので、quality 落としても視認上の差異はほぼなし**
 
 ### 開発環境メモ
 - Next.js 16.2.4 + React 19.2.4 + Tailwind 4
