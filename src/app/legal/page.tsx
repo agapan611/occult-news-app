@@ -81,12 +81,31 @@ export default function LegalPage() {
           <h3 className="font-bold text-foreground/90 mt-4 mb-1.5">収集する情報</h3>
           <p className="text-foreground/80 mb-3">
             本サイトは、サービス向上のため以下の情報を収集する場合があります。
+            いずれも Cookie 同意バナーで「同意する」を選択いただいた場合のみ発動し、個人情報（入力欄の内容など）は自動的にマスキングされます。
           </p>
           <ul className="list-disc pl-5 space-y-1 text-foreground/80 mb-4">
-            <li>アクセス解析ツール（Google Analytics等）によるアクセス情報</li>
-            <li>Cookieを用いた閲覧履歴・設定情報</li>
+            <li>
+              <strong className="text-foreground">Google Analytics 4</strong>
+              ：ページビュー数、遷移元、滞在時間、デバイス種別等の匿名アクセス解析（IP アドレスは匿名化）
+            </li>
+            <li>
+              <strong className="text-foreground">Microsoft Clarity</strong>
+              ：ヒートマップおよびセッション録画（マウス移動・クリック・スクロール等の操作パターンを UX 改善目的で分析。パスワード欄や個人情報入力欄は自動マスキング）
+            </li>
+            <li>Cookie を用いた閲覧履歴・設定情報</li>
             <li>お問い合わせ時にご記入いただいた情報（メール等）</li>
           </ul>
+          <p className="text-foreground/80 mb-4 text-xs">
+            Microsoft Clarity のプライバシー方針詳細:{" "}
+            <a
+              href="https://privacy.microsoft.com/ja-jp/privacystatement"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-cyan underline underline-offset-2"
+            >
+              Microsoft プライバシーステートメント
+            </a>
+          </p>
 
           <h3 className="font-bold text-foreground/90 mt-4 mb-1.5">広告について</h3>
           <p className="text-foreground/80 mb-3">
@@ -189,7 +208,7 @@ export default function LegalPage() {
         </section>
 
         <section className="mt-8 text-xs text-muted">
-          <p>最終更新日: 2026年4月19日</p>
+          <p>最終更新日: 2026年4月22日</p>
         </section>
       </main>
 

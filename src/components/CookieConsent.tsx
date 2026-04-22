@@ -63,8 +63,8 @@ export default function CookieConsent() {
             id="cookie-consent-desc"
             className="text-[11px] leading-relaxed text-foreground/80"
           >
-            当サイトでは将来的にアクセス解析のため Cookie・類似技術を使用する場合があります。
-            現在は匿名アクセス解析（Cookieless）のみ有効です。詳細は{" "}
+            「同意する」を押すと、Google Analytics 4（匿名アクセス解析）と Microsoft Clarity（ヒートマップ・セッション録画、個人情報は自動マスキング）が有効化されます。
+            「必要なもののみ」では解析ツールは発動しません。詳細は{" "}
             <Link
               href="/legal"
               className="underline underline-offset-2 hover:text-accent"
