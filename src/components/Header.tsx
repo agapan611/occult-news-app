@@ -6,18 +6,18 @@ export default function Header() {
   return (
     <header className="sticky top-0 z-50 border-b border-card-border bg-background/85 backdrop-blur-md">
       <div className="mx-auto flex h-14 max-w-lg items-center gap-3 px-4">
-        <Link href="/" className="flex items-center gap-2 shrink-0">
-          <div className="flex -space-x-2">
+        <Link href="/" aria-label="OCCULT WIRE トップへ" className="flex items-center gap-2 shrink-0">
+          <div className="flex -space-x-2" aria-hidden="true">
             <Image
               src="/shuna.png"
-              alt="シュナ"
+              alt=""
               width={28}
               height={28}
               className="rounded-full border-2 border-background z-10"
             />
             <Image
               src="/raika.png"
-              alt="ライカ"
+              alt=""
               width={28}
               height={28}
               className="rounded-full border-2 border-background"

@@ -54,7 +54,8 @@ export default function AboutPage() {
                 <div className="absolute -inset-3 rounded-full bg-accent/10 blur-xl" />
                 <Image
                   src={admin.icon}
-                  alt={admin.name}
+                  alt=""
+                  aria-hidden="true"
                   width={200}
                   height={200}
                   className="relative rounded-2xl border-2 border-accent/30"

@@ -49,12 +49,6 @@ Best Practices 96→100 到達（#49 CSP enforce 完了）
 
 ## 優先度: 中
 
-### 56. a11y: viewport / alt 属性精緻化（v4 評価由来）
-- viewport meta の `maximum-scale` を緩和（ズーム抑止は WCAG 違反）
-- `NewsThumbnail` / Hero 背景 / OGP 画像の alt 属性文言を精緻化
-- 装飾画像は `alt=""` + `aria-hidden`、情報画像は記事主題を含む alt に
-- 評価スコア見込み: 7. a11y 91→94（#55 と合算で 91→96 も視野）
-
 ### 15. AdSense審査対応（GRIMOIRE 20記事蓄積後）
 - **NEWS欄の陰謀論/数秘術カテゴリは審査リスク高**
 - 選択肢:
@@ -196,6 +190,23 @@ Best Practices 96→100 到達（#49 CSP enforce 完了）
 ---
 
 ## 対応済み
+
+### 2026-04-22 #56 a11y viewport・alt 精緻化
+- [x] **viewport の `maximumScale: 1` 削除**（`src/app/layout.tsx`）
+  - ユーザーのズームを妨げない → WCAG 1.4.4 Resize Text 違反を解消
+  - コメントで意図を明記（誤って再導入されないよう）
+- [x] **装飾目的のキャラアイコンを `alt=""` + `aria-hidden="true"` に**（10ファイル、12箇所）
+  - `Header.tsx`: サイトロゴ部分、Link に `aria-label="OCCULT WIRE トップへ"`
+  - `Footer.tsx`: シュナ/ライカアイコン（`<span>シュナ</span>` テキスト併記のため）
+  - `StoryCard.tsx` / `LatestGrimoire.tsx`: 著者アイコン + 著者名テキスト併記
+  - `grimoire/[id]/page.tsx`: 著者バイライン + 読了後の筆者立ち絵（Plan C で追加した部分も）
+  - `grimoire/author/[slug]/page.tsx`: プロフィールヘッダー
+  - `ArticleCard.tsx`: コメンターアイコン（「〇〇のひとこと/考察」併記）
+  - `not-found.tsx` / `error.tsx`: キャラ対話のアイコン
+  - `about/page.tsx`: 管理人大アイコン（`<h2>` 併記）
+- [x] **NewsThumbnail SVG は既に `aria-hidden="true"` 付き**（確認のみ）
+- [x] **Hero 背景画像は `alt=""` のまま維持**（既に装飾扱い）
+- 評価スコア見込み: 7. a11y 91→94（重複読み上げ解消 + WCAG 違反解消）
 
 ### 2026-04-22 #55 テキストコントラスト改善
 - [x] **`--color-muted` を zinc-500 (#71717a) → zinc-400 (#a1a1aa) に変更**
@@ -745,9 +756,9 @@ Best Practices 96→100 到達（#49 CSP enforce 完了）
 |---|---|---|---|---|---|
 | 1 | **#54 Hero 画像最適化** | sizes 縮小 + WebP 化 + quality=70（1.8MB → 46KB、SI -2.1s 見込み） | 小 | +0.24 | ✅ 完了 (18d9b72) |
 | 2 | **#55 コントラスト改善** | `--color-muted` を zinc-400 へ（4.22:1 → 7.74:1） | 小 | +0.12 | ✅ 完了 |
-| 3 | #56 a11y viewport・alt 精緻化 | maximum-scale 緩和 / alt 文言見直し | 中 | +0.12 | ⏳ 次 |
+| 3 | **#56 a11y viewport・alt 精緻化** | maximumScale 削除 + 装飾アイコン alt="" (12箇所) | 中 | +0.12 | ✅ 完了 |
 
-実施済み (#54 + #55) で **86.35 → 86.71** 射程。#56 実施でさらに **+0.12**。外部承認（#17 / #24 / #15）到達で **88+** 射程。
+全 3 タスク完了で **86.35 → 86.83** 射程（次回 PSI 実測で確認）。外部承認（#17 / #24 / #15）到達で **88+** 射程。
 
 ※ v3 トップ5 の #6 llms-full.txt / #24 検索オートサジェスト / #27 オカルト度ゲージ は 2026-04-22 早朝に実装済み（対応済みに移動）。#23 デザイン世界観 / #49 CSP enforce は Plan C で完了。
 
@@ -755,8 +766,9 @@ Best Practices 96→100 到達（#49 CSP enforce 完了）
 
 **🔧 Claude 側で即着手（海斗さん負担なし）**
 - ✅ #54 Hero 画像最適化: 完了（18d9b72）
-- ✅ #55 コントラスト改善: 完了
-- #56 a11y viewport・alt 精緻化（工数中、次の対応候補）
+- ✅ #55 コントラスト改善: 完了（e02978e）
+- ✅ #56 a11y viewport・alt 精緻化: 完了
+- 次: PSI 再測定で #54/#55/#56 の合算効果を検証（Playwright MCP）
 
 **👤 海斗さんの外部アカウント作業（据え置き）**
 - #17 Amazon アソシエイト申請（UI 土台は実装済、加点 +0.42）
@@ -768,8 +780,9 @@ Best Practices 96→100 到達（#49 CSP enforce 完了）
 **📊 次セッション開始直後のおすすめアクション**
 1. ✅ #54 Hero 画像最適化（完了）
 2. ✅ #55 コントラスト改善（完了）
-3. **#56 a11y viewport・alt 精緻化** で a11y 91→94 狙い
-4. 87 到達後は外部承認（#17 / #24 / #15）待ち or #16 キャラIP 収益化着手
+3. ✅ #56 a11y viewport・alt 精緻化（完了）
+4. **PSI 再測定**で合算効果確認 → v5 サイト評価
+5. 87 到達後は外部承認（#17 / #24 / #15）待ち or #16 キャラIP 収益化着手
 
 ### 注意・既知事項
 - GA4 稼働中（ID `G-CDGLNNRHL3`、Cookie 同意後のみ発火、anonymize_ip=true）

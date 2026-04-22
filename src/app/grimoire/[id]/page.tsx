@@ -202,17 +202,17 @@ export default async function StoryPage({
           className="mb-6 flex items-center gap-2 rounded-lg bg-card border border-card-border p-3 hover:bg-card-hover hover:border-accent/40 transition-colors"
         >
           {story.author === "both" ? (
-            <div className="flex -space-x-2">
+            <div className="flex -space-x-2" aria-hidden="true">
               <Image
                 src="/shuna.png"
-                alt="シュナ"
+                alt=""
                 width={36}
                 height={36}
                 className="rounded-full border border-card-border z-10"
               />
               <Image
                 src="/raika.png"
-                alt="ライカ"
+                alt=""
                 width={36}
                 height={36}
                 className="rounded-full border border-card-border"
@@ -221,7 +221,8 @@ export default async function StoryPage({
           ) : (
             <Image
               src={author.icon}
-              alt={author.name}
+              alt=""
+              aria-hidden="true"
               width={36}
               height={36}
               className="rounded-full border border-card-border"
@@ -310,17 +311,17 @@ export default async function StoryPage({
         {/* 著者立ち絵 + 締めセリフ（読了後の余韻） */}
         <section className="mt-10 border-t border-card-border pt-8 text-center">
           {story.author === "both" ? (
-            <div className="mx-auto mb-4 flex justify-center -space-x-6">
+            <div className="mx-auto mb-4 flex justify-center -space-x-6" aria-hidden="true">
               <Image
                 src="/shuna.png"
-                alt="シュナ"
+                alt=""
                 width={104}
                 height={104}
                 className="rounded-full border-2 border-accent/40 bg-background shadow-[0_0_32px_-8px_rgba(139,92,246,0.5)] z-10"
               />
               <Image
                 src="/raika.png"
-                alt="ライカ"
+                alt=""
                 width={104}
                 height={104}
                 className="rounded-full border-2 border-cyan/40 bg-background shadow-[0_0_32px_-8px_rgba(6,182,212,0.5)]"
@@ -329,7 +330,8 @@ export default async function StoryPage({
           ) : (
             <Image
               src={author.icon}
-              alt={author.name}
+              alt=""
+              aria-hidden="true"
               width={128}
               height={128}
               className={`mx-auto mb-4 rounded-full border-2 bg-background ${author.ringClass}`}

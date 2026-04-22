@@ -21,7 +21,8 @@ export default function Footer() {
             >
               <Image
                 src="/shuna.png"
-                alt="シュナ"
+                alt=""
+                aria-hidden="true"
                 width={32}
                 height={32}
                 className="rounded-full border border-card-border group-hover:border-accent transition-colors"
@@ -35,7 +36,8 @@ export default function Footer() {
             >
               <Image
                 src="/raika.png"
-                alt="ライカ"
+                alt=""
+                aria-hidden="true"
                 width={32}
                 height={32}
                 className="rounded-full border border-card-border group-hover:border-cyan transition-colors"

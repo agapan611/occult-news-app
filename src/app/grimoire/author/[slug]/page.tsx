@@ -218,17 +218,17 @@ export default async function AuthorPage({
         <div className="border-b border-card-border px-4 py-6">
           <div className="flex items-start gap-4 mb-4">
             {author === "both" ? (
-              <div className="flex -space-x-3 shrink-0">
+              <div className="flex -space-x-3 shrink-0" aria-hidden="true">
                 <Image
                   src="/shuna.png"
-                  alt="シュナ"
+                  alt=""
                   width={64}
                   height={64}
                   className="rounded-full border border-card-border z-10"
                 />
                 <Image
                   src="/raika.png"
-                  alt="ライカ"
+                  alt=""
                   width={64}
                   height={64}
                   className="rounded-full border border-card-border"
@@ -237,7 +237,8 @@ export default async function AuthorPage({
             ) : (
               <Image
                 src={info.icon}
-                alt={info.name}
+                alt=""
+                aria-hidden="true"
                 width={72}
                 height={72}
                 className="rounded-full border border-card-border shrink-0"

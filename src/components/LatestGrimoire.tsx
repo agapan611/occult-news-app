@@ -46,17 +46,17 @@ export default function LatestGrimoire({ stories }: { stories: Story[] }) {
                 {/* アイコン */}
                 <div className="mb-3 flex items-center gap-1.5">
                   {story.author === "both" ? (
-                    <div className="flex -space-x-2">
+                    <div className="flex -space-x-2" aria-hidden="true">
                       <Image
                         src="/shuna.png"
-                        alt="シュナ"
+                        alt=""
                         width={24}
                         height={24}
                         className="rounded-full border border-card-border z-10"
                       />
                       <Image
                         src="/raika.png"
-                        alt="ライカ"
+                        alt=""
                         width={24}
                         height={24}
                         className="rounded-full border border-card-border"
@@ -65,7 +65,8 @@ export default function LatestGrimoire({ stories }: { stories: Story[] }) {
                   ) : (
                     <Image
                       src={author.icon}
-                      alt={author.name}
+                      alt=""
+                      aria-hidden="true"
                       width={24}
                       height={24}
                       className="rounded-full border border-card-border"

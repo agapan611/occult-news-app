@@ -33,18 +33,20 @@ export default function NotFound() {
             <div className="flex items-center gap-2">
               <Image
                 src="/shuna.png"
-                alt="シュナ"
+                alt=""
+                aria-hidden="true"
                 width={48}
                 height={48}
                 className="rounded-full border border-card-border"
               />
               <span className="text-xs text-accent">シュナ</span>
             </div>
-            <span className="text-muted/40">×</span>
+            <span className="text-muted/40" aria-hidden="true">×</span>
             <div className="flex items-center gap-2">
               <Image
                 src="/raika.png"
-                alt="ライカ"
+                alt=""
+                aria-hidden="true"
                 width={48}
                 height={48}
                 className="rounded-full border border-card-border"

@@ -122,7 +122,8 @@ export default function ArticleCard({
         <div className="flex items-start gap-2.5">
           <Image
             src={commenter.icon}
-            alt={commenter.name}
+            alt=""
+            aria-hidden="true"
             width={28}
             height={28}
             className="rounded-full border border-accent/30 shrink-0 mt-0.5"

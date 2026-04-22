@@ -74,17 +74,17 @@ export default function StoryCard({ story }: { story: Story }) {
       {/* 著者 + 日付 */}
       <div className="flex items-center gap-2">
         {story.author === "both" ? (
-          <div className="flex -space-x-2">
+          <div className="flex -space-x-2" aria-hidden="true">
             <Image
               src="/shuna.png"
-              alt="シュナ"
+              alt=""
               width={22}
               height={22}
               className="rounded-full border border-card-border z-10"
             />
             <Image
               src="/raika.png"
-              alt="ライカ"
+              alt=""
               width={22}
               height={22}
               className="rounded-full border border-card-border"
@@ -93,7 +93,8 @@ export default function StoryCard({ story }: { story: Story }) {
         ) : (
           <Image
             src={author.icon}
-            alt={author.name}
+            alt=""
+            aria-hidden="true"
             width={22}
             height={22}
             className="rounded-full border border-card-border"
