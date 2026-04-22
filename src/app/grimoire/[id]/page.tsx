@@ -40,7 +40,7 @@ const authorInfo: Record<
     slug: "raika",
     leadlineClass: "text-cyan/90",
     ringClass: "border-cyan/40 shadow-[0_0_32px_-8px_rgba(6,182,212,0.5)]",
-    closingLine: "どう、ゾクッとした？ わたしは大満足！",
+    closingLine: "読み終えたか。判断は、あんた次第だ。",
   },
   both: {
     name: "シュナ & ライカ",
@@ -337,7 +337,7 @@ export default async function StoryPage({
               className={`mx-auto mb-4 rounded-full border-2 bg-background ${author.ringClass}`}
             />
           )}
-          <p className={`text-sm italic leading-relaxed ${author.leadlineClass}`}>
+          <p className={`text-base leading-relaxed ${author.leadlineClass}`}>
             {author.name}「{author.closingLine}」
           </p>
           <p className="mt-2 text-[11px] tracking-[0.2em] text-muted">
