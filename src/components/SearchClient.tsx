@@ -209,7 +209,7 @@ export default function SearchClient({ items, initialQuery = "" }: Props) {
                         {item.title}
                       </span>
                       {item.leadline && (
-                        <span className="block truncate text-[10px] italic text-foreground/60">
+                        <span className="block truncate text-[10px] italic text-foreground/70">
                           {item.leadline}
                         </span>
                       )}

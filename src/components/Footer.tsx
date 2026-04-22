@@ -31,7 +31,7 @@ export default function Footer() {
               />
               <span className="text-[11px]">シュナ</span>
             </Link>
-            <span className="text-muted/40">×</span>
+            <span className="text-muted/40" aria-hidden="true">×</span>
             <Link
               href="/grimoire/author/raika"
               data-ga-event="click_footer_author"

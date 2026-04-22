@@ -109,7 +109,7 @@ export default function ArticleCard({
       </div>
 
       {/* 記事概要（短縮版） */}
-      <p className="text-[13px] leading-relaxed text-foreground/60 mb-3 line-clamp-2">
+      <p className="text-[13px] leading-relaxed text-foreground/70 mb-3 line-clamp-2">
         {article.summary}
       </p>
 
