@@ -4,10 +4,12 @@ import JsonLd from "@/components/JsonLd";
 import ScrollToTop from "@/components/ScrollToTop";
 import CookieConsent from "@/components/CookieConsent";
 import GoogleAnalytics from "@/components/GoogleAnalytics";
+import MicrosoftClarity from "@/components/MicrosoftClarity";
 import AnalyticsListener from "@/components/AnalyticsListener";
 import "./globals.css";
 
 const GA_ID = process.env.NEXT_PUBLIC_GA_ID;
+const CLARITY_PROJECT_ID = process.env.NEXT_PUBLIC_CLARITY_PROJECT_ID;
 
 const SITE_URL = "https://occult.ainiwa.jp";
 const DEFAULT_TITLE = "OCCULT WIRE - オカルト視点ニュース";
@@ -122,6 +124,9 @@ export default function RootLayout({
         <CookieConsent />
         <Analytics />
         {GA_ID && <GoogleAnalytics gaId={GA_ID} />}
+        {CLARITY_PROJECT_ID && (
+          <MicrosoftClarity projectId={CLARITY_PROJECT_ID} />
+        )}
         <AnalyticsListener />
       </body>
     </html>

@@ -17,6 +17,8 @@ export default function Footer() {
           <div className="flex items-center justify-center gap-4">
             <Link
               href="/grimoire/author/shuna"
+              data-ga-event="click_footer_author"
+              data-ga-label="shuna"
               className="group flex items-center gap-2 hover:text-accent transition-colors"
             >
               <Image
@@ -32,6 +34,8 @@ export default function Footer() {
             <span className="text-muted/40">×</span>
             <Link
               href="/grimoire/author/raika"
+              data-ga-event="click_footer_author"
+              data-ga-label="raika"
               className="group flex items-center gap-2 hover:text-cyan transition-colors"
             >
               <Image
@@ -72,34 +76,86 @@ export default function Footer() {
 
         {/* ナビゲーション */}
         <nav className="flex flex-wrap justify-center gap-x-4 gap-y-2 text-center">
-          <Link href="/grimoire/daily" prefetch={false} className="hover:text-accent transition-colors">
+          <Link
+            href="/grimoire/daily"
+            prefetch={false}
+            data-ga-event="click_footer_nav"
+            data-ga-label="daily"
+            className="hover:text-accent transition-colors"
+          >
             今日の1冊
           </Link>
-          <Link href="/grimoire/random" prefetch={false} className="hover:text-accent transition-colors">
+          <Link
+            href="/grimoire/random"
+            prefetch={false}
+            data-ga-event="click_footer_nav"
+            data-ga-label="random"
+            className="hover:text-accent transition-colors"
+          >
             ランダム
           </Link>
-          <Link href="/contact" className="hover:text-accent transition-colors">
+          <Link
+            href="/contact"
+            data-ga-event="click_footer_nav"
+            data-ga-label="contact"
+            className="hover:text-accent transition-colors"
+          >
             お問い合わせ
           </Link>
-          <Link href="/legal" className="hover:text-accent transition-colors">
+          <Link
+            href="/legal"
+            data-ga-event="click_footer_nav"
+            data-ga-label="legal"
+            className="hover:text-accent transition-colors"
+          >
             運営・プライバシー
           </Link>
-          <Link href="/terms" className="hover:text-accent transition-colors">
+          <Link
+            href="/terms"
+            data-ga-event="click_footer_nav"
+            data-ga-label="terms"
+            className="hover:text-accent transition-colors"
+          >
             利用規約
           </Link>
-          <Link href="/legal#disclaimer" className="hover:text-accent transition-colors">
+          <Link
+            href="/legal#disclaimer"
+            data-ga-event="click_footer_nav"
+            data-ga-label="disclaimer"
+            className="hover:text-accent transition-colors"
+          >
             免責事項
           </Link>
-          <Link href="/about" className="hover:text-accent transition-colors">
+          <Link
+            href="/about"
+            data-ga-event="click_footer_nav"
+            data-ga-label="about"
+            className="hover:text-accent transition-colors"
+          >
             管理人
           </Link>
-          <Link href="/search" className="hover:text-accent transition-colors">
+          <Link
+            href="/search"
+            data-ga-event="click_footer_nav"
+            data-ga-label="search"
+            className="hover:text-accent transition-colors"
+          >
             検索
           </Link>
-          <Link href="/sitemap" className="hover:text-accent transition-colors">
+          <Link
+            href="/sitemap"
+            data-ga-event="click_footer_nav"
+            data-ga-label="sitemap"
+            className="hover:text-accent transition-colors"
+          >
             サイトマップ
           </Link>
-          <a href="/feed.xml" className="hover:text-accent transition-colors">
+          <a
+            href="/feed.xml"
+            data-ga-event="click_footer_nav"
+            data-ga-label="rss"
+            className="hover:text-accent transition-colors"
+          >
             RSS
           </a>
         </nav>

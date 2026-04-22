@@ -4,6 +4,7 @@ import Link from "next/link";
 import { useState } from "react";
 import type { Story, StoryAuthor } from "@/lib/stories";
 import StoryCard from "./StoryCard";
+import { trackEvent } from "@/lib/analytics";
 
 type FilterKey = "all" | StoryAuthor;
 
@@ -33,6 +34,8 @@ export default function StoryFilter({ stories }: { stories: Story[] }) {
           <Link
             href="/grimoire/daily"
             prefetch={false}
+            data-ga-event="click_grimoire_special"
+            data-ga-label="daily"
             className="inline-block rounded-full border border-accent/40 bg-accent/10 px-4 py-1.5 text-[11px] text-accent tracking-wider hover:bg-accent/20 hover:border-accent/60 transition-colors"
           >
             今日の1冊 &rarr;
@@ -40,6 +43,8 @@ export default function StoryFilter({ stories }: { stories: Story[] }) {
           <Link
             href="/grimoire/random"
             prefetch={false}
+            data-ga-event="click_grimoire_special"
+            data-ga-label="random"
             className="inline-block rounded-full border border-cyan/40 bg-cyan/10 px-4 py-1.5 text-[11px] text-cyan tracking-wider hover:bg-cyan/20 hover:border-cyan/60 transition-colors"
           >
             ランダム &rarr;
@@ -56,7 +61,10 @@ export default function StoryFilter({ stories }: { stories: Story[] }) {
               className={`flex-1 py-2.5 text-xs font-bold transition-colors ${
                 filter === f.key ? "text-accent border-b-2 border-accent" : "text-muted"
               }`}
-              onClick={() => setFilter(f.key)}
+              onClick={() => {
+                setFilter(f.key);
+                trackEvent("grimoire_filter_change", { event_label: f.key });
+              }}
             >
               {f.label}
             </button>

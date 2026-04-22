@@ -41,6 +41,9 @@ export default function StoryCard({ story }: { story: Story }) {
   return (
     <Link
       href={`/grimoire/${story.id}`}
+      data-ga-event="click_grimoire_card"
+      data-ga-label={story.id}
+      data-ga-category={story.category}
       className="relative block border-b border-card-border px-4 py-5 pl-5 active:bg-white/[0.02] transition-colors"
     >
       {/* 著者別アクセントストライプ（左端） */}

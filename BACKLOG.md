@@ -169,15 +169,20 @@ Best Practices 96→100 到達（#49 CSP enforce 完了）
 - 2026-04-21 再評価でも**効率順 2位**指定（工数極小、+0.24）
 - 注意: #50 の GA4 ホストは既に CSP 許可リストに追加済
 
-### 50. 分析・計測の拡張（残: イベント計測 / ヒートマップ / GTM / Sentry）
-- 2026-04-21 GA4 実運用化完了（下部参照）、本項目は残の拡張
-- 失点残: ヒートマップなし／主要イベント計測なし／GTM経由化なし／Sentry等なし
-- 候補:
-  1. `gtag('event', ...)` でイベント計測（Xフォロークリック、スクロール深度、アフィリエイトリンククリック等）
-  2. GTM 経由化（GA4 を GTM タグとして管理、イベント追加を GA UI で可能に）
-  3. Microsoft Clarity 等でヒートマップ（無料 + Cookieless 選択肢あり）
-  4. Sentry（ランタイムエラー計測、海斗さん側 Sentry アカウント必要）
-- 注意: ヒートマップ/GTM 追加時は CSP 許可リスト拡張要
+### 50. 分析・計測の拡張（残: Clarity 本稼働 / GTM / Sentry）
+- 2026-04-21 GA4 実運用化完了
+- 2026-04-22 イベント計測拡張 + Microsoft Clarity コード基盤整備（下部参照）
+- 失点残: Clarity 本稼働未／GTM経由化なし／Sentry等なし
+- **Clarity 稼働に必要な残手順（海斗さん作業）**:
+  1. https://clarity.microsoft.com/ でアカウント作成 + プロジェクト作成（無料）
+  2. プロジェクト ID を Vercel 環境変数 `NEXT_PUBLIC_CLARITY_PROJECT_ID` に設定
+  3. `src/app/legal/page.tsx` の Cookie 記載に「Microsoft Clarity（ヒートマップ・セッション録画）」追記
+  4. `src/components/CookieConsent.tsx` の文言を「匿名解析のみ」から実態に合わせて更新
+  5. 再デプロイで発火開始
+- 候補（残）:
+  1. GTM 経由化（GA4 を GTM タグとして管理、イベント追加を GA UI で可能に）
+  2. Sentry（ランタイムエラー計測、海斗さん側 Sentry アカウント必要）
+- 注意: ヒートマップ/GTM 追加時は CSP 許可リスト拡張要（Clarity 分は 2026-04-22 追加済）
 
 ---
 
@@ -190,6 +195,27 @@ Best Practices 96→100 到達（#49 CSP enforce 完了）
 ---
 
 ## 対応済み
+
+### 2026-04-22 #50 分析・計測拡張（イベント計測 + MS Clarity 基盤）
+- [x] **gtag イベント計測の拡張**（既存の `AnalyticsListener` 基盤に `data-ga-event` 属性を追加するだけで対応）
+  - NEWS 元記事クリック（`click_news_source` / ArticleCard）
+  - GRIMOIRE カードクリック（`click_grimoire_card` / StoryCard + LatestGrimoire）
+  - GRIMOIRE「もっと見る」（`click_grimoire_more` / LatestGrimoire の latest_header・latest_hscroll）
+  - Header X フォロー（`click_x_follow` / header）
+  - Header 検索アイコン（`click_header_nav` / search）
+  - Header 管理人リンク（`click_header_nav` / about）
+  - Footer 著者リンク（`click_footer_author` / shuna・raika）
+  - Footer ナビゲーション 9 種（`click_footer_nav` / daily・random・contact・legal・terms・disclaimer・about・search・sitemap・rss）
+  - GRIMOIRE 一覧「今日の1冊」「ランダム」ボタン（`click_grimoire_special` / daily・random）
+  - GRIMOIRE 一覧 フィルタタブ（`grimoire_filter_change` / all・shuna・raika・both、trackEvent 直接呼び出し）
+  - サイト内検索: 検索実行 debounce 計測（`site_search`、**クエリ長とヒット件数のみ送信、検索語そのものは送らない**＝個人情報配慮）
+  - サイト内検索: 候補クリック + 結果カードクリック（`click_search_result` / item.id + item.kind）
+- [x] **Microsoft Clarity 導入の基盤整備**（本稼働は海斗さんアクション待ち）
+  - `src/components/MicrosoftClarity.tsx` 新規作成（GoogleAnalytics と同じ Cookie 同意連動パターン）
+  - `src/app/layout.tsx` に `NEXT_PUBLIC_CLARITY_PROJECT_ID` が設定されている場合のみ発火するよう組込
+  - `next.config.ts` の CSP に `https://www.clarity.ms` + `https://*.clarity.ms` を `script-src` / `connect-src` 両方に追加（enforce モードで稼働中なので追加必須）
+- [x] **build 確認**（61 ページ生成、TypeScript エラーなし）
+- 評価スコア見込み: 18. 分析・計測 85→88（gtag イベント計測分、+0.06）、Clarity 稼働後さらに +0.04（→ 合計 +0.10）
 
 ### 2026-04-22 #56 a11y viewport・alt 精緻化
 - [x] **viewport の `maximumScale: 1` 削除**（`src/app/layout.tsx`）
@@ -737,6 +763,11 @@ Best Practices 96→100 到達（#49 CSP enforce 完了）
 ### 今日の実績（2026-04-22 通算）
 - Plan C（A-3 ノイズ / A-1 NEWS 色 / A-2 NEW バッジ / B-1 Hero / B-2 筆者立ち絵）実装
 - #49 CSP enforce 昇格 → Best Practices 96→100 到達
+- #54 Hero 画像最適化（1.8MB→46.7KB WebP）
+- #55 コントラスト改善（`--color-muted` zinc-500→zinc-400、4.22:1→7.74:1）
+- #56 a11y viewport・alt 精緻化（maximumScale 削除 + 装飾アイコン 12箇所 alt="" 化）
+- #50 イベント計測拡張（data-ga-event 計 10+ イベント追加、検索実行・結果クリック計測）
+- #50 Microsoft Clarity 基盤整備（CSP 許可済、本稼働は海斗さんアクション待ち）
 - サイト評価 v4: **86.35 / 100**（v3 85.2 → +1.15）
 - 評価ファイル: `~/.claude/skills/site-evaluation/results/occult-wire/2026-04-22.md`
 
@@ -767,10 +798,12 @@ Best Practices 96→100 到達（#49 CSP enforce 完了）
 **🔧 Claude 側で即着手（海斗さん負担なし）**
 - ✅ #54 Hero 画像最適化: 完了（18d9b72）
 - ✅ #55 コントラスト改善: 完了（e02978e）
-- ✅ #56 a11y viewport・alt 精緻化: 完了
+- ✅ #56 a11y viewport・alt 精緻化: 完了（979a32a）
+- ✅ #50 イベント計測拡張 + Clarity 基盤整備: 完了
 - 次: PSI 再測定で #54/#55/#56 の合算効果を検証（Playwright MCP）
 
 **👤 海斗さんの外部アカウント作業（据え置き）**
+- **#50 Microsoft Clarity 本稼働**（アカウント作成 + 環境変数設定 + legal/CookieConsent 文言更新、加点 +0.04）
 - #17 Amazon アソシエイト申請（UI 土台は実装済、加点 +0.42）
 - #24 メルマガ SaaS 選定 → 購読フォーム UI 埋込（加点 +0.28）
 - #15 AdSense 審査対応（GRIMOIRE 20 記事到達後、現 7 本、加点 +0.49）
@@ -781,8 +814,9 @@ Best Practices 96→100 到達（#49 CSP enforce 完了）
 1. ✅ #54 Hero 画像最適化（完了）
 2. ✅ #55 コントラスト改善（完了）
 3. ✅ #56 a11y viewport・alt 精緻化（完了）
-4. **PSI 再測定**で合算効果確認 → v5 サイト評価
-5. 87 到達後は外部承認（#17 / #24 / #15）待ち or #16 キャラIP 収益化着手
+4. ✅ #50 イベント計測拡張 + Clarity 基盤整備（完了）
+5. **PSI 再測定**で合算効果確認 → v5 サイト評価
+6. 87 到達後は外部承認（#17 / #24 / #15 / #50 Clarity）待ち or #16 キャラIP 収益化着手
 
 ### 注意・既知事項
 - GA4 稼働中（ID `G-CDGLNNRHL3`、Cookie 同意後のみ発火、anonymize_ip=true）

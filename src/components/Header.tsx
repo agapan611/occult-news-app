@@ -32,6 +32,8 @@ export default function Header() {
         <Link
           href="/search"
           aria-label="サイト内検索"
+          data-ga-event="click_header_nav"
+          data-ga-label="search"
           className="shrink-0 text-muted hover:text-accent transition-colors"
         >
           <svg
@@ -54,6 +56,8 @@ export default function Header() {
           target="_blank"
           rel="noopener noreferrer"
           aria-label="OCCULT WIRE on X"
+          data-ga-event="click_x_follow"
+          data-ga-label="header"
           className="shrink-0 text-muted hover:text-accent transition-colors"
         >
           <svg
@@ -68,6 +72,8 @@ export default function Header() {
         </a>
         <Link
           href="/about"
+          data-ga-event="click_header_nav"
+          data-ga-label="about"
           className="shrink-0 text-[11px] text-muted hover:text-accent transition-colors"
         >
           管理人

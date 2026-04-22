@@ -92,6 +92,9 @@ export default function ArticleCard({
               href={article.sourceUrl}
               target="_blank"
               rel="noopener noreferrer"
+              data-ga-event="click_news_source"
+              data-ga-label={sourceHost}
+              data-ga-category={article.category}
               className="text-cyan underline underline-offset-2 hover:text-cyan/70"
             >
               元記事（{sourceHost}）&rarr;

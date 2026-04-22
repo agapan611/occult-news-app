@@ -11,6 +11,7 @@ import {
   type KeyboardEvent,
 } from "react";
 import type { SearchItem } from "@/lib/search-index";
+import { trackEvent } from "@/lib/analytics";
 
 type Props = {
   items: SearchItem[];
@@ -71,7 +72,26 @@ export default function SearchClient({ items, initialQuery = "" }: Props) {
     return () => document.removeEventListener("mousedown", onDocClick);
   }, []);
 
+  // 検索実行の計測（debounce 800ms、クエリ長とヒット件数のみ送信 = 個人情報配慮）
+  useEffect(() => {
+    if (trimmed.length < 2) return;
+    const id = setTimeout(() => {
+      trackEvent("site_search", {
+        event_label: `len_${trimmed.length}`,
+        value: allResults.length,
+      });
+    }, 800);
+    return () => clearTimeout(id);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [trimmed]);
+
   function navigateToItem(item: SearchItem) {
+    // 候補・結果クリックの計測（検索語そのものは送らず、長さだけ送る）
+    trackEvent("click_search_result", {
+      event_label: item.id,
+      event_category: item.kind,
+      value: trimmed.length,
+    });
     if (item.kind === "news") {
       window.open(item.url, "_blank", "noopener,noreferrer");
     } else {
@@ -295,6 +315,9 @@ function ResultCard({ item, matches }: { item: SearchItem; matches: Matches }) {
       href={item.url}
       target="_blank"
       rel="noopener noreferrer"
+      data-ga-event="click_search_result"
+      data-ga-label={item.id}
+      data-ga-category={item.kind}
       className="group block rounded-lg border border-card-border bg-card/60 p-3 hover:border-cyan/60 transition-colors"
     >
       {content}
@@ -302,6 +325,9 @@ function ResultCard({ item, matches }: { item: SearchItem; matches: Matches }) {
   ) : (
     <Link
       href={item.url}
+      data-ga-event="click_search_result"
+      data-ga-label={item.id}
+      data-ga-category={item.kind}
       className="group block rounded-lg border border-card-border bg-card/60 p-3 hover:border-accent/60 transition-colors"
     >
       {content}

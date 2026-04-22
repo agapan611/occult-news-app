@@ -26,6 +26,8 @@ export default function LatestGrimoire({ stories }: { stories: Story[] }) {
         </div>
         <Link
           href="/grimoire"
+          data-ga-event="click_grimoire_more"
+          data-ga-label="latest_header"
           className="text-[11px] text-accent hover:text-accent-dim transition-colors"
         >
           すべて &rsaquo;
@@ -41,6 +43,9 @@ export default function LatestGrimoire({ stories }: { stories: Story[] }) {
               <Link
                 key={story.id}
                 href={`/grimoire/${story.id}`}
+                data-ga-event="click_grimoire_card"
+                data-ga-label={story.id}
+                data-ga-category={story.category}
                 className="group relative block w-[220px] shrink-0 rounded-xl border border-card-border bg-card p-4 transition-all active:scale-[0.98] hover:border-accent/40"
               >
                 {/* アイコン */}
@@ -95,6 +100,8 @@ export default function LatestGrimoire({ stories }: { stories: Story[] }) {
           {/* もっと見るカード */}
           <Link
             href="/grimoire"
+            data-ga-event="click_grimoire_more"
+            data-ga-label="latest_hscroll"
             className="flex w-[120px] shrink-0 items-center justify-center rounded-xl border border-dashed border-accent/30 bg-transparent text-center transition-colors hover:border-accent/60"
           >
             <span className="text-xs text-accent font-bold tracking-wider">
