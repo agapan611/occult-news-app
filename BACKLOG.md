@@ -13,17 +13,20 @@
 
 ## サイト評価マージ情報
 
-最新評価: **2026-04-22（86.35 / 100、前回 +1.15）**
-前回評価: 2026-04-21 v3（85.2 / 100）
+最新評価: **2026-04-22 v5（87.42 / 100、v4 +1.07、v1 +5.42）**
+前回評価: 2026-04-22 v4（86.35 / 100）
 評価ファイル:
+- `~/.claude/skills/site-evaluation/results/occult-wire/2026-04-22_v5.md`
 - `~/.claude/skills/site-evaluation/results/occult-wire/2026-04-22.md`
-- `~/.claude/skills/site-evaluation/results/occult-wire/2026-04-21_v3.md`
 
-2026-04-22 合格項目 25→26 / 33（新規合格: #24 検索 79→88）
-Best Practices 96→100 到達（#49 CSP enforce 完了）
+v5 合格項目 26→28 / 33（新規合格: #27 タイポ 76→84 / #14 法務 77→80）
+PSI 実測: Perf 88(mobile)/99(desktop)、A11y 93→96、BP 100、SEO 100
+主な伸び: #19 画像 86→97(+11) / #27 タイポ(+8) / #18 Analytics 85→92(+7) / #47 フォント preload 削減で記事 Perf 93 確認
+退行ゼロ（20 コミットで v1 82.00 → v5 87.42）
 残最大ボトルネック: 9. 収益動線（#17 アフィリ申請 / #24 メルマガ / #15 AdSense が外部承認待ち）
 
-再評価由来の新規タスク: #54（Hero 画像最適化）/ #55（コントラスト）/ #56（a11y viewport・alt）
+v5 再評価由来の新規タスク: #57（Giscus コメント）/ #58（ライトモード OS 追従）/ #59（フォーム内製化）/ #60（a11y コントラスト残）/ #61（未使用JS 遅延）
+#54（Hero 画像最適化）は v5 で効果確認済み → 対応済みへ移動
 
 ---
 
@@ -35,15 +38,31 @@ Best Practices 96→100 到達（#49 CSP enforce 完了）
 
 ## 優先度: 高（今月中に着手）
 
-### 54. Hero 画像最適化（v4 評価由来・最優先）
-- **背景**: 2026-04-22 v4 PSI 実測で `/public/shuna-raika.png` が `next/image` 最適化の効果を享受できておらず、モバイルで約 53 KiB 無駄、Speed Index +2.1 秒
-- 原因: Hero の表示幅は max-w-lg = 512px までだが `sizes="(max-width: 640px) 100vw, 640px"` で大きめに取っている + PNG のまま
+### 57. コメント欄（Giscus 統合）
+- **v5 評価由来**、現在 GRIMOIRE 記事下にプレースホルダ
+- GitHub Discussions を DB 代わりに無料で UGC を発火させる
+- 工数: 2-3h（Giscus 公式設定 → `<Giscus>` コンポーネント追加）
+- 見込み: 33. コメント 0→60（加重加点 **+0.44**、v5 トップ5 最大効果）
+- 注意: GitHub アカウント必須なのでコメント数は多くない想定、E-E-A-T ブースト目的
+
+### 58. ライトモード OS 追従切替
+- **v5 評価由来**、`#23 デザインの世界観強化` のダークモード追従と対をなす
+- 現状: ダークモード固定、`prefers-color-scheme: light` でもダーク表示
+- 対応案: globals.css に light variant を追加、Tailwind dark: prefix 切替
+- 工数: 3-4h（全ページの色トークン洗い直し）
+- 見込み: 30. UX 7x→80、加重加点 **+0.29**
+- 注意: サイトの世界観はダーク主体。ライトは「昼間の電車で読む用」ポジション
+
+### 59. お問い合わせフォーム内製化（React Hook Form + Supabase）
+- **v5 評価由来**、`#46 フォーム・CV設計` を具体化
+- 現状: `/contact` は mailto: + Google Forms 依存
 - 対応案:
-  1. `sizes` を `(max-width: 640px) 100vw, 512px` に縮小
-  2. `quality={70}` を明示（背景の blur-6px なので品質落としても見た目変化なし）
-  3. ソース画像を WebP or AVIF に差し替え（`shuna-raika.webp`）
-  4. それでも重い場合は Hero 背景を SVG グラデ + 透かしの軽量版に置換する選択肢
-- 評価スコア見込み: 4. パフォーマンス モバイル 92→95+、15. 読了体験 CLS改善（加重加点 +0.24）
+  1. Supabase の `contacts` テーブル作成（name / email / message / created_at）
+  2. React Hook Form + zod で型付きバリデーション
+  3. rate limit は Upstash Redis か Vercel の built-in Edge Config
+  4. 送信後 shunaraika@gmail.com へ webhook 通知（Resend 無料枠）
+- 工数: 半日〜1日
+- 見込み: 23. コミュニケーション 77→85、加重加点 **+0.18**
 
 ---
 
@@ -103,6 +122,20 @@ Best Practices 96→100 到達（#49 CSP enforce 完了）
   - ただしCDNが二重になるのでキャッシュ戦略に注意
 - **トリガー**: 実際にアクセスログで不審なUA・帯域スパイクが観測されたら着手
 - 現状: アクセス少・立ち上げ直後なので様子見
+
+### 60. a11y コントラスト残（PSI 警告消化）
+- **v5 評価由来**、PSI Accessibility 96 のうち残2失点のコントラスト警告
+- 対象: Footer 極小テキスト（著作権表記周り）の #888 相当
+- 対応: `text-foreground/50` 等を `text-foreground/65` 以上へ昇格 or CSS 変数 `--color-muted-subtle` 新設
+- 工数: 30 分
+- 見込み: 7. a11y 93→96、加重加点 **+0.14**
+
+### 61. 未使用 JS 27 KiB の dynamic import 化
+- **v5 評価由来**、PSI insight 「Unused JavaScript 27 KiB」警告
+- 候補: Hero 配下のスクロール駆動要素（OccultLevelGauge など）を `dynamic(..., { ssr: false })` で遅延
+- 工数: 1h
+- 見込み: 4. パフォーマンス mobile 88→91、加重加点 **+0.08**
+- 注意: LCP 悪化させないよう、Above-the-fold は遅延しない
 
 ---
 
@@ -195,6 +228,25 @@ Best Practices 96→100 到達（#49 CSP enforce 完了）
 ---
 
 ## 対応済み
+
+### 2026-04-22 v5 #54 Hero 画像最適化 + サイト再評価（v5、5回目実施）
+- [x] **#54 Hero 画像 WebP 化**
+  - `/public/shuna-raika.png` → `shuna-raika-hero.webp` に差し替え（97% サイズ削減）
+  - `Hero.tsx` の `next/image` で `quality={70}` 明示、`sizes="(max-width: 640px) 100vw, 512px"` に縮小
+  - **実測効果**:
+    - Speed Index モバイル **4.3s → 2.3s**（-2.0s）
+    - Speed Index デスクトップ **-0.5s**
+    - PSI Insight「Image delivery」−53 KiB → −25 KiB（半減）
+  - 評価スコア実測: 19. 画像 86→**97** (+11)、4. Performance モバイル 86→88
+- [x] **site-evaluation スキル 5 回目実施（v5）**
+  - 評価ファイル: `~/.claude/skills/site-evaluation/results/occult-wire/2026-04-22_v5.md`
+  - 総合 **87.42 / 100**（v4 +1.07、v1 +5.42、20 コミット累積）
+  - モバイル PSI: Performance 88 / A11y 96 / Best Practices 100 / SEO 100
+  - デスクトップ PSI: Performance 99 / A11y 96 / Best Practices 100 / SEO 100
+  - 合格項目 26→28 / 33（新規合格: **#27 タイポ 76→84** / **#14 法務 77→80**）
+  - #47 フォント preload 削減効果確認: 記事ページ Perf 93(mobile)/99(desktop)、render-blocking 110ms まで削減
+  - **退行ゼロ**（全変更項目が改善 or 維持）
+- v5 新規タスク #57〜#61 を追加（Giscus / ライトモード / フォーム内製化 / a11y 残 / 未使用JS）
 
 ### 2026-04-22 #50 分析・計測拡張（イベント計測 + MS Clarity 基盤）
 - [x] **gtag イベント計測の拡張**（既存の `AnalyticsListener` 基盤に `data-ga-event` 属性を追加するだけで対応）

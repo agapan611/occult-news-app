@@ -4,7 +4,7 @@
 > 進捗（未対応タスク・作業ログ）は `BACKLOG.md` で管理している。
 >
 > このファイルは **今このサイトがどうなっているか** を俯瞰する資料。
-> 更新: 2026-04-19
+> 更新: 2026-04-22 (v5 評価 + v6 Phase 1 #60/#61 push済)
 
 ---
 
@@ -34,6 +34,7 @@
 | 自動デプロイ | `git push origin master` → Vercel ビルド → alias 自動張り替え |
 | 親ドメイン | `ainiwa.jp`（別プロジェクト `ainiwa-portal` 管理） |
 | GitHub | `agapan611/occult-news-app` |
+| Commit author (local) | `75990160+agapan611@users.noreply.github.com`（2026-04-22 設定） — Vercel の将来的な Git Committer 検証強化に備え、SCP-WIRE と揃えて GitHub noreply 形式に。グローバル `user.email` は `shunaraika@gmail.com / OCCULT WIRE` のまま維持。過去 commit の author 書き換えはしない |
 
 ## 4. ページ構成
 
@@ -165,6 +166,40 @@ data/
 - 内部リンク設計（GRIMOIRE ⇔ ニュース）
 - カテゴリページ `/category/[slug]`（未実装）
 - AdSense 審査（GRIMOIRE 20記事貯まるまで据え置き）
+
+## 15. 次セッション引き継ぎ（2026-04-22 夜時点）
+
+### 直前セッションの成果
+- **サイト評価 v5 実施**（87.42 / 100、v4 +1.07、v1 +5.42、20 コミット累積）
+  - 評価ファイル: `~/.claude/skills/site-evaluation/results/occult-wire/2026-04-22_v5.md`
+- **BACKLOG に v5 マージ**（#54 対応済みへ移動、#57〜#61 を新規追加）
+- **site-evaluation スキルに Step 4.5「BACKLOG マージ」追加**（今後の評価時に自動発動）
+- **v6 Phase 1 実装+push 済み**（commit `895a9e2` / `aae279a`）
+  - #60 a11y コントラスト（Footer × に aria-hidden、text-foreground/60 → /70）
+  - #61 /search /sitemap の prefetch={false}（First Load JS -27 KiB）
+
+### 次セッションで着手する作業
+
+#### Claude 単独で進められる
+- **#58 ライトモード OS 追従切替**（工数 3-4h、未着手）
+  - `prefers-color-scheme: light` で自動切替、globals.css に light variant 追加
+  - Tailwind dark: prefix で色トークンを2セット化
+  - 全ページの色トークン洗い直しが必要
+  - 見込み: 30. UX 7x→80、加重加点 +0.29
+
+#### 海斗さん作業が前提のもの（待ち）
+- **#57 Giscus コメント統合**（工数 2-3h、ユーザー作業待ち）
+  - 海斗さん側: https://github.com/agapan611/occult-news-app/settings で **Discussions** タブ有効化 → https://github.com/apps/giscus で Giscus アプリ認可
+  - 完了連絡後、Claude 側で `<Giscus>` コンポーネント実装
+  - 見込み: 33. コメント 0→60、加重加点 **+0.44**（v5 最大効果）
+- **#59 お問い合わせフォーム内製化**（工数 半日〜1日、ユーザー作業待ち）
+  - 海斗さん側: https://supabase.com/dashboard/new で新規プロジェクト作成（region `ap-northeast-1`、名前 `occult-wire-contact`）+ https://resend.com/signup でアカウント作成
+  - URL / API キー共有後、Claude 側で React Hook Form + zod + Supabase 実装
+  - 見込み: 23. コミュニケーション 77→85、加重加点 +0.18
+
+### v6 完了後の予定
+- サイト評価 v6 実施（site-evaluation スキル）→ 87.42 → 88.5 前後を狙う
+- Step 4.5 で BACKLOG 自動マージ確認（今回追加した新フロー）
 
 ---
 
