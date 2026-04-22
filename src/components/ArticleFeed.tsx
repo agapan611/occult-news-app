@@ -52,6 +52,10 @@ export default function ArticleFeed({ days }: { days: DailyArticles[] }) {
                   key={article.id}
                   article={article}
                   isNew={day.date === latestDate}
+                  isHot={
+                    day.date === latestDate &&
+                    ["ghost", "paranormal", "cryptid"].includes(article.category)
+                  }
                 />
               ))}
             </section>

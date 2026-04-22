@@ -17,6 +17,48 @@ const styleLabels: Record<string, string> = {
   prophecy: "予言", synchronicity: "シンクロニシティ", occult_history: "オカルト史",
 };
 
+type CategoryGroup = "occult_core" | "mystery" | "normal";
+
+function getCategoryGroup(category: string): CategoryGroup {
+  if (["ghost", "paranormal", "cryptid"].includes(category)) return "occult_core";
+  if (["ufo", "uma", "mystery", "urban_legend"].includes(category)) return "mystery";
+  return "normal";
+}
+
+const groupStyles: Record<CategoryGroup, {
+  badge: string;
+  caption: string;
+  commentBox: string;
+  commentLabel: string;
+  readMore: string;
+  sourceLink: string;
+}> = {
+  occult_core: {
+    badge: "bg-accent/25 text-accent",
+    caption: "text-accent/80",
+    commentBox: "bg-accent/[0.05] border-accent/20 shadow-[0_0_24px_-8px_rgba(139,92,246,0.45)]",
+    commentLabel: "text-accent/80",
+    readMore: "text-accent hover:text-accent-dim",
+    sourceLink: "text-accent hover:text-accent/70",
+  },
+  mystery: {
+    badge: "bg-cyan/20 text-cyan",
+    caption: "text-cyan/80",
+    commentBox: "bg-cyan/[0.03] border-cyan/10 shadow-[0_0_24px_-8px_rgba(6,182,212,0.35)]",
+    commentLabel: "text-cyan/80",
+    readMore: "text-cyan hover:text-cyan/70",
+    sourceLink: "text-cyan hover:text-cyan/70",
+  },
+  normal: {
+    badge: "bg-muted/15 text-muted",
+    caption: "text-foreground/60",
+    commentBox: "bg-card border-card-border shadow-[0_0_18px_-10px_rgba(139,92,246,0.25)]",
+    commentLabel: "text-foreground/70",
+    readMore: "text-accent hover:text-accent-dim",
+    sourceLink: "text-cyan hover:text-cyan/70",
+  },
+};
+
 const commenterInfo: Record<
   Commenter,
   { name: string; icon: string; stripeClass: string }
@@ -28,12 +70,16 @@ const commenterInfo: Record<
 export default function ArticleCard({
   article,
   isNew = false,
+  isHot = false,
 }: {
   article: Article;
   isNew?: boolean;
+  isHot?: boolean;
 }) {
   const [expanded, setExpanded] = useState(false);
   const isOccultNews = article.type === "occult_news";
+  const group = getCategoryGroup(article.category);
+  const styles = groupStyles[group];
   const commenter = commenterInfo[article.commentBy] ?? commenterInfo.shuna;
 
   const commentPreview = article.occultComment.slice(0, 60) + "...";
@@ -60,11 +106,10 @@ export default function ArticleCard({
             NEW
           </span>
         )}
-        <span
-          className={`rounded px-1.5 py-0.5 ${
-            isOccultNews ? "bg-cyan/20 text-cyan" : "bg-accent/20 text-accent"
-          }`}
-        >
+        {isHot && (
+          <span className="text-sm leading-none" aria-hidden title="注目案件">🔥</span>
+        )}
+        <span className={`rounded px-1.5 py-0.5 ${styles.badge}`}>
           {categoryLabels[article.category] ?? article.category}
         </span>
         {!isOccultNews && (
@@ -77,7 +122,7 @@ export default function ArticleCard({
 
       {/* キャラのリード（サブタイトル風） */}
       {article.leadline && (
-        <p className={`text-[11px] mb-0.5 italic ${isOccultNews ? "text-cyan/80" : "text-accent/80"}`}>
+        <p className={`text-[11px] mb-0.5 italic ${styles.caption}`}>
           {commenter.name}「{article.leadline}」
         </p>
       )}
@@ -95,7 +140,7 @@ export default function ArticleCard({
               data-ga-event="click_news_source"
               data-ga-label={sourceHost}
               data-ga-category={article.category}
-              className="text-cyan underline underline-offset-2 hover:text-cyan/70"
+              className={`underline underline-offset-2 ${styles.sourceLink}`}
             >
               元記事（{sourceHost}）&rarr;
             </a>
@@ -115,11 +160,7 @@ export default function ArticleCard({
 
       {/* コメント（吹き出し風） */}
       <div
-        className={`rounded-lg border p-3 cursor-pointer transition-shadow ${
-          isOccultNews
-            ? "bg-cyan/[0.03] border-cyan/10 shadow-[0_0_24px_-8px_rgba(139,92,246,0.35)]"
-            : "bg-card border-card-border shadow-[0_0_18px_-10px_rgba(139,92,246,0.25)]"
-        }`}
+        className={`rounded-lg border p-3 cursor-pointer transition-shadow ${styles.commentBox}`}
         onClick={() => setExpanded(!expanded)}
       >
         <div className="flex items-start gap-2.5">
@@ -132,22 +173,14 @@ export default function ArticleCard({
             className="rounded-full border border-accent/30 shrink-0 mt-0.5"
           />
           <div className="min-w-0 flex-1">
-            <p
-              className={`text-[10px] font-bold mb-1 ${
-                isOccultNews ? "text-cyan/80" : "text-accent/80"
-              }`}
-            >
+            <p className={`text-[10px] font-bold mb-1 ${styles.commentLabel}`}>
               {commenter.name}の{isOccultNews ? "ひとこと" : "考察"}
             </p>
             <p className="text-sm leading-relaxed text-foreground/90">
               {expanded ? article.occultComment : commentPreview}
             </p>
             <button
-              className={`mt-2 text-xs transition-colors ${
-                isOccultNews
-                  ? "text-cyan hover:text-cyan/70"
-                  : "text-accent hover:text-accent-dim"
-              }`}
+              className={`mt-2 text-xs transition-colors ${styles.readMore}`}
               onClick={(e) => {
                 e.stopPropagation();
                 setExpanded(!expanded);
