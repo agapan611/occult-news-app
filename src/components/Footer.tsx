@@ -22,7 +22,7 @@ export default function Footer() {
               className="group flex items-center gap-2 hover:text-accent transition-colors"
             >
               <Image
-                src="/shuna.png"
+                src="/shuna.webp"
                 alt=""
                 aria-hidden="true"
                 width={32}
@@ -39,7 +39,7 @@ export default function Footer() {
               className="group flex items-center gap-2 hover:text-cyan transition-colors"
             >
               <Image
-                src="/raika.png"
+                src="/raika.webp"
                 alt=""
                 aria-hidden="true"
                 width={32}

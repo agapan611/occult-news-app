@@ -9,14 +9,14 @@ export default function Header() {
         <Link href="/" aria-label="OCCULT WIRE トップへ" className="flex items-center gap-2 shrink-0">
           <div className="flex -space-x-2" aria-hidden="true">
             <Image
-              src="/shuna.png"
+              src="/shuna.webp"
               alt=""
               width={28}
               height={28}
               className="rounded-full border-2 border-background z-10"
             />
             <Image
-              src="/raika.png"
+              src="/raika.webp"
               alt=""
               width={28}
               height={28}

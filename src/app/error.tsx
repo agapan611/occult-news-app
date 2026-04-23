@@ -30,7 +30,7 @@ export default function Error({
 
         <div className="mb-6 flex items-center justify-center gap-2">
           <Image
-            src="/raika.png"
+            src="/raika.webp"
             alt=""
             aria-hidden="true"
             width={56}

@@ -112,8 +112,8 @@ data/
 
 `public/`
 
-- `shuna.png` / `raika.png` — キャラ単体画像
-- `shuna-raika.png` — 2ショット（PIL合成版）
+- `shuna.webp` / `raika.webp` — キャラ単体画像（2026-04-23 GPT 生成の新版、ろうそく除去版、512×768 / 各70KB）
+- `shuna-raika.png` — 2ショット（PIL合成版、旧キャラ画ベース）
 - `shuna-raika-header.png` — Xヘッダー（1500x500）
 - `icons/` — PWAアイコン一式
 - `manifest.json` — PWAマニフェスト

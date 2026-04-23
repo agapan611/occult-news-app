@@ -63,8 +63,8 @@ const commenterInfo: Record<
   Commenter,
   { name: string; icon: string; stripeClass: string }
 > = {
-  shuna: { name: "シュナ", icon: "/shuna.png", stripeClass: "bg-accent" },
-  raika: { name: "ライカ", icon: "/raika.png", stripeClass: "bg-cyan" },
+  shuna: { name: "シュナ", icon: "/shuna.webp", stripeClass: "bg-accent" },
+  raika: { name: "ライカ", icon: "/raika.webp", stripeClass: "bg-cyan" },
 };
 
 export default function ArticleCard({

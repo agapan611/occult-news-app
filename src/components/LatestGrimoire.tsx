@@ -6,9 +6,9 @@ const authorInfo: Record<
   StoryAuthor,
   { name: string; icon: string; leadlineClass: string }
 > = {
-  shuna: { name: "シュナ", icon: "/shuna.png", leadlineClass: "text-accent/85" },
-  raika: { name: "ライカ", icon: "/raika.png", leadlineClass: "text-cyan/85" },
-  both: { name: "シュナ & ライカ", icon: "/shuna.png", leadlineClass: "text-foreground/70" },
+  shuna: { name: "シュナ", icon: "/shuna.webp", leadlineClass: "text-accent/85" },
+  raika: { name: "ライカ", icon: "/raika.webp", leadlineClass: "text-cyan/85" },
+  both: { name: "シュナ & ライカ", icon: "/shuna.webp", leadlineClass: "text-foreground/70" },
 };
 
 export default function LatestGrimoire({ stories }: { stories: Story[] }) {
@@ -53,14 +53,14 @@ export default function LatestGrimoire({ stories }: { stories: Story[] }) {
                   {story.author === "both" ? (
                     <div className="flex -space-x-2" aria-hidden="true">
                       <Image
-                        src="/shuna.png"
+                        src="/shuna.webp"
                         alt=""
                         width={24}
                         height={24}
                         className="rounded-full border border-card-border z-10"
                       />
                       <Image
-                        src="/raika.png"
+                        src="/raika.webp"
                         alt=""
                         width={24}
                         height={24}

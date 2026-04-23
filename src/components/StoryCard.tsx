@@ -15,21 +15,21 @@ const authorInfo: Record<
 > = {
   shuna: {
     name: "シュナ",
-    icon: "/shuna.png",
+    icon: "/shuna.webp",
     colorClass: "text-accent",
     stripeStyle: "bg-accent",
     leadlineClass: "text-accent/80",
   },
   raika: {
     name: "ライカ",
-    icon: "/raika.png",
+    icon: "/raika.webp",
     colorClass: "text-cyan",
     stripeStyle: "bg-cyan",
     leadlineClass: "text-cyan/80",
   },
   both: {
     name: "シュナ & ライカ",
-    icon: "/shuna.png",
+    icon: "/shuna.webp",
     colorClass: "text-foreground",
     stripeStyle: "bg-gradient-to-b from-accent to-cyan",
     leadlineClass: "text-foreground/70",
@@ -79,14 +79,14 @@ export default function StoryCard({ story }: { story: Story }) {
         {story.author === "both" ? (
           <div className="flex -space-x-2" aria-hidden="true">
             <Image
-              src="/shuna.png"
+              src="/shuna.webp"
               alt=""
               width={22}
               height={22}
               className="rounded-full border border-card-border z-10"
             />
             <Image
-              src="/raika.png"
+              src="/raika.webp"
               alt=""
               width={22}
               height={22}

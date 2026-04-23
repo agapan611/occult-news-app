@@ -28,7 +28,7 @@ const authorInfo: Record<StoryAuthor, CharacterProfile> = {
   shuna: {
     name: "シュナ",
     nameEn: "Shuna",
-    icon: "/shuna.png",
+    icon: "/shuna.webp",
     tagline: "数字と象徴の向こう側を覗く、銀髪のゴシック少女",
     description:
       "古代文明・数秘術・神秘主義を得意とする10代後半の少女。タロットカードを常に持ち歩き、偶然の一致や隠された意味に敏感。親しみやすい語り口で、読者を友達のように話の奥へと誘う。",
@@ -55,7 +55,7 @@ const authorInfo: Record<StoryAuthor, CharacterProfile> = {
   raika: {
     name: "ライカ",
     nameEn: "Raika",
-    icon: "/raika.png",
+    icon: "/raika.webp",
     tagline: "事実を積み上げ、判断は読者に委ねる魔導書の継承者",
     description:
       "UFO・陰謀論・未解決事件を得意とする10代後半の少年。褐色肌に黒髪、魔導書を常に携え燭台を灯す。感情を前面に出さないが、オカルトへの情熱は強い。「判断は任せる」が口癖。",
@@ -82,7 +82,7 @@ const authorInfo: Record<StoryAuthor, CharacterProfile> = {
   both: {
     name: "シュナ & ライカ",
     nameEn: "Shuna & Raika",
-    icon: "/shuna.png",
+    icon: "/shuna.webp",
     tagline: "双子の視点が交わる、月1〜2回の特別対談",
     description:
       "見た目も性格も対照的な双子の兄妹が、大きなテーマを交互に掘り下げる特別対談。シュナの直感的な切り口とライカのデータ裏付けが補完しあう。月に1〜2回のペースで公開。",
@@ -220,14 +220,14 @@ export default async function AuthorPage({
             {author === "both" ? (
               <div className="flex -space-x-3 shrink-0" aria-hidden="true">
                 <Image
-                  src="/shuna.png"
+                  src="/shuna.webp"
                   alt=""
                   width={64}
                   height={64}
                   className="rounded-full border border-card-border z-10"
                 />
                 <Image
-                  src="/raika.png"
+                  src="/raika.webp"
                   alt=""
                   width={64}
                   height={64}

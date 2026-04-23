@@ -32,7 +32,7 @@ export default function NotFound() {
           <div className="mb-6 flex items-center justify-center gap-4">
             <div className="flex items-center gap-2">
               <Image
-                src="/shuna.png"
+                src="/shuna.webp"
                 alt=""
                 aria-hidden="true"
                 width={48}
@@ -44,7 +44,7 @@ export default function NotFound() {
             <span className="text-muted/40" aria-hidden="true">×</span>
             <div className="flex items-center gap-2">
               <Image
-                src="/raika.png"
+                src="/raika.webp"
                 alt=""
                 aria-hidden="true"
                 width={48}

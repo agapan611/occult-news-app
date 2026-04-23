@@ -27,7 +27,7 @@ const authorInfo: Record<
 > = {
   shuna: {
     name: "シュナ",
-    icon: "/shuna.png",
+    icon: "/shuna.webp",
     colorClass: "text-accent",
     slug: "shuna",
     leadlineClass: "text-accent/90",
@@ -36,7 +36,7 @@ const authorInfo: Record<
   },
   raika: {
     name: "ライカ",
-    icon: "/raika.png",
+    icon: "/raika.webp",
     colorClass: "text-cyan",
     slug: "raika",
     leadlineClass: "text-cyan/90",
@@ -45,7 +45,7 @@ const authorInfo: Record<
   },
   both: {
     name: "シュナ & ライカ",
-    icon: "/shuna.png",
+    icon: "/shuna.webp",
     colorClass: "text-foreground",
     slug: "both",
     leadlineClass: "text-foreground/80",
@@ -205,14 +205,14 @@ export default async function StoryPage({
           {story.author === "both" ? (
             <div className="flex -space-x-2" aria-hidden="true">
               <Image
-                src="/shuna.png"
+                src="/shuna.webp"
                 alt=""
                 width={36}
                 height={36}
                 className="rounded-full border border-card-border z-10"
               />
               <Image
-                src="/raika.png"
+                src="/raika.webp"
                 alt=""
                 width={36}
                 height={36}
@@ -314,14 +314,14 @@ export default async function StoryPage({
           {story.author === "both" ? (
             <div className="mx-auto mb-4 flex justify-center -space-x-6" aria-hidden="true">
               <Image
-                src="/shuna.png"
+                src="/shuna.webp"
                 alt=""
                 width={104}
                 height={104}
                 className="rounded-full border-2 border-accent/40 bg-background shadow-[0_0_32px_-8px_rgba(139,92,246,0.5)] z-10"
               />
               <Image
-                src="/raika.png"
+                src="/raika.webp"
                 alt=""
                 width={104}
                 height={104}
