@@ -38,13 +38,6 @@ v5 再評価由来の新規タスク: #57（Giscus コメント）/ #58（ライ
 
 ## 優先度: 高（今月中に着手）
 
-### 57. コメント欄（Giscus 統合）
-- **v5 評価由来**、現在 GRIMOIRE 記事下にプレースホルダ
-- GitHub Discussions を DB 代わりに無料で UGC を発火させる
-- 工数: 2-3h（Giscus 公式設定 → `<Giscus>` コンポーネント追加）
-- 見込み: 33. コメント 0→60（加重加点 **+0.44**、v5 トップ5 最大効果）
-- 注意: GitHub アカウント必須なのでコメント数は多くない想定、E-E-A-T ブースト目的
-
 ### 59. お問い合わせフォーム内製化（React Hook Form + Supabase）
 - **v5 評価由来**、`#46 フォーム・CV設計` を具体化
 - 現状: `/contact` は mailto: + Google Forms 依存
@@ -206,6 +199,21 @@ v5 再評価由来の新規タスク: #57（Giscus コメント）/ #58（ライ
 ---
 
 ## 対応済み
+
+### 2026-04-23 #57 Giscus コメント統合（GRIMOIRE）
+- [x] **GitHub Discussions 有効化**（Announcements カテゴリ運用）
+  - Giscus アプリを `agapan611/occult-news-app` に限定認可（Only select repositories）
+- [x] **`<Giscus>` クライアントコンポーネント新規作成**（`src/components/Giscus.tsx`）
+  - pathname マッピング（URL 単位で独立した Discussion を自動生成）
+  - テーマ dark 固定（世界観優先）
+  - StrictMode 二重挿入ガード + アンマウントクリーンアップ実装
+- [x] **CSP 拡張**（`next.config.ts`）
+  - `script-src` / `connect-src` / `frame-src` に `giscus.app` を追加
+  - `connect-src` に `api.github.com` を追加
+- [x] **GRIMOIRE 記事末尾に「囁きを残す」セクションを配置**（`src/app/grimoire/[id]/page.tsx`）
+  - 注記と「戻る」の間、読了後の余韻を妨げない位置
+- commit: `5b7de32`
+- 見込み: 33. コメント 0→60、加重加点 **+0.44**（v5 トップ5 最大効果）
 
 ### 2026-04-22 v6 Phase 2 #23 デザインの世界観強化
 - [x] **NEWS カテゴリ色分け実装**（`src/components/ArticleCard.tsx`）
