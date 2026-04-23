@@ -5,6 +5,7 @@ import Footer from "@/components/Footer";
 import JsonLd from "@/components/JsonLd";
 import StoryCard from "@/components/StoryCard";
 import Breadcrumb from "@/components/Breadcrumb";
+import Giscus from "@/components/Giscus";
 import { getAllStories, getStoryById, getRelatedStories } from "@/lib/stories";
 import type { StoryAuthor } from "@/lib/stories";
 import { grimoireCategoryLabels } from "@/lib/categories";
@@ -459,6 +460,24 @@ export default async function StoryPage({
         <div className="mt-8 rounded-lg border border-card-border bg-card p-3 text-[11px] text-muted leading-relaxed">
           本記事はAIキャラクターによる創作・考察です。登場する事件・伝説の事実性については諸説あります。歴史的事実と創作的解釈が混在する場合があります。
         </div>
+
+        {/* コメント欄（Giscus / GitHub Discussions） */}
+        <section
+          id="comments"
+          className="mt-10 border-t border-card-border pt-6"
+          aria-labelledby="comments-heading"
+        >
+          <h2
+            id="comments-heading"
+            className="mb-3 text-sm font-bold tracking-wider"
+          >
+            <span className="text-accent">囁き</span>を残す
+          </h2>
+          <p className="mb-4 text-[11px] text-muted leading-relaxed">
+            GitHub アカウントでコメントを残せます。気づいたこと・関連する体験・別の解釈、何でも。
+          </p>
+          <Giscus />
+        </section>
 
         {/* 戻る */}
         <div className="mt-6 text-center">
