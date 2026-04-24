@@ -1,5 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
+import { ASSETS } from "@/lib/assets";
 
 export default function Footer() {
   return (
@@ -22,7 +23,7 @@ export default function Footer() {
               className="group flex items-center gap-2 hover:text-accent transition-colors"
             >
               <Image
-                src="/shuna.webp"
+                src={ASSETS.characters.shuna}
                 alt=""
                 aria-hidden="true"
                 width={32}
@@ -39,7 +40,7 @@ export default function Footer() {
               className="group flex items-center gap-2 hover:text-cyan transition-colors"
             >
               <Image
-                src="/raika.webp"
+                src={ASSETS.characters.raika}
                 alt=""
                 aria-hidden="true"
                 width={32}

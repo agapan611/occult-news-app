@@ -1,14 +1,15 @@
 import Image from "next/image";
 import Link from "next/link";
 import type { Story, StoryAuthor } from "@/lib/stories";
+import { ASSETS } from "@/lib/assets";
 
 const authorInfo: Record<
   StoryAuthor,
   { name: string; icon: string; leadlineClass: string }
 > = {
-  shuna: { name: "シュナ", icon: "/shuna.webp", leadlineClass: "text-accent/85" },
-  raika: { name: "ライカ", icon: "/raika.webp", leadlineClass: "text-cyan/85" },
-  both: { name: "シュナ & ライカ", icon: "/shuna.webp", leadlineClass: "text-foreground/70" },
+  shuna: { name: "シュナ", icon: ASSETS.characters.shuna, leadlineClass: "text-accent/85" },
+  raika: { name: "ライカ", icon: ASSETS.characters.raika, leadlineClass: "text-cyan/85" },
+  both: { name: "シュナ & ライカ", icon: ASSETS.characters.shuna, leadlineClass: "text-foreground/70" },
 };
 
 export default function LatestGrimoire({ stories }: { stories: Story[] }) {
@@ -53,14 +54,14 @@ export default function LatestGrimoire({ stories }: { stories: Story[] }) {
                   {story.author === "both" ? (
                     <div className="flex -space-x-2" aria-hidden="true">
                       <Image
-                        src="/shuna.webp"
+                        src={ASSETS.characters.shuna}
                         alt=""
                         width={24}
                         height={24}
                         className="rounded-full border border-card-border z-10"
                       />
                       <Image
-                        src="/raika.webp"
+                        src={ASSETS.characters.raika}
                         alt=""
                         width={24}
                         height={24}

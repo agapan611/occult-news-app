@@ -3,6 +3,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { useEffect } from "react";
+import { ASSETS } from "@/lib/assets";
 
 export default function Error({
   error,
@@ -30,7 +31,7 @@ export default function Error({
 
         <div className="mb-6 flex items-center justify-center gap-2">
           <Image
-            src="/raika.webp"
+            src={ASSETS.characters.raika}
             alt=""
             aria-hidden="true"
             width={56}

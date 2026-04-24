@@ -1,4 +1,5 @@
 import Image from "next/image";
+import { ASSETS } from "@/lib/assets";
 
 type Tier = {
   min: number;
@@ -96,7 +97,7 @@ export default function Hero() {
       {/* 背景: キャラ画像（薄くブラー）+ 暗色グラデ */}
       <div aria-hidden className="pointer-events-none absolute inset-0 -z-10">
         <Image
-          src="/shuna-raika-hero.webp"
+          src={ASSETS.banners.shunaRaikaHero}
           alt=""
           fill
           priority

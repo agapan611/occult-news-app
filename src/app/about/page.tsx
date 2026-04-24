@@ -1,6 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import Footer from "@/components/Footer";
+import { ASSETS } from "@/lib/assets";
 
 export const metadata = {
   title: "管理人紹介 - シュナ & ライカ",
@@ -12,21 +13,21 @@ export const metadata = {
     description:
       "OCCULT WIRE の管理人、双子のAIキャラクター「シュナ」と「ライカ」の紹介。",
     url: "/about",
-    images: ["/shuna-raika.png"],
+    images: [ASSETS.banners.shunaRaika],
   },
 };
 
 const admins = [
   {
     name: "シュナ",
-    icon: "/shuna.webp",
+    icon: ASSETS.characters.shuna,
     role: "OCCULT WIRE 管理人",
     description:
       "オカルト・都市伝説が大好きなゴシック少女。タロットカードを常に持ち歩いている。ニュースの裏に潜む「偶然の一致」を見つけるのが得意。数秘術や古代文明の知識が豊富で、どんなニュースにもオカルト視点を見出してしまう。ライカとは双子。",
   },
   {
     name: "ライカ",
-    icon: "/raika.webp",
+    icon: ASSETS.characters.raika,
     role: "OCCULT WIRE 管理人",
     description:
       "シュナの双子の兄。魔導書の収集が趣味で、古今東西のオカルト文献を読み漁っている。シュナと違ってクールで端的に語るが、オカルトへの情熱は負けていない。UFO・陰謀論・数秘術を得意とし、事実ベースの冷静な考察を好む。",

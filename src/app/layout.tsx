@@ -7,6 +7,7 @@ import GoogleAnalytics from "@/components/GoogleAnalytics";
 import MicrosoftClarity from "@/components/MicrosoftClarity";
 import AnalyticsListener from "@/components/AnalyticsListener";
 import "./globals.css";
+import { ASSETS } from "@/lib/assets";
 
 const GA_ID = process.env.NEXT_PUBLIC_GA_ID;
 const CLARITY_PROJECT_ID = process.env.NEXT_PUBLIC_CLARITY_PROJECT_ID;
@@ -38,7 +39,7 @@ const organizationJsonLd = {
   url: SITE_URL,
   logo: {
     "@type": "ImageObject",
-    url: `${SITE_URL}/shuna-raika.png`,
+    url: ASSETS.banners.shunaRaika,
     width: 1200,
     height: 630,
   },
@@ -73,7 +74,7 @@ export const metadata: Metadata = {
     locale: "ja_JP",
     images: [
       {
-        url: "/shuna-raika.png",
+        url: ASSETS.banners.shunaRaika,
         width: 1200,
         height: 630,
         alt: "OCCULT WIRE - シュナ & ライカ",
@@ -86,7 +87,7 @@ export const metadata: Metadata = {
     description: DEFAULT_DESCRIPTION,
     site: "@occult_wire",
     creator: "@occult_wire",
-    images: ["/shuna-raika.png"],
+    images: [ASSETS.banners.shunaRaika],
   },
   appleWebApp: {
     capable: true,

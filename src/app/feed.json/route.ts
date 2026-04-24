@@ -1,5 +1,6 @@
 import { getAllStories } from "@/lib/stories";
 import { grimoireCategoryLabels } from "@/lib/categories";
+import { ASSETS } from "@/lib/assets";
 
 const SITE_URL = "https://occult.ainiwa.jp";
 const FEED_TITLE = "OCCULT WIRE - GRIMOIRE";
@@ -7,7 +8,7 @@ const FEED_DESCRIPTION =
   "シュナとライカが綴るオカルト・都市伝説の長編考察。神秘の書庫。";
 const FEED_URL = `${SITE_URL}/feed.json`;
 const FEED_HOME = `${SITE_URL}/grimoire`;
-const ICON_URL = `${SITE_URL}/shuna-raika.png`;
+const ICON_URL = ASSETS.banners.shunaRaika;
 
 const authorLabel = (author: string) =>
   author === "shuna"

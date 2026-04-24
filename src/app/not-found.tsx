@@ -3,6 +3,7 @@ import Link from "next/link";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { getAllStories } from "@/lib/stories";
+import { ASSETS } from "@/lib/assets";
 
 export const metadata = {
   title: "ページが見つかりません",
@@ -32,7 +33,7 @@ export default function NotFound() {
           <div className="mb-6 flex items-center justify-center gap-4">
             <div className="flex items-center gap-2">
               <Image
-                src="/shuna.webp"
+                src={ASSETS.characters.shuna}
                 alt=""
                 aria-hidden="true"
                 width={48}
@@ -44,7 +45,7 @@ export default function NotFound() {
             <span className="text-muted/40" aria-hidden="true">×</span>
             <div className="flex items-center gap-2">
               <Image
-                src="/raika.webp"
+                src={ASSETS.characters.raika}
                 alt=""
                 aria-hidden="true"
                 width={48}

@@ -1,6 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import HeaderNav from "./HeaderNav";
+import { ASSETS } from "@/lib/assets";
 
 export default function Header() {
   return (
@@ -9,14 +10,14 @@ export default function Header() {
         <Link href="/" aria-label="OCCULT WIRE トップへ" className="flex items-center gap-2 shrink-0">
           <div className="flex -space-x-2" aria-hidden="true">
             <Image
-              src="/shuna.webp"
+              src={ASSETS.characters.shuna}
               alt=""
               width={28}
               height={28}
               className="rounded-full border-2 border-background z-10"
             />
             <Image
-              src="/raika.webp"
+              src={ASSETS.characters.raika}
               alt=""
               width={28}
               height={28}

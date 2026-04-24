@@ -10,6 +10,7 @@ import { getAllStories, getStoryById, getRelatedStories } from "@/lib/stories";
 import type { StoryAuthor } from "@/lib/stories";
 import { grimoireCategoryLabels } from "@/lib/categories";
 import { getAffiliateKeywords, buildAmazonSearchUrl } from "@/lib/affiliate";
+import { ASSETS } from "@/lib/assets";
 
 const SITE_URL = "https://occult.ainiwa.jp";
 
@@ -27,7 +28,7 @@ const authorInfo: Record<
 > = {
   shuna: {
     name: "シュナ",
-    icon: "/shuna.webp",
+    icon: ASSETS.characters.shuna,
     colorClass: "text-accent",
     slug: "shuna",
     leadlineClass: "text-accent/90",
@@ -36,7 +37,7 @@ const authorInfo: Record<
   },
   raika: {
     name: "ライカ",
-    icon: "/raika.webp",
+    icon: ASSETS.characters.raika,
     colorClass: "text-cyan",
     slug: "raika",
     leadlineClass: "text-cyan/90",
@@ -45,7 +46,7 @@ const authorInfo: Record<
   },
   both: {
     name: "シュナ & ライカ",
-    icon: "/shuna.webp",
+    icon: ASSETS.characters.shuna,
     colorClass: "text-foreground",
     slug: "both",
     leadlineClass: "text-foreground/80",
@@ -127,12 +128,12 @@ export default async function StoryPage({
       url: SITE_URL,
       logo: {
         "@type": "ImageObject",
-        url: `${SITE_URL}/shuna-raika.png`,
+        url: ASSETS.banners.shunaRaika,
         width: 1200,
         height: 630,
       },
     },
-    image: [`${SITE_URL}/shuna-raika.png`],
+    image: [ASSETS.banners.shunaRaika],
     mainEntityOfPage: { "@type": "WebPage", "@id": pageUrl },
     inLanguage: "ja",
     articleSection: grimoireCategoryLabels[story.category] ?? story.category,
@@ -205,14 +206,14 @@ export default async function StoryPage({
           {story.author === "both" ? (
             <div className="flex -space-x-2" aria-hidden="true">
               <Image
-                src="/shuna.webp"
+                src={ASSETS.characters.shuna}
                 alt=""
                 width={36}
                 height={36}
                 className="rounded-full border border-card-border z-10"
               />
               <Image
-                src="/raika.webp"
+                src={ASSETS.characters.raika}
                 alt=""
                 width={36}
                 height={36}
@@ -314,14 +315,14 @@ export default async function StoryPage({
           {story.author === "both" ? (
             <div className="mx-auto mb-4 flex justify-center -space-x-6" aria-hidden="true">
               <Image
-                src="/shuna.webp"
+                src={ASSETS.characters.shuna}
                 alt=""
                 width={104}
                 height={104}
                 className="rounded-full border-2 border-accent/40 bg-background shadow-[0_0_32px_-8px_rgba(139,92,246,0.5)] z-10"
               />
               <Image
-                src="/raika.webp"
+                src={ASSETS.characters.raika}
                 alt=""
                 width={104}
                 height={104}

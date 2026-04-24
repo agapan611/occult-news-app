@@ -4,6 +4,7 @@ import { useState } from "react";
 import Image from "next/image";
 import type { Article, Commenter } from "@/lib/articles";
 import NewsThumbnail from "./NewsThumbnail";
+import { ASSETS } from "@/lib/assets";
 
 const categoryLabels: Record<string, string> = {
   science: "科学", society: "社会", politics: "政治", economy: "経済",
@@ -63,8 +64,8 @@ const commenterInfo: Record<
   Commenter,
   { name: string; icon: string; stripeClass: string }
 > = {
-  shuna: { name: "シュナ", icon: "/shuna.webp", stripeClass: "bg-accent" },
-  raika: { name: "ライカ", icon: "/raika.webp", stripeClass: "bg-cyan" },
+  shuna: { name: "シュナ", icon: ASSETS.characters.shuna, stripeClass: "bg-accent" },
+  raika: { name: "ライカ", icon: ASSETS.characters.raika, stripeClass: "bg-cyan" },
 };
 
 export default function ArticleCard({
