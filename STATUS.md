@@ -197,6 +197,10 @@ data/
 - **AiNiwa ファミリー共通ルール整備**
   - グローバルルール `~/.claude/rules/ainiwa_family.md` / `ainiwa_assets.md` 追加
   - AGENTS.md にファミリー参照追記（commit `a8215a4`）
+- **app icon を AiNiwa ファミリー共通に統一**（commit `9c18039`）
+  - `src/app/{icon.png, apple-icon.png}` を追加、`src/app/favicon.ico` を AiNiwa 版に上書き
+  - Next.js 16 file-based icon convention に対応（`/icon.png` `/apple-icon.png` が 200 で配信開始）
+  - 既存の `public/manifest.json` / `public/icons/` と layout.tsx の `<link rel="manifest">` 手動記述はそのまま残す（動作中のため）
 
 ### 2026-04-23 の成果（#57 Giscus 統合 完了後）
 
