@@ -16,6 +16,16 @@
   },
   "published": [
     {
+      "id": "shuna-nazca-lines-sky-ritual",
+      "date": "2026-04-25",
+      "author": "shuna",
+      "category": "ancient_civilization",
+      "title": "ナスカの地上絵──空に宛てた祈りを、AIが303個見つけた日",
+      "theme": "ナスカ地上絵の制作技法・儀礼用途・AI発見",
+      "keywords": ["ナスカの地上絵", "マリア・ライヘ", "山形大学", "IBM", "AI考古学", "水の儀礼", "UNESCO", "古代文明"],
+      "referenced_knowledge": ["nazca_lines"]
+    },
+    {
       "id": "raika-olgoi-khorkhoi-gobi",
       "date": "2026-04-24",
       "author": "raika",
