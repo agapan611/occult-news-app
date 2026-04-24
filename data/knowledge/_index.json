@@ -1,12 +1,12 @@
 {
   "version": 1,
-  "updated": "2026-04-23",
+  "updated": "2026-04-24",
   "categories": [
     { "id": "ancient_civilization", "title": "古代文明", "threshold_days": 730, "topics": ["atlantis", "gobekli_tepe", "nazca_lines", "stonehenge"] },
     { "id": "conspiracy", "title": "陰謀論・機密", "threshold_days": 180, "topics": ["area_51", "kennedy_assassination", "mk_ultra", "stargate_project"] },
     { "id": "ghost_stories", "title": "怪談・心霊", "threshold_days": null, "topics": ["maruyama_okyo_yurei"] },
     { "id": "horror", "title": "ホラー・不気味な実話", "threshold_days": null, "topics": [] },
-    { "id": "mystery", "title": "ミステリー・怪事件", "threshold_days": 365, "topics": ["bermuda_triangle", "dyatlov_pass", "eilean_mor_lighthouse", "hinterkaifeck"] },
+    { "id": "mystery", "title": "ミステリー・怪事件", "threshold_days": 365, "topics": ["bermuda_triangle", "dyatlov_pass", "eilean_mor_lighthouse", "hinterkaifeck", "mongolian_death_worm"] },
     { "id": "mysticism", "title": "神秘主義・呪術", "threshold_days": 730, "topics": ["mirror_mysticism"] },
     { "id": "numerology", "title": "数秘術・数字の神秘", "threshold_days": 730, "topics": ["number_seven"] },
     { "id": "science_occult", "title": "科学と境界領域のオカルト", "threshold_days": 180, "topics": ["deja_vu", "mandela_effect", "near_death_experience", "quantum_consciousness"] },
@@ -28,6 +28,7 @@
     { "id": "maruyama_okyo_yurei", "title": "円山応挙『反魂香之図』と『足のない幽霊』の成立", "category": "ghost_stories", "tags": ["maruyama_okyo", "hangoko", "kudoji", "yureiga", "yotsuya_kaidan", "edo_art"], "related": ["mirror_mysticism"], "verified": "2026-04-23" },
     { "id": "mirror_mysticism", "title": "鏡の神秘主義と呪術", "category": "mysticism", "tags": ["mirror", "magic", "da_vinci", "mirror_writing", "reflection", "yata_no_kagami", "sankakubuchi"], "related": [], "verified": "2026-04-21" },
     { "id": "mk_ultra", "title": "MKウルトラ計画", "category": "conspiracy", "tags": ["mk_ultra", "cia", "lsd", "gottlieb", "frank_olson", "church_committee", "declassified", "foia", "1953"], "related": ["stargate_project", "kennedy_assassination", "area_51"], "verified": "2026-04-21" },
+    { "id": "mongolian_death_worm", "title": "モンゴリアン・デスワーム（オルゴイ・ホルホイ）", "category": "mystery", "tags": ["mongolian_death_worm", "olgoi_khorkhoi", "gobi_desert", "uma", "roy_chapman_andrews", "ivan_mackerle", "richard_freeman", "tartar_sand_boa", "amphisbaena"], "related": [], "verified": "2026-04-24", "file": "topics/mongolian_death_worm.md" },
     { "id": "nazca_lines", "title": "ナスカの地上絵", "category": "ancient_civilization", "tags": ["nazca", "peru", "geoglyph", "maria_reiche", "yamagata_university", "unesco", "paracas", "water_ritual"], "related": ["stonehenge", "atlantis", "gobekli_tepe"], "verified": "2026-04-21" },
     { "id": "near_death_experience", "title": "臨死体験（NDE）", "category": "science_occult", "tags": ["nde", "raymond_moody", "parnia", "aware_study", "pam_reynolds", "tunnel", "obe", "iands", "dmt"], "related": ["quantum_consciousness", "deja_vu", "mandela_effect"], "verified": "2026-04-21" },
     { "id": "nimitz_ufo", "title": "ニミッツ空母UFO遭遇事件（ティックタック）", "category": "ufo_uap", "tags": ["nimitz", "tic_tac", "david_fravor", "atflir", "flir1", "aatip", "uap_task_force", "2004"], "related": ["rendlesham_ufo", "roswell_1947", "phoenix_lights"], "verified": "2026-04-21" },

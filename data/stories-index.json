@@ -16,6 +16,16 @@
   },
   "published": [
     {
+      "id": "raika-olgoi-khorkhoi-gobi",
+      "date": "2026-04-24",
+      "author": "raika",
+      "category": "uma",
+      "title": "オルゴイ・ホルホイ──ゴビ砂漠の「触れただけで死ぬ虫」を、百年かけて追った男たちの顛末",
+      "theme": "ゴビ砂漠のUMA「モンゴリアン・デスワーム」の1926年以降の追跡史と科学的仮説",
+      "keywords": ["オルゴイ・ホルホイ", "モンゴリアン・デスワーム", "ゴビ砂漠", "Roy Chapman Andrews", "Ivan Mackerle", "Richard Freeman", "タタール・サンドボア", "アンフィスバエナ"],
+      "referenced_knowledge": ["mongolian_death_worm"]
+    },
+    {
       "id": "shuna-japanese-ghost-no-feet",
       "date": "2026-04-23",
       "author": "shuna",
