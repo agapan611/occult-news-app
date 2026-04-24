@@ -4,7 +4,7 @@
 > 進捗（未対応タスク・作業ログ）は `BACKLOG.md` で管理している。
 >
 > このファイルは **今このサイトがどうなっているか** を俯瞰する資料。
-> 更新: 2026-04-22 (v5 評価 + v6 Phase 1 #60/#61 push済)
+> 更新: 2026-04-24 (AiNiwa 基盤整備 / 画像 R2 一元化 完了)
 
 ---
 
@@ -110,13 +110,29 @@ data/
 
 ## 10. 画像アセット
 
-`public/`
+**2026-04-24〜 Cloudflare R2 に一元化**（AiNiwa ファミリー共通方式）
 
-- `shuna.webp` / `raika.webp` — キャラ単体画像（2026-04-23 GPT 生成の新版、ろうそく除去版、512×768 / 各70KB）
-- `shuna-raika.png` — 2ショット（PIL合成版、旧キャラ画ベース）
-- `shuna-raika-header.png` — Xヘッダー（1500x500）
-- `icons/` — PWAアイコン一式
-- `manifest.json` — PWAマニフェスト
+- source of truth: `C:/クラウドコード/shared-assets/` → R2 バケット `ainiwa-assets`
+- 公開 URL: `https://pub-481c073fb7994d50ab97163e55cad4d5.r2.dev`
+- 参照：`src/lib/assets.ts` の `ASSETS.*` 経由（`<Image src={ASSETS.characters.shuna} />` 等）
+- 画像追加手順: `shared-assets/image-tasks/` にタスクファイル → GPT 生成 → `node sync.mjs` で配布（詳細: `~/.claude/rules/ainiwa_assets.md`）
+
+### R2 で管理する画像（2026-04-24 時点）
+
+| キー | R2 配置 | 用途 |
+|---|---|---|
+| `ASSETS.characters.shuna` | `characters/shuna.webp` | シュナ アイコン（ろうそく除去版、512×768 / 約 76KB） |
+| `ASSETS.characters.raika` | `characters/raika.webp` | ライカ アイコン（同仕様、約 70KB） |
+| `ASSETS.banners.shunaRaika` | `banners/shuna-raika.png` | OG 画像・RSS アイコン（2ショット、PIL合成版） |
+| `ASSETS.banners.shunaRaikaHeader` | `banners/shuna-raika-header.png` | X ヘッダー（1500×500） |
+| `ASSETS.banners.shunaRaikaHero` | `banners/shuna-raika-hero.webp` | トップページヒーロー |
+
+### `public/` に残るのは以下のみ（サイト固有・R2 管理外）
+
+- `icons/` — PWA / favicon 系
+- `manifest.json` — PWA マニフェスト
+- `llms.txt` — LLM 向け記述
+- `fonts/` — ウェブフォント
 
 ## 11. 関連スキル（`~/.claude/skills/`）
 
@@ -168,9 +184,23 @@ data/
 - カテゴリページ `/category/[slug]`（未実装）
 - AdSense 審査（GRIMOIRE 20記事貯まるまで据え置き）
 
-## 15. 次セッション引き継ぎ（2026-04-23 / #57 Giscus 統合 完了後）
+## 15. 次セッション引き継ぎ
 
-### 直前セッションの成果
+### 2026-04-24 の成果（AiNiwa 基盤整備）
+
+- **画像の Cloudflare R2 一元化 完了**（commit `52d772d`）
+  - `src/lib/assets.ts` 新規作成（`ASSETS.characters.*` / `ASSETS.banners.*`）
+  - `next.config.ts` に R2 `remotePatterns` 追加
+  - 13 ファイルの `<Image>` src / OG 画像 URL を `ASSETS.*` に移行
+  - `public/` から移行済み画像を削除（shuna.webp / raika.webp / shuna-raika* 一式）
+  - 画像ソース source of truth: `C:/クラウドコード/shared-assets/`、R2 バケット `ainiwa-assets` へ `node sync.mjs` で配布
+- **AiNiwa ファミリー共通ルール整備**
+  - グローバルルール `~/.claude/rules/ainiwa_family.md` / `ainiwa_assets.md` 追加
+  - AGENTS.md にファミリー参照追記（commit `a8215a4`）
+
+### 2026-04-23 の成果（#57 Giscus 統合 完了後）
+
+#### 直前セッションの成果
 - **#57 Giscus コメント統合 完了**（commit `5b7de32`）
   - GitHub Discussions 有効化 + Announcements カテゴリ運用（Giscus アプリは `agapan611/occult-news-app` に限定認可）
   - `<Giscus>` クライアントコンポーネント新規作成（`src/components/Giscus.tsx`、pathname マッピング・dark テーマ固定）
