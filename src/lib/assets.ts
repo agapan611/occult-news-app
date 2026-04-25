@@ -16,8 +16,14 @@ const R2_BASE = "https://pub-481c073fb7994d50ab97163e55cad4d5.r2.dev";
 
 export const ASSETS = {
   characters: {
-    shuna: `${R2_BASE}/characters/shuna.webp`,
-    raika: `${R2_BASE}/characters/raika.webp`,
+    shuna: `${R2_BASE}/characters/shuna/bust.png`,
+    raika: `${R2_BASE}/characters/raika/bust.png`,
+    shunaBust: `${R2_BASE}/characters/shuna/bust.png`,
+    shunaFull: `${R2_BASE}/characters/shuna/full.png`,
+    shunaSd: `${R2_BASE}/characters/shuna/sd.png`,
+    raikaBust: `${R2_BASE}/characters/raika/bust.png`,
+    raikaFull: `${R2_BASE}/characters/raika/full.png`,
+    raikaSd: `${R2_BASE}/characters/raika/sd.png`,
   },
   banners: {
     shunaRaika: `${R2_BASE}/banners/shuna-raika.png`,
