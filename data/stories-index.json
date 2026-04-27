@@ -16,6 +16,16 @@
   },
   "published": [
     {
+      "id": "raika-flannan-isles-lighthouse",
+      "date": "2026-04-28",
+      "author": "raika",
+      "category": "mystery",
+      "title": "鍵のかかったドア、止まった時計、残された雨具──フランネン諸島・3人灯台守失踪事件、1900年12月",
+      "theme": "1900年フランネン諸島・エイリアン・モア灯台の3人灯台守失踪事件",
+      "keywords": ["フランネン諸島", "エイリアン・モア", "Eilean Mor", "James Ducat", "Thomas Marshall", "Donald McArthur", "Robert Muirhead", "Wilfrid Wilson Gibson", "Northern Lighthouse Board", "5シリング罰金"],
+      "referenced_knowledge": ["eilean_mor_lighthouse", "dyatlov_pass"]
+    },
+    {
       "id": "shuna-nazca-lines-sky-ritual",
       "date": "2026-04-25",
       "author": "shuna",

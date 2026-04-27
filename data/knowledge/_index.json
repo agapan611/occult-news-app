@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updated": "2026-04-24",
+  "updated": "2026-04-28",
   "categories": [
     { "id": "ancient_civilization", "title": "古代文明", "threshold_days": 730, "topics": ["atlantis", "gobekli_tepe", "nazca_lines", "stonehenge"] },
     { "id": "conspiracy", "title": "陰謀論・機密", "threshold_days": 180, "topics": ["area_51", "kennedy_assassination", "mk_ultra", "stargate_project"] },
@@ -20,7 +20,7 @@
     { "id": "bermuda_triangle", "title": "バミューダ・トライアングル", "category": "mystery", "tags": ["bermuda_triangle", "flight_19", "mary_celeste", "methane_hydrate", "atlantic", "charles_berlitz", "vincent_gaddis"], "related": ["eilean_mor_lighthouse", "atlantis"], "verified": "2026-04-21" },
     { "id": "deja_vu", "title": "デジャヴュ（既視感）", "category": "science_occult", "tags": ["deja_vu", "memory", "temporal_lobe_epilepsy", "anne_cleary", "boirac", "dual_processing", "gestalt_familiarity"], "related": ["mandela_effect", "near_death_experience", "quantum_consciousness"], "verified": "2026-04-21" },
     { "id": "dyatlov_pass", "title": "ディアトロフ峠事件", "category": "mystery", "tags": ["unsolved", "ussr", "1959", "ural", "avalanche", "radiation"], "related": ["eilean_mor_lighthouse", "hinterkaifeck"], "verified": "2026-04-21" },
-    { "id": "eilean_mor_lighthouse", "title": "フランネン諸島灯台守失踪事件", "category": "mystery", "tags": ["flannan_isles", "eilean_mor", "lighthouse", "1900", "scotland", "hebrides", "northern_lighthouse_board", "joseph_moore"], "related": ["bermuda_triangle", "dyatlov_pass", "hinterkaifeck"], "verified": "2026-04-21" },
+    { "id": "eilean_mor_lighthouse", "title": "フランネン諸島灯台守失踪事件", "category": "mystery", "tags": ["flannan_isles", "eilean_mor", "lighthouse", "1900", "scotland", "hebrides", "northern_lighthouse_board", "joseph_moore"], "related": ["bermuda_triangle", "dyatlov_pass", "hinterkaifeck"], "verified": "2026-04-28", "file": "topics/eilean_mor_lighthouse.md" },
     { "id": "gobekli_tepe", "title": "ギョベクリ・テペ", "category": "ancient_civilization", "tags": ["gobekli_tepe", "neolithic", "turkey", "archaeology", "klaus_schmidt", "unesco", "t_pillar"], "related": ["atlantis", "stonehenge", "nazca_lines"], "verified": "2026-04-21" },
     { "id": "hinterkaifeck", "title": "ヒンターカイフェック事件", "category": "mystery", "tags": ["hinterkaifeck", "bavaria", "1922", "gruber", "mattock", "schlittenbauer", "germany", "unsolved_murder"], "related": ["eilean_mor_lighthouse", "dyatlov_pass"], "verified": "2026-04-21" },
     { "id": "kennedy_assassination", "title": "ケネディ大統領暗殺事件", "category": "conspiracy", "tags": ["jfk", "dallas", "1963", "oswald", "warren_commission", "hsca", "zapruder", "grassy_knoll", "nara"], "related": ["mk_ultra", "area_51"], "verified": "2026-04-21" },
