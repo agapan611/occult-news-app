@@ -11,6 +11,96 @@
   ],
   "recent": [
     {
+      "id": "2026-04-28-001",
+      "date": "2026-04-28",
+      "title": "日経平均、終値60,537円で史上初の6万円突破──ホルムズ海峡『開放提案』報道で821円高、米半導体株上昇も追い風",
+      "commentBy": "raika",
+      "commentStyle": "conspiracy",
+      "category": "economy",
+      "keyAngles": ["日経平均6万円突破", "60537円終値", "ホルムズ海峡開放提案", "イラン戦闘終結報道", "米半導体株上昇"],
+      "sourceUrl": "https://news.yahoo.co.jp/articles/6924b7f4e9d5cc40d2d76badde52755ee97f0a8e"
+    },
+    {
+      "id": "2026-04-28-002",
+      "date": "2026-04-28",
+      "title": "北海道・十勝地方南部で震度5強、深さ83km・M6.2──浦幌町で観測、1週間程度は同程度の揺れに警戒",
+      "commentBy": "raika",
+      "commentStyle": "science_occult",
+      "category": "society",
+      "keyAngles": ["北海道十勝5強", "深さ83km深発スラブ内地震", "M6.2浦幌町", "10日間4回震度5以上", "後発地震1週間注意"],
+      "sourceUrl": "https://tenki.jp/forecaster/s_ono/2026/04/27/38701.html"
+    },
+    {
+      "id": "2026-04-28-003",
+      "date": "2026-04-28",
+      "title": "アメリカ産原油91万バレルが日本到着、ホルムズ海峡封鎖の代替ルート確立──パナマ運河経由で喜望峰回航より20日短縮",
+      "commentBy": "raika",
+      "commentStyle": "conspiracy",
+      "category": "world",
+      "keyAngles": ["アメリカ産原油91万バレル", "コスモ石油製油所", "パナマ運河経由20日短縮", "ホルムズ海峡封鎖代替", "米国エネルギー依存深化"],
+      "sourceUrl": "https://www.kab.co.jp/news/article/16526938"
+    },
+    {
+      "id": "2026-04-28-004",
+      "date": "2026-04-28",
+      "title": "米FEMAナンバー3が『車ごと40マイル瞬間移動』を告白──CNNが報道、ユリ・ゲラーがX上で『本物』認定",
+      "commentBy": "raika",
+      "commentStyle": "science_occult",
+      "category": "paranormal",
+      "keyAngles": ["FEMAナンバー3フィリップス", "車ごと40マイル瞬間移動", "ユリゲラー本物認定", "CIAスターゲイト計画", "テレポーテーション体験"],
+      "sourceUrl": "https://tocana.jp/2026/04/post_294383_entry.html"
+    },
+    {
+      "id": "2026-04-28-005",
+      "date": "2026-04-28",
+      "title": "ロシアが『世界初の老化遅延薬』開発を表明──RAGE遺伝子遮断、プーチン『150歳まで』発言の半年後",
+      "commentBy": "raika",
+      "commentStyle": "mystery",
+      "category": "science",
+      "keyAngles": ["RAGE遺伝子遮断遺伝子治療薬", "セキリンスキー教育大臣", "プーチン150歳発言", "2050年息子35歳", "Calico Altos Labs対抗"],
+      "sourceUrl": "https://tocana.jp/2026/04/post_294449_entry.html"
+    },
+    {
+      "id": "2026-04-28-006",
+      "date": "2026-04-28",
+      "title": "トランプ晩餐会襲撃犯『コール・アレン』、2年半前のXに名前だけ予言投稿──Henry Martinez が2023年12月22日に投下",
+      "commentBy": "shuna",
+      "commentStyle": "prophecy",
+      "category": "mystery",
+      "keyAngles": ["コールアレン晩餐会襲撃", "Henry Martinez 2023年12月22日", "2年半前の名前予言", "先取りの夢シンクロニシティ", "Cole Allen偶然説"],
+      "sourceUrl": "https://tocana.jp/2026/04/post_294496_entry.html"
+    },
+    {
+      "id": "2026-04-28-007",
+      "date": "2026-04-28",
+      "title": "ルナ下院議員、UFO情報公開の文脈で『エノク書を読みなさい』とX投稿──紀元前300年のテキストとネフィリム伝承が再注目",
+      "commentBy": "shuna",
+      "commentStyle": "mysticism",
+      "category": "paranormal",
+      "keyAngles": ["エノク書ネフィリム", "ルナ議員X投稿", "UFOのマドンナ15世紀絵画", "グリゴリ見守る者天使集団", "聖書正典削除"],
+      "sourceUrl": "https://tocana.jp/2026/04/post_294483_entry.html"
+    },
+    {
+      "id": "2026-04-28-008",
+      "date": "2026-04-28",
+      "title": "スタンフォード研究、AIチャットボットの『お世辞依存』を暴露──47%が嘘行為を支持、49%多く人間より追従、Science誌掲載",
+      "commentBy": "shuna",
+      "commentStyle": "synchronicity",
+      "category": "tech",
+      "keyAngles": ["スタンフォード研究Science誌", "AI追従47%嘘行為支持", "11チャットボット調査", "悪魔タロット心地よい鎖", "謝罪意欲低下"],
+      "sourceUrl": "https://tocana.jp/2026/04/post_294508_entry.html"
+    },
+    {
+      "id": "2026-04-28-009",
+      "date": "2026-04-28",
+      "title": "ネス湖『ザ・クエスト』第4回、5月28〜31日に開催──秘密兵器投入で『ネス湖を丸裸にする』、過去には説明不能な音と水面現象",
+      "commentBy": "shuna",
+      "commentStyle": "mystery",
+      "category": "cryptid",
+      "keyAngles": ["ザクエスト第4回", "ネス湖探査団5月28-31日", "ドラムナドロキット村", "説明不能な音水面現象", "ケルピー水の精霊"],
+      "sourceUrl": "https://web-mu.jp/paranormal/76998/"
+    },
+    {
       "id": "2026-04-24-001",
       "date": "2026-04-24",
       "title": "終末預言「三日間の闇」が2026年4月30日に成就!?──19世紀フランスの神秘家ジャエニーの幻視と「花の月・木曜日・二つの月」の符合",
