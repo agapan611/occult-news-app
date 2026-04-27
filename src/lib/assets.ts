@@ -26,8 +26,8 @@ export const ASSETS = {
     raikaSd: `${R2_BASE}/characters/raika/sd.png`,
   },
   banners: {
-    shunaRaika: `${R2_BASE}/banners/shuna-raika.png`,
-    shunaRaikaHeader: `${R2_BASE}/banners/shuna-raika-header.png`,
-    shunaRaikaHero: `${R2_BASE}/banners/shuna-raika-hero.webp`,
+    shunaRaika: `${R2_BASE}/banners/occult-wire-banner.png`,
+    shunaRaikaHeader: `${R2_BASE}/banners/occult-wire-banner.png`,
+    shunaRaikaHero: `${R2_BASE}/banners/occult-wire-banner.png`,
   },
 } as const;
